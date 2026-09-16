@@ -1,0 +1,2477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TypeMaster Pro - Free Online Typing Test</title>
+
+<meta name="description"
+content="Free online English typing test with WPM, accuracy, KDPH, standard words, actual words, SSC typing practice and typing history.">
+
+<meta name="keywords"
+content="typing test, typing speed test, WPM test, SSC typing test, English typing practice, KDPH">
+
+<link rel="icon"
+href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E⌨️%3C/text%3E%3C/svg%3E">
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+:root{
+    --bg:#eef2ff;
+    --text:#111827;
+    --muted:#64748b;
+    --card:rgba(255,255,255,.62);
+    --border:rgba(255,255,255,.7);
+    --input:rgba(255,255,255,.55);
+    --accent:#6366f1;
+    --accent2:#8b5cf6;
+    --danger:#ef4444;
+    --success:#16a34a;
+    --shadow:0 20px 60px rgba(15,23,42,.12);
+}
+
+body.dark{
+    --bg:#080b16;
+    --text:#f8fafc;
+    --muted:#94a3b8;
+    --card:rgba(15,23,42,.62);
+    --border:rgba(255,255,255,.10);
+    --input:rgba(15,23,42,.55);
+    --shadow:0 20px 60px rgba(0,0,0,.35);
+}
+
+body{
+    font-family:Inter,Segoe UI,Arial,sans-serif;
+    background:
+        radial-gradient(circle at 10% 10%,rgba(99,102,241,.22),transparent 30%),
+        radial-gradient(circle at 90% 20%,rgba(139,92,246,.18),transparent 30%),
+        var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    transition:.3s;
+}
+
+button,
+select,
+textarea{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.container{
+    width:min(1180px,92%);
+    margin:auto;
+}
+
+/* HEADER */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    backdrop-filter:blur(18px);
+    background:rgba(255,255,255,.15);
+    border-bottom:1px solid var(--border);
+}
+
+.nav{
+    height:72px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-size:23px;
+    font-weight:800;
+    letter-spacing:-.5px;
+}
+
+.logo span{
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.icon-btn{
+    width:42px;
+    height:42px;
+    border-radius:14px;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+}
+
+/* HERO */
+
+.hero{
+    padding:65px 0 30px;
+    text-align:center;
+}
+
+.badge{
+    display:inline-block;
+    padding:8px 14px;
+    border-radius:30px;
+    background:var(--card);
+    border:1px solid var(--border);
+    color:var(--accent);
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:18px;
+}
+
+.hero h1{
+    font-size:clamp(36px,6vw,64px);
+    line-height:1;
+    letter-spacing:-2px;
+    margin-bottom:18px;
+}
+
+.gradient{
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    max-width:700px;
+    margin:auto;
+    color:var(--muted);
+    font-size:17px;
+    line-height:1.7;
+}
+
+/* TABS */
+
+.tabs{
+    display:flex;
+    gap:8px;
+    margin:30px auto 18px;
+    width:max-content;
+    padding:6px;
+    border-radius:18px;
+    background:var(--card);
+    border:1px solid var(--border);
+    backdrop-filter:blur(20px);
+}
+
+.tab{
+    border:0;
+    padding:12px 22px;
+    border-radius:13px;
+    background:transparent;
+    color:var(--muted);
+    font-weight:700;
+}
+
+.tab.active{
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    color:white;
+}
+
+/* MAIN CARD */
+
+.glass{
+    background:var(--card);
+    border:1px solid var(--border);
+    box-shadow:var(--shadow);
+    backdrop-filter:blur(22px);
+    -webkit-backdrop-filter:blur(22px);
+    border-radius:26px;
+}
+
+.test-card{
+    padding:25px;
+    margin-bottom:28px;
+}
+
+/* CONTROLS */
+
+.controls{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.control label{
+    display:block;
+    font-size:12px;
+    color:var(--muted);
+    font-weight:700;
+    margin-bottom:7px;
+}
+
+select{
+    width:100%;
+    padding:13px 14px;
+    border-radius:14px;
+    border:1px solid var(--border);
+    background:var(--input);
+    color:var(--text);
+    outline:none;
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:12px;
+    margin-top:18px;
+}
+
+.stat{
+    padding:17px;
+    border-radius:18px;
+    background:rgba(255,255,255,.12);
+    border:1px solid var(--border);
+}
+
+.stat small{
+    color:var(--muted);
+    display:block;
+    font-size:11px;
+    font-weight:700;
+    margin-bottom:7px;
+}
+
+.stat strong{
+    font-size:23px;
+}
+
+/* PROGRESS */
+
+.progress-wrap{
+    margin:22px 0;
+}
+
+.progress-info{
+    display:flex;
+    justify-content:space-between;
+    color:var(--muted);
+    font-size:12px;
+    margin-bottom:8px;
+}
+
+.progress{
+    height:9px;
+    border-radius:20px;
+    background:rgba(100,116,139,.15);
+    overflow:hidden;
+}
+
+.progress-bar{
+    width:0%;
+    height:100%;
+    background:linear-gradient(90deg,var(--accent),var(--accent2));
+    transition:.2s;
+}
+
+/* PASSAGE */
+
+.passage{
+    min-height:180px;
+    padding:25px;
+    border-radius:20px;
+    background:rgba(255,255,255,.10);
+    border:1px solid var(--border);
+    font-size:22px;
+    line-height:1.9;
+    letter-spacing:.2px;
+    margin-bottom:18px;
+}
+
+.char.correct{
+    color:var(--success);
+}
+
+.char.wrong{
+    color:var(--danger);
+    text-decoration:underline;
+}
+
+.char.current{
+    background:rgba(99,102,241,.25);
+    border-radius:3px;
+}
+
+/* INPUT */
+
+textarea{
+    width:100%;
+    height:130px;
+    resize:none;
+    padding:18px;
+    border-radius:18px;
+    border:1px solid var(--border);
+    background:var(--input);
+    color:var(--text);
+    outline:none;
+    line-height:1.7;
+}
+
+textarea:focus{
+    border-color:var(--accent);
+    box-shadow:0 0 0 3px rgba(99,102,241,.12);
+}
+
+textarea:disabled{
+    opacity:.65;
+}
+
+/* BUTTONS */
+
+.actions{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+}
+
+.btn{
+    border:0;
+    border-radius:14px;
+    padding:13px 22px;
+    font-weight:800;
+}
+
+.btn-primary{
+    color:white;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+}
+
+.btn-secondary{
+    background:var(--card);
+    color:var(--text);
+    border:1px solid var(--border);
+}
+
+.btn-danger{
+    background:#ef4444;
+    color:white;
+}
+
+/* KEYBOARD */
+
+.keyboard{
+    margin-top:25px;
+    padding:18px;
+    border-radius:20px;
+    background:rgba(0,0,0,.06);
+    overflow-x:auto;
+}
+
+body.dark .keyboard{
+    background:rgba(255,255,255,.04);
+}
+
+.key-row{
+    display:flex;
+    justify-content:center;
+    gap:6px;
+    margin:6px 0;
+    min-width:650px;
+}
+
+.key{
+    min-width:40px;
+    height:40px;
+    border-radius:8px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid var(--border);
+    background:var(--card);
+    font-size:12px;
+    font-weight:700;
+    transition:.08s;
+}
+
+.key.active{
+    background:var(--accent);
+    color:white;
+    transform:translateY(2px);
+}
+
+.key.space{
+    width:280px;
+}
+
+/* RESULTS */
+
+.result{
+    display:none;
+    padding:30px;
+    margin-bottom:30px;
+}
+
+.result.show{
+    display:block;
+}
+
+.result-title{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.result-title h2{
+    font-size:32px;
+    margin-bottom:8px;
+}
+
+.result-title p{
+    color:var(--muted);
+}
+
+.result-main{
+    display:grid;
+    grid-template-columns:280px 1fr;
+    gap:25px;
+    align-items:center;
+}
+
+.speed-circle{
+    width:230px;
+    height:230px;
+    margin:auto;
+    border-radius:50%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    background:
+        radial-gradient(circle,var(--bg) 58%,transparent 59%),
+        conic-gradient(var(--accent) var(--score),rgba(100,116,139,.15) 0);
+}
+
+.speed-circle strong{
+    font-size:48px;
+}
+
+.speed-circle span{
+    color:var(--muted);
+    font-size:13px;
+    font-weight:700;
+}
+
+.result-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+}
+
+.result-item{
+    padding:17px;
+    border-radius:17px;
+    background:rgba(255,255,255,.09);
+    border:1px solid var(--border);
+}
+
+.result-item small{
+    color:var(--muted);
+    display:block;
+    margin-bottom:6px;
+}
+
+.result-item strong{
+    font-size:21px;
+}
+
+/* HISTORY */
+
+.history{
+    margin-top:25px;
+}
+
+.history h3{
+    margin-bottom:12px;
+}
+
+.history-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.history-table th,
+.history-table td{
+    padding:11px;
+    text-align:left;
+    border-bottom:1px solid var(--border);
+    font-size:13px;
+}
+
+.history-table th{
+    color:var(--muted);
+}
+
+/* INFO */
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    margin:35px 0;
+}
+
+.info-card{
+    padding:25px;
+}
+
+.info-card h3{
+    margin-bottom:10px;
+}
+
+.info-card p{
+    color:var(--muted);
+    line-height:1.7;
+    font-size:14px;
+}
+
+/* FOOTER */
+
+footer{
+    margin-top:60px;
+    padding:35px 0;
+    border-top:1px solid var(--border);
+    color:var(--muted);
+}
+
+.footer-content{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.footer-links{
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+}
+
+.footer-links a{
+    color:var(--muted);
+    text-decoration:none;
+}
+
+/* PAGES */
+
+.page{
+    display:none;
+    padding:45px 0;
+}
+
+.page.active{
+    display:block;
+}
+
+.page-card{
+    padding:35px;
+}
+
+.page-card h2{
+    margin-bottom:18px;
+}
+
+.page-card h3{
+    margin:25px 0 8px;
+}
+
+.page-card p,
+.page-card li{
+    color:var(--muted);
+    line-height:1.8;
+}
+
+.page-card ul{
+    padding-left:22px;
+}
+
+/* STATUS */
+
+.status{
+    margin-top:12px;
+    color:var(--muted);
+    font-size:13px;
+}
+
+.pass{
+    color:var(--success);
+    font-weight:800;
+}
+
+.fail{
+    color:var(--danger);
+    font-weight:800;
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+    .controls{
+        grid-template-columns:1fr;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .result-main{
+        grid-template-columns:1fr;
+    }
+
+    .result-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .info-grid{
+        grid-template-columns:1fr;
+    }
+
+    .footer-content{
+        flex-direction:column;
+    }
+
+    .passage{
+        font-size:18px;
+    }
+
+    .tabs{
+        width:100%;
+    }
+
+    .tab{
+        flex:1;
+        padding:11px 8px;
+    }
+}
+
+@media(max-width:480px){
+
+    .hero{
+        padding-top:40px;
+    }
+
+    .test-card{
+        padding:16px;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .result-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .speed-circle{
+        width:200px;
+        height:200px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="container nav">
+
+<div class="logo">
+⌨️ <span>TypeMaster Pro</span>
+</div>
+
+<div class="nav-right">
+<button class="icon-btn" onclick="toggleDark()" id="themeBtn">🌙</button>
+</div>
+
+</div>
+</header>
+
+
+<main class="container">
+
+<section class="hero">
+
+<div class="badge">FREE ENGLISH TYPING PRACTICE</div>
+
+<h1>
+Improve Your
+<span class="gradient">Typing Speed</span>
+</h1>
+
+<p>
+Practice your English typing, improve accuracy and measure your
+speed with standard WPM, actual words and KDPH.
+</p>
+
+</section>
+
+
+<!-- TEST TABS -->
+
+<div class="tabs">
+
+<button class="tab active" id="normalTab" onclick="selectMode('normal')">
+Normal Test
+</button>
+
+<button class="tab" id="sscTab" onclick="selectMode('ssc')">
+SSC Mode
+</button>
+
+</div>
+
+
+<!-- TEST -->
+
+<section class="glass test-card" id="testSection">
+
+<div class="controls">
+
+<div class="control">
+
+<label>TEST DURATION</label>
+
+<select id="duration">
+<option value="60">1 Minute</option>
+<option value="120">2 Minutes</option>
+<option value="300">5 Minutes</option>
+<option value="600">10 Minutes</option>
+</select>
+
+</div>
+
+
+<div class="control">
+
+<label>DIFFICULTY</label>
+
+<select id="difficulty">
+
+<option value="easy">Easy</option>
+<option value="medium" selected>Medium</option>
+<option value="hard">Hard</option>
+
+</select>
+
+</div>
+
+
+<div class="control">
+
+<label>TARGET SPEED</label>
+
+<select id="target">
+
+<option value="30">30 WPM</option>
+<option value="35">35 WPM</option>
+<option value="40">40 WPM</option>
+<option value="50">50 WPM</option>
+<option value="60">60 WPM</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<div class="stats">
+
+<div class="stat">
+<small>TIME</small>
+<strong id="timeDisplay">01:00</strong>
+</div>
+
+<div class="stat">
+<small>NET WPM</small>
+<strong id="wpmDisplay">0.00</strong>
+</div>
+
+<div class="stat">
+<small>ACCURACY</small>
+<strong id="accuracyDisplay">100%</strong>
+</div>
+
+<div class="stat">
+<small>ERRORS</small>
+<strong id="errorDisplay">0</strong>
+</div>
+
+<div class="stat">
+<small>BEST WPM</small>
+<strong id="bestDisplay">0.00</strong>
+</div>
+
+</div>
+
+
+<div class="progress-wrap">
+
+<div class="progress-info">
+
+<span>Test Progress</span>
+
+<span id="progressText">0%</span>
+
+</div>
+
+<div class="progress">
+<div class="progress-bar" id="progressBar"></div>
+</div>
+
+</div>
+
+
+<div class="passage" id="passage"></div>
+
+
+<textarea
+id="typingInput"
+placeholder="Click Start Test and type here..."
+disabled
+spellcheck="false"
+autocomplete="off"
+autocorrect="off"
+autocapitalize="off"></textarea>
+
+
+<div class="actions">
+
+<button class="btn btn-primary" onclick="startTest()" id="startBtn">
+Start Test
+</button>
+
+<button class="btn btn-danger" onclick="finishTest()">
+Finish Test
+</button>
+
+<button class="btn btn-secondary" onclick="resetTest()">
+Reset
+</button>
+
+</div>
+
+
+<div class="status" id="status">
+Ready to start.
+</div>
+
+
+<!-- KEYBOARD -->
+
+<div class="keyboard">
+
+<div class="key-row">
+<div class="key">Q</div>
+<div class="key">W</div>
+<div class="key">E</div>
+<div class="key">R</div>
+<div class="key">T</div>
+<div class="key">Y</div>
+<div class="key">U</div>
+<div class="key">I</div>
+<div class="key">O</div>
+<div class="key">P</div>
+</div>
+
+<div class="key-row">
+<div class="key">A</div>
+<div class="key">S</div>
+<div class="key">D</div>
+<div class="key">F</div>
+<div class="key">G</div>
+<div class="key">H</div>
+<div class="key">J</div>
+<div class="key">K</div>
+<div class="key">L</div>
+</div>
+
+<div class="key-row">
+<div class="key">Z</div>
+<div class="key">X</div>
+<div class="key">C</div>
+<div class="key">V</div>
+<div class="key">B</div>
+<div class="key">N</div>
+<div class="key">M</div>
+</div>
+
+<div class="key-row">
+<div class="key space">SPACE</div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- RESULT -->
+
+<section class="glass result" id="resultSection">
+
+<div class="result-title">
+
+<h2>Test Complete 🎉</h2>
+
+<p id="resultMessage">
+Here is your typing performance.
+</p>
+
+</div>
+
+
+<div class="result-main">
+
+<div>
+
+<div class="speed-circle" id="speedCircle">
+
+<strong id="resultNetWpm">0.00</strong>
+
+<span>NET WPM</span>
+
+</div>
+
+</div>
+
+
+<div class="result-grid">
+
+<div class="result-item">
+<small>Gross WPM</small>
+<strong id="resultGross">0.00</strong>
+</div>
+
+<div class="result-item">
+<small>Net WPM</small>
+<strong id="resultNet">0.00</strong>
+</div>
+
+<div class="result-item">
+<small>Accuracy</small>
+<strong id="resultAccuracy">100%</strong>
+</div>
+
+<div class="result-item">
+<small>Typed Characters</small>
+<strong id="resultChars">0</strong>
+</div>
+
+<div class="result-item">
+<small>Standard Words</small>
+<strong id="resultStandardWords">0.00</strong>
+</div>
+
+<div class="result-item">
+<small>Actual Words</small>
+<strong id="resultActualWords">0</strong>
+</div>
+
+<div class="result-item">
+<small>Correct Characters</small>
+<strong id="resultCorrect">0</strong>
+</div>
+
+<div class="result-item">
+<small>Wrong Characters</small>
+<strong id="resultWrong">0</strong>
+</div>
+
+<div class="result-item">
+<small>KDPH</small>
+<strong id="resultKdph">0</strong>
+</div>
+
+<div class="result-item">
+<small>Test Time</small>
+<strong id="resultTime">0 sec</strong>
+</div>
+
+<div class="result-item">
+<small>Target Speed</small>
+<strong id="resultTarget">30 WPM</strong>
+</div>
+
+<div class="result-item">
+<small>Best WPM</small>
+<strong id="resultBest">0.00</strong>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="actions">
+
+<button class="btn btn-primary" onclick="startTest()">
+Try Again
+</button>
+
+<button class="btn btn-secondary" onclick="window.print()">
+Print Result
+</button>
+
+</div>
+
+</section>
+
+
+<!-- HISTORY -->
+
+<section class="glass info-card history">
+
+<h3>Recent Test History</h3>
+
+<table class="history-table">
+
+<thead>
+
+<tr>
+<th>Date</th>
+<th>Mode</th>
+<th>Time</th>
+<th>WPM</th>
+<th>Accuracy</th>
+</tr>
+
+</thead>
+
+<tbody id="historyBody"></tbody>
+
+</table>
+
+</section>
+
+
+<!-- INFO -->
+
+<section class="info-grid">
+
+<div class="glass info-card">
+
+<h3>⚡ Fast Practice</h3>
+
+<p>
+Practice for 1, 2, 5 or 10 minutes and automatically continue
+through multiple passages without losing your session statistics.
+</p>
+
+</div>
+
+
+<div class="glass info-card">
+
+<h3>📊 Accurate Statistics</h3>
+
+<p>
+Track typed characters, standard words, actual words, accuracy,
+gross WPM, net WPM and KDPH separately.
+</p>
+
+</div>
+
+
+<div class="glass info-card">
+
+<h3>🎯 SSC Practice</h3>
+
+<p>
+Use the 15-minute SSC-style English typing practice mode and
+monitor your typing speed and accuracy.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section class="page" id="aboutPage">
+
+<div class="glass page-card">
+
+<h2>About TypeMaster Pro</h2>
+
+<p>
+TypeMaster Pro is a free English typing practice website designed
+to help students, job seekers and office professionals improve
+their typing speed and accuracy.
+</p>
+
+<h3>What can you practice?</h3>
+
+<ul>
+<li>English typing speed</li>
+<li>Standard WPM</li>
+<li>Actual word counting</li>
+<li>Accuracy</li>
+<li>KDPH</li>
+<li>SSC-style typing practice</li>
+</ul>
+
+</div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section class="page" id="contactPage">
+
+<div class="glass page-card">
+
+<h2>Contact</h2>
+
+<p>
+For suggestions, corrections or technical issues, contact us by email.
+</p>
+
+<p style="margin-top:15px;">
+Email:
+<a href="mailto:your-email@example.com">
+your-email@example.com
+</a>
+</p>
+
+</div>
+
+</section>
+
+
+<!-- PRIVACY -->
+
+<section class="page" id="privacyPage">
+
+<div class="glass page-card">
+
+<h2>Privacy Policy</h2>
+
+<p>
+TypeMaster Pro is designed to provide typing practice without
+requiring users to create an account.
+</p>
+
+<h3>Local Data</h3>
+
+<p>
+Typing statistics such as best WPM and recent test history may be
+stored locally in your browser using local storage.
+</p>
+
+<h3>Third Party Services</h3>
+
+<p>
+This basic version does not require external analytics or advertising
+services.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- TERMS -->
+
+<section class="page" id="termsPage">
+
+<div class="glass page-card">
+
+<h2>Terms & Conditions</h2>
+
+<p>
+By using TypeMaster Pro, you agree to use the website for lawful
+purposes.
+</p>
+
+<h3>Accuracy</h3>
+
+<p>
+Typing results are provided for practice and informational purposes.
+Different examinations and organizations may use their own
+evaluation rules.
+</p>
+
+<h3>Availability</h3>
+
+<p>
+The website is provided on an as-is basis and functionality may be
+changed or improved in future versions.
+</p>
+
+</div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+<div class="container footer-content">
+
+<div>
+© 2026 TypeMaster Pro
+</div>
+
+<div class="footer-links">
+
+<a href="#" onclick="showPage('aboutPage')">About</a>
+
+<a href="#" onclick="showPage('contactPage')">Contact</a>
+
+<a href="#" onclick="showPage('privacyPage')">Privacy Policy</a>
+
+<a href="#" onclick="showPage('termsPage')">Terms</a>
+
+</div>
+
+</div>
+
+</footer>
+
+
+<script>
+
+/* =========================
+   PASSAGES
+========================= */
+
+const passages = {
+
+easy: [
+
+"Typing is an important skill for students and office professionals. Regular practice can improve speed and accuracy.",
+
+"Good typing skills save time and help you complete daily computer work more efficiently.",
+
+"Practice every day and focus on accuracy before trying to type faster.",
+
+"Learning to type correctly can make computer work easier and more comfortable."
+
+],
+
+medium: [
+
+"Successful typing requires patience, accuracy and regular practice. A consistent practice routine can gradually improve your speed.",
+
+"Office professionals often work with emails, reports, spreadsheets and documents. Better typing skills can make these tasks faster.",
+
+"Speed is useful, but accuracy is equally important. Try to reduce mistakes while maintaining a comfortable typing rhythm.",
+
+"Many competitive examinations require candidates to demonstrate their typing ability within a fixed amount of time."
+
+],
+
+hard: [
+
+"Professional productivity depends on the ability to communicate information quickly and accurately. Consistent keyboard practice develops coordination and confidence.",
+
+"Administrative professionals frequently handle detailed correspondence, spreadsheets, reports and digital records where typing accuracy is extremely important.",
+
+"Developing a high typing speed should never come at the expense of accuracy. The most effective approach is to build correct typing habits first.",
+
+"Competitive examination typing tests require concentration, rhythm and careful attention to punctuation, spaces and capitalization."
+
+]
+
+};
+
+
+/* =========================
+   STATE
+========================= */
+
+let mode = "normal";
+
+let duration = 60;
+
+let running = false;
+
+let elapsedSeconds = 0;
+
+let remainingSeconds = 60;
+
+let timer = null;
+
+let passageIndex = 0;
+
+let currentPassage = "";
+
+let currentTyped = 0;
+
+let currentCorrect = 0;
+
+let currentWrong = 0;
+
+
+/*
+IMPORTANT:
+These are SESSION totals.
+
+They are NOT reset when a new passage loads.
+*/
+
+let sessionTyped = 0;
+let sessionCorrect = 0;
+let sessionWrong = 0;
+
+
+/*
+Text typed by user for ACTUAL WORD counting.
+*/
+let sessionTypedText = "";
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const input = document.getElementById("typingInput");
+const passageBox = document.getElementById("passage");
+
+const timeDisplay = document.getElementById("timeDisplay");
+const wpmDisplay = document.getElementById("wpmDisplay");
+const accuracyDisplay = document.getElementById("accuracyDisplay");
+const errorDisplay = document.getElementById("errorDisplay");
+
+const progressBar = document.getElementById("progressBar");
+const progressText = document.getElementById("progressText");
+
+const statusBox = document.getElementById("status");
+
+const resultSection = document.getElementById("resultSection");
+
+
+/* =========================
+   BEST WPM
+========================= */
+
+function getBestWpm(){
+
+    return Number(localStorage.getItem("typingBestWpm") || 0);
+
+}
+
+
+function updateBestDisplay(){
+
+    document.getElementById("bestDisplay").textContent =
+        getBestWpm().toFixed(2);
+
+}
+
+updateBestDisplay();
+
+
+/* =========================
+   MODE
+========================= */
+
+function selectMode(newMode){
+
+    if(running) return;
+
+    mode = newMode;
+
+    document.getElementById("normalTab").classList.toggle(
+        "active",
+        mode === "normal"
+    );
+
+    document.getElementById("sscTab").classList.toggle(
+        "active",
+        mode === "ssc"
+    );
+
+
+    if(mode === "ssc"){
+
+        duration = 900;
+
+        document.getElementById("duration").disabled = true;
+
+        document.getElementById("duration").value = "600";
+
+        document.getElementById("difficulty").value = "medium";
+
+        document.getElementById("target").value = "35";
+
+        statusBox.textContent =
+            "SSC Mode: 15-minute English typing practice.";
+
+    }else{
+
+        document.getElementById("duration").disabled = false;
+
+        duration =
+            Number(document.getElementById("duration").value);
+
+        statusBox.textContent =
+            "Normal typing test selected.";
+
+    }
+
+    resetTest();
+
+}
+
+
+/* =========================
+   DURATION
+========================= */
+
+document.getElementById("duration").addEventListener(
+    "change",
+    function(){
+
+        if(mode === "normal"){
+
+            duration = Number(this.value);
+
+            resetTest();
+
+        }
+
+    }
+);
+
+
+/* =========================
+   LOAD PASSAGE
+========================= */
+
+function loadPassage(){
+
+    const difficulty =
+        document.getElementById("difficulty").value;
+
+    const list = passages[difficulty];
+
+    currentPassage =
+        list[passageIndex % list.length];
+
+    passageIndex++;
+
+    currentTyped = 0;
+    currentCorrect = 0;
+    currentWrong = 0;
+
+    renderPassage();
+
+}
+
+
+function renderPassage(){
+
+    passageBox.innerHTML = "";
+
+    for(let i = 0; i < currentPassage.length; i++){
+
+        const span = document.createElement("span");
+
+        span.className = "char";
+
+        span.textContent = currentPassage[i];
+
+        passageBox.appendChild(span);
+
+    }
+
+}
+
+
+/* =========================
+   STANDARD WORDS
+========================= */
+
+/*
+THIS IS THE IMPORTANT FIX.
+
+Standard Words are NOT actual words.
+
+10 characters / 5 = 2 standard words.
+
+Therefore:
+
+10 characters = 2
+20 characters = 4
+50 characters = 10
+100 characters = 20
+*/
+
+function getStandardWords(){
+
+    return sessionTyped / 5;
+
+}
+
+
+/* =========================
+   ACTUAL WORDS
+========================= */
+
+function getActualWords(){
+
+    const text = sessionTypedText.trim();
+
+    if(!text) return 0;
+
+    return text
+        .split(/\s+/)
+        .filter(Boolean)
+        .length;
+
+}
+
+
+/* =========================
+   STATISTICS
+========================= */
+
+function calculateStats(){
+
+    const minutes =
+        Math.max(elapsedSeconds, 1) / 60;
+
+    const typed =
+        sessionTyped;
+
+    const correct =
+        sessionCorrect;
+
+    const wrong =
+        sessionWrong;
+
+
+    /*
+    Gross WPM:
+    ALL typed characters / 5 / minutes
+    */
+
+    const grossWpm =
+        (typed / 5) / minutes;
+
+
+    /*
+    Net WPM:
+    CORRECT characters / 5 / minutes
+    */
+
+    const netWpm =
+        (correct / 5) / minutes;
+
+
+    const accuracy =
+        typed > 0
+        ? (correct / typed) * 100
+        : 100;
+
+
+    /*
+    KDPH based on correct key depressions.
+    */
+
+    const kdph =
+        minutes > 0
+        ? (correct / minutes) * 60
+        : 0;
+
+
+    return {
+
+        typed,
+        correct,
+        wrong,
+
+        grossWpm,
+        netWpm,
+
+        accuracy,
+
+        kdph,
+
+        standardWords:
+            getStandardWords(),
+
+        actualWords:
+            getActualWords()
+
+    };
+
+}
+
+
+/* =========================
+   LIVE STATS
+========================= */
+
+function updateLiveStats(){
+
+    const stats = calculateStats();
+
+    wpmDisplay.textContent =
+        stats.netWpm.toFixed(2);
+
+    accuracyDisplay.textContent =
+        stats.accuracy.toFixed(1) + "%";
+
+    errorDisplay.textContent =
+        stats.wrong;
+
+
+    /*
+    IMPORTANT:
+    Progress is based on TIME.
+    */
+
+    const percent =
+        Math.min(
+            (elapsedSeconds / duration) * 100,
+            100
+        );
+
+    progressBar.style.width =
+        percent + "%";
+
+    progressText.textContent =
+        Math.round(percent) + "%";
+
+}
+
+
+/* =========================
+   TIME FORMAT
+========================= */
+
+function formatTime(seconds){
+
+    const min =
+        Math.floor(seconds / 60);
+
+    const sec =
+        seconds % 60;
+
+    return String(min).padStart(2,"0")
+        + ":" +
+        String(sec).padStart(2,"0");
+
+}
+
+
+/* =========================
+   START TEST
+========================= */
+
+function startTest(){
+
+    clearInterval(timer);
+
+    duration =
+        mode === "ssc"
+        ? 900
+        : Number(document.getElementById("duration").value);
+
+
+    running = true;
+
+    elapsedSeconds = 0;
+
+    remainingSeconds = duration;
+
+    passageIndex = 0;
+
+    sessionTyped = 0;
+    sessionCorrect = 0;
+    sessionWrong = 0;
+
+    sessionTypedText = "";
+
+    currentTyped = 0;
+    currentCorrect = 0;
+    currentWrong = 0;
+
+
+    resultSection.classList.remove("show");
+
+    input.disabled = false;
+
+    input.value = "";
+
+    input.focus();
+
+
+    loadPassage();
+
+    updateTime();
+
+    updateLiveStats();
+
+
+    statusBox.textContent =
+        mode === "ssc"
+        ? "SSC test started. Type carefully and accurately."
+        : "Test started. Keep typing until the timer ends.";
+
+
+    timer = setInterval(function(){
+
+        if(!running) return;
+
+        elapsedSeconds++;
+
+        remainingSeconds--;
+
+        updateTime();
+
+        updateLiveStats();
+
+
+        if(remainingSeconds <= 0){
+
+            finishTest();
+
+        }
+
+    },1000);
+
+}
+
+
+/* =========================
+   TIME DISPLAY
+========================= */
+
+function updateTime(){
+
+    timeDisplay.textContent =
+        formatTime(remainingSeconds);
+
+}
+
+
+/* =========================
+   INPUT HANDLER
+========================= */
+
+input.addEventListener("input", function(){
+
+    if(!running) return;
+
+
+    const value = input.value;
+
+
+    /*
+    If user types beyond passage length,
+    prevent extra characters.
+    */
+
+    if(value.length > currentPassage.length){
+
+        input.value =
+            value.substring(
+                0,
+                currentPassage.length
+            );
+
+    }
+
+
+    currentTyped =
+        input.value.length;
+
+
+    currentCorrect = 0;
+
+    currentWrong = 0;
+
+
+    /*
+    Compare every typed character.
+    */
+
+    for(
+        let i = 0;
+        i < input.value.length;
+        i++
+    ){
+
+        if(
+            input.value[i]
+            ===
+            currentPassage[i]
+        ){
+
+            currentCorrect++;
+
+        }else{
+
+            currentWrong++;
+
+        }
+
+    }
+
+
+    renderTypedPassage();
+
+    calculateSessionPreview();
+
+    updateLiveStats();
+
+
+    /*
+    PASSAGE COMPLETE
+    */
+
+    if(
+        input.value.length
+        >=
+        currentPassage.length
+    ){
+
+        /*
+        Add this passage's typed data
+        to the SESSION totals.
+        */
+
+        sessionTyped += currentTyped;
+
+        sessionCorrect += currentCorrect;
+
+        sessionWrong += currentWrong;
+
+
+        /*
+        Add user typed text for actual words.
+        */
+
+        sessionTypedText +=
+            input.value + " ";
+
+
+        input.value = "";
+
+        loadPassage();
+
+        input.focus();
+
+    }
+
+});
+
+
+/* =========================
+   RENDER TYPED PASSAGE
+========================= */
+
+function renderTypedPassage(){
+
+    const chars =
+        passageBox.querySelectorAll(".char");
+
+
+    for(let i = 0; i < chars.length; i++){
+
+        chars[i].className = "char";
+
+        if(i < input.value.length){
+
+            if(
+                input.value[i]
+                ===
+                currentPassage[i]
+            ){
+
+                chars[i].classList.add("correct");
+
+            }else{
+
+                chars[i].classList.add("wrong");
+
+            }
+
+        }
+
+
+        if(i === input.value.length){
+
+            chars[i].classList.add("current");
+
+        }
+
+    }
+
+}
+
+
+/* =========================
+   SESSION PREVIEW
+========================= */
+
+function calculateSessionPreview(){
+
+    const typed =
+        sessionTyped + currentTyped;
+
+    const correct =
+        sessionCorrect + currentCorrect;
+
+    const wrong =
+        sessionWrong + currentWrong;
+
+
+    const minutes =
+        Math.max(elapsedSeconds,1) / 60;
+
+
+    const netWpm =
+        (correct / 5) / minutes;
+
+
+    const accuracy =
+        typed > 0
+        ? (correct / typed) * 100
+        : 100;
+
+
+    wpmDisplay.textContent =
+        netWpm.toFixed(2);
+
+    accuracyDisplay.textContent =
+        accuracy.toFixed(1) + "%";
+
+    errorDisplay.textContent =
+        wrong;
+
+}
+
+
+/* =========================
+   FINISH TEST
+========================= */
+
+function finishTest(){
+
+    /*
+    CRITICAL:
+    If test has NOT started,
+    Finish button must do NOTHING.
+    */
+
+    if(!running){
+
+        return;
+
+    }
+
+
+    running = false;
+
+    clearInterval(timer);
+
+    /*
+    Add current unfinished passage.
+    */
+
+    sessionTyped += currentTyped;
+
+    sessionCorrect += currentCorrect;
+
+    sessionWrong += currentWrong;
+
+
+    sessionTypedText +=
+        input.value;
+
+
+    input.disabled = true;
+
+
+    const stats =
+        calculateStats();
+
+
+    showResult(stats);
+
+
+    saveHistory(stats);
+
+
+    /*
+    Update best WPM.
+    */
+
+    const oldBest =
+        getBestWpm();
+
+
+    if(stats.netWpm > oldBest){
+
+        localStorage.setItem(
+            "typingBestWpm",
+            stats.netWpm.toFixed(2)
+        );
+
+    }
+
+
+    updateBestDisplay();
+
+
+    statusBox.innerHTML =
+        "Test finished. See your detailed result below.";
+
+}
+
+
+/* =========================
+   RESULT
+========================= */
+
+function showResult(stats){
+
+    document.getElementById("resultGross")
+        .textContent =
+        stats.grossWpm.toFixed(2);
+
+
+    document.getElementById("resultNet")
+        .textContent =
+        stats.netWpm.toFixed(2);
+
+
+    document.getElementById("resultNetWpm")
+        .textContent =
+        stats.netWpm.toFixed(2);
+
+
+    document.getElementById("resultAccuracy")
+        .textContent =
+        stats.accuracy.toFixed(1) + "%";
+
+
+    document.getElementById("resultChars")
+        .textContent =
+        stats.typed;
+
+
+    /*
+    STANDARD WORDS:
+    Characters / 5
+
+    Example:
+    10 characters = 2.00
+    */
+
+    document.getElementById("resultStandardWords")
+        .textContent =
+        stats.standardWords.toFixed(2);
+
+
+    /*
+    ACTUAL WORDS:
+    Real whitespace-separated words.
+    */
+
+    document.getElementById("resultActualWords")
+        .textContent =
+        stats.actualWords;
+
+
+    document.getElementById("resultCorrect")
+        .textContent =
+        stats.correct;
+
+
+    document.getElementById("resultWrong")
+        .textContent =
+        stats.wrong;
+
+
+    document.getElementById("resultKdph")
+        .textContent =
+        Math.round(stats.kdph);
+
+
+    document.getElementById("resultTime")
+        .textContent =
+        elapsedSeconds + " sec";
+
+
+    const target =
+        Number(document.getElementById("target").value);
+
+
+    document.getElementById("resultTarget")
+        .textContent =
+        target + " WPM";
+
+
+    const best =
+        Math.max(
+            stats.netWpm,
+            getBestWpm()
+        );
+
+
+    document.getElementById("resultBest")
+        .textContent =
+        best.toFixed(2);
+
+
+    /*
+    Circle progress.
+    */
+
+    const score =
+        Math.min(
+            (stats.netWpm / target) * 100,
+            100
+        );
+
+
+    document.getElementById("speedCircle")
+        .style.setProperty(
+            "--score",
+            score + "%"
+        );
+
+
+    const message =
+        stats.netWpm >= target
+        ? "Excellent! You reached your target speed."
+        : "Keep practicing. You are getting closer to your target.";
+
+
+    document.getElementById("resultMessage")
+        .innerHTML =
+        message;
+
+
+    resultSection.classList.add("show");
+
+    resultSection.scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+    });
+
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+function resetTest(){
+
+    clearInterval(timer);
+
+    running = false;
+
+    elapsedSeconds = 0;
+
+    duration =
+        mode === "ssc"
+        ? 900
+        : Number(document.getElementById("duration").value);
+
+    remainingSeconds =
+        duration;
+
+    passageIndex = 0;
+
+    sessionTyped = 0;
+
+    sessionCorrect = 0;
+
+    sessionWrong = 0;
+
+    sessionTypedText = "";
+
+    currentTyped = 0;
+
+    currentCorrect = 0;
+
+    currentWrong = 0;
+
+    input.value = "";
+
+    input.disabled = true;
+
+    resultSection.classList.remove("show");
+
+    updateTime();
+
+    wpmDisplay.textContent = "0.00";
+
+    accuracyDisplay.textContent = "100%";
+
+    errorDisplay.textContent = "0";
+
+    progressBar.style.width = "0%";
+
+    progressText.textContent = "0%";
+
+    loadPassage();
+
+    statusBox.textContent =
+        "Ready to start.";
+
+}
+
+
+/* =========================
+   DARK MODE
+========================= */
+
+function toggleDark(){
+
+    document.body.classList.toggle("dark");
+
+    const dark =
+        document.body.classList.contains("dark");
+
+    localStorage.setItem(
+        "darkMode",
+        dark ? "1" : "0"
+    );
+
+    document.getElementById("themeBtn")
+        .textContent =
+        dark ? "☀️" : "🌙";
+
+}
+
+
+if(
+    localStorage.getItem("darkMode")
+    ===
+    "1"
+){
+
+    document.body.classList.add("dark");
+
+    document.getElementById("themeBtn")
+        .textContent = "☀️";
+
+}
+
+
+/* =========================
+   KEYBOARD VISUAL
+========================= */
+
+document.addEventListener(
+    "keydown",
+    function(e){
+
+        if(!running) return;
+
+        let key =
+            e.key.toUpperCase();
+
+        if(e.code === "Space"){
+
+            key = "SPACE";
+
+        }
+
+
+        const keys =
+            document.querySelectorAll(".key");
+
+
+        keys.forEach(function(k){
+
+            if(k.textContent === key){
+
+                k.classList.add("active");
+
+                setTimeout(
+                    () => k.classList.remove("active"),
+                    100
+                );
+
+            }
+
+        });
+
+    }
+);
+
+
+/* =========================
+   HISTORY
+========================= */
+
+function saveHistory(stats){
+
+    const history =
+        JSON.parse(
+            localStorage.getItem("typingHistory")
+            ||
+            "[]"
+        );
+
+
+    history.unshift({
+
+        date:
+            new Date().toLocaleString(),
+
+        mode:
+            mode === "ssc"
+            ? "SSC"
+            : "Normal",
+
+        time:
+            elapsedSeconds,
+
+        wpm:
+            stats.netWpm,
+
+        accuracy:
+            stats.accuracy
+
+    });
+
+
+    /*
+    Keep last 10 tests.
+    */
+
+    history.splice(10);
+
+
+    localStorage.setItem(
+        "typingHistory",
+        JSON.stringify(history)
+    );
+
+
+    renderHistory();
+
+}
+
+
+function renderHistory(){
+
+    const history =
+        JSON.parse(
+            localStorage.getItem("typingHistory")
+            ||
+            "[]"
+        );
+
+
+    const body =
+        document.getElementById("historyBody");
+
+
+    if(history.length === 0){
+
+        body.innerHTML = `
+        <tr>
+        <td colspan="5">
+        No tests completed yet.
+        </td>
+        </tr>
+        `;
+
+        return;
+
+    }
+
+
+    body.innerHTML =
+        history.map(function(item){
+
+            return `
+            <tr>
+
+            <td>${item.date}</td>
+
+            <td>${item.mode}</td>
+
+            <td>${item.time}s</td>
+
+            <td>${Number(item.wpm).toFixed(2)}</td>
+
+            <td>${Number(item.accuracy).toFixed(1)}%</td>
+
+            </tr>
+            `;
+
+        }).join("");
+
+}
+
+renderHistory();
+
+
+/* =========================
+   PAGE NAVIGATION
+========================= */
+
+function showPage(pageId){
+
+    document
+        .querySelectorAll(".page")
+        .forEach(function(page){
+
+            page.classList.remove("active");
+
+        });
+
+
+    document
+        .getElementById(pageId)
+        .classList.add("active");
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================
+   INITIALIZE
+========================= */
+
+loadPassage();
+
+updateTime();
+
+updateBestDisplay();
+
+
+</script>
+
+</body>
+</html>
