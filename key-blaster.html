@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Key Blaster - TypeMaster Pro</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    font-family:Arial, sans-serif;
+    background:linear-gradient(135deg,#0f172a,#1e293b,#312e81);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.game{
+    width:100%;
+    max-width:900px;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:24px;
+    padding:30px;
+    box-shadow:0 20px 60px rgba(0,0,0,.35);
+    backdrop-filter:blur(12px);
+}
+
+.header{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.header h1{
+    margin:0 0 8px;
+    font-size:36px;
+}
+
+.header p{
+    margin:0;
+    color:#cbd5e1;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin-bottom:25px;
+}
+
+.stat{
+    background:rgba(255,255,255,.08);
+    border-radius:15px;
+    padding:15px;
+    text-align:center;
+}
+
+.stat small{
+    display:block;
+    color:#cbd5e1;
+    margin-bottom:6px;
+}
+
+.stat strong{
+    font-size:24px;
+}
+
+.arena{
+    height:350px;
+    position:relative;
+    overflow:hidden;
+    background:rgba(0,0,0,.22);
+    border-radius:20px;
+    border:1px solid rgba(255,255,255,.12);
+    margin-bottom:20px;
+}
+
+.target{
+    position:absolute;
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:28px;
+    font-weight:bold;
+    background:#fff;
+    color:#111827;
+    box-shadow:0 8px 25px rgba(0,0,0,.35);
+    user-select:none;
+}
+
+.message{
+    text-align:center;
+    min-height:30px;
+    font-size:18px;
+    color:#cbd5e1;
+}
+
+.controls{
+    text-align:center;
+    margin-top:20px;
+}
+
+button{
+    border:0;
+    border-radius:12px;
+    padding:13px 25px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    background:#fff;
+    color:#111827;
+}
+
+button:hover{
+    transform:translateY(-1px);
+}
+
+#result{
+    display:none;
+    text-align:center;
+    margin-top:20px;
+    padding:25px;
+    background:rgba(255,255,255,.08);
+    border-radius:18px;
+}
+
+.result-score{
+    font-size:42px;
+    font-weight:bold;
+    margin:10px 0;
+}
+
+.achievement{
+    display:none;
+    margin:15px auto 0;
+    padding:12px;
+    max-width:450px;
+    border-radius:12px;
+    background:rgba(250,204,21,.15);
+    border:1px solid rgba(250,204,21,.4);
+}
+
+@media(max-width:650px){
+    .game{
+        padding:20px;
+    }
+
+    .header h1{
+        font-size:28px;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .arena{
+        height:300px;
+    }
+
+    .target{
+        width:58px;
+        height:58px;
+        font-size:24px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="game">
+
+    <div class="header">
+        <h1>⌨️ Key Blaster</h1>
+        <p>Hit the correct keys before they disappear!</p>
+    </div>
+
+    <div class="stats">
+        <div class="stat">
+            <small>Time</small>
+            <strong id="time">60</strong>
+        </div>
+
+        <div class="stat">
+            <small>Score</small>
+            <strong id="score">0</strong>
+        </div>
+
+        <div class="stat">
+            <small>Accuracy</small>
+            <strong id="accuracy">100%</strong>
+        </div>
+
+        <div class="stat">
+            <small>WPM</small>
+            <strong id="wpm">0</strong>
+        </div>
+    </div>
+
+    <div class="arena" id="arena">
+        <div class="target" id="target">A</div>
+    </div>
+
+    <div class="message" id="message">
+        Press Start Game to begin
+    </div>
+
+    <div class="controls">
+        <button id="startBtn" onclick="startGame()">▶ Start Game</button>
+    </div>
+
+    <div id="result">
+
+        <h2>🎮 Game Over!</h2>
+
+        <div class="result-score" id="finalScore">0</div>
+
+        <p>Score</p>
+
+        <p>
+            WPM: <strong id="finalWpm">0</strong>
+            &nbsp; | &nbsp;
+            Accuracy: <strong id="finalAccuracy">0%</strong>
+        </p>
+
+        <p>
+            Correct Hits:
+            <strong id="finalHits">0</strong>
+        </p>
+
+        <div class="achievement" id="achievementBox">
+            🏆 Achievement Unlocked!
+            <div id="achievementText"></div>
+        </div>
+
+        <br>
+
+        <button onclick="startGame()">🔄 Play Again</button>
+
+        <br><br>
+
+        <a href="games.html" style="color:#fff;text-decoration:none;">
+            ← Back to Games
+        </a>
+
+    </div>
+
+</div>
+
+<script>
+
+const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+let gameRunning = false;
+let timeLeft = 60;
+let score = 0;
+let correctHits = 0;
+let totalAttempts = 0;
+let startTime = 0;
+let timerInterval = null;
+
+const timeEl = document.getElementById("time");
+const scoreEl = document.getElementById("score");
+const accuracyEl = document.getElementById("accuracy");
+const wpmEl = document.getElementById("wpm");
+
+const arena = document.getElementById("arena");
+const target = document.getElementById("target");
+const message = document.getElementById("message");
+const startBtn = document.getElementById("startBtn");
+const result = document.getElementById("result");
+
+function randomLetter(){
+
+    return letters[
+        Math.floor(Math.random() * letters.length)
+    ];
+
+}
+
+function moveTarget(){
+
+    const maxX = arena.clientWidth - target.offsetWidth;
+    const maxY = arena.clientHeight - target.offsetHeight;
+
+    const x = Math.floor(Math.random() * Math.max(maxX,1));
+    const y = Math.floor(Math.random() * Math.max(maxY,1));
+
+    target.style.left = x + "px";
+    target.style.top = y + "px";
+
+    target.textContent = randomLetter();
+
+}
+
+function updateStats(){
+
+    scoreEl.textContent = score;
+
+    let accuracy = totalAttempts === 0
+        ? 100
+        : Math.round((correctHits / totalAttempts) * 100);
+
+    accuracyEl.textContent = accuracy + "%";
+
+    const elapsedMinutes =
+        Math.max((Date.now() - startTime) / 60000, 1/60);
+
+    const wpm = Math.round(correctHits / elapsedMinutes);
+
+    wpmEl.textContent = wpm;
+
+}
+
+function startGame(){
+
+    clearInterval(timerInterval);
+
+    gameRunning = true;
+
+    timeLeft = 60;
+    score = 0;
+    correctHits = 0;
+    totalAttempts = 0;
+
+    startTime = Date.now();
+
+    result.style.display = "none";
+    startBtn.style.display = "none";
+
+    message.textContent =
+        "Type the letter shown on the target!";
+
+    timeEl.textContent = timeLeft;
+
+    updateStats();
+    moveTarget();
+
+    timerInterval = setInterval(function(){
+
+        timeLeft--;
+
+        timeEl.textContent = timeLeft;
+
+        updateStats();
+
+        if(timeLeft <= 0){
+
+            endGame();
+
+        }
+
+    },1000);
+
+}
+
+function endGame(){
+
+    gameRunning = false;
+
+    clearInterval(timerInterval);
+
+    target.style.display = "none";
+
+    const elapsedMinutes =
+        Math.max((Date.now() - startTime) / 60000, 1/60);
+
+    const finalWpm =
+        Math.round(correctHits / elapsedMinutes);
+
+    const finalAccuracy =
+        totalAttempts === 0
+        ? 100
+        : Math.round((correctHits / totalAttempts) * 100);
+
+    document.getElementById("finalScore").textContent =
+        score;
+
+    document.getElementById("finalWpm").textContent =
+        finalWpm;
+
+    document.getElementById("finalAccuracy").textContent =
+        finalAccuracy + "%";
+
+    document.getElementById("finalHits").textContent =
+        correctHits;
+
+    result.style.display = "block";
+    startBtn.style.display = "inline-block";
+
+    startBtn.textContent = "▶ Start New Game";
+
+    message.textContent =
+        "Game finished!";
+
+    saveBestScore();
+    saveAchievements(finalWpm, finalAccuracy);
+
+}
+
+function saveBestScore(){
+
+    const oldScore =
+        Number(localStorage.getItem("tm_key_blaster_best") || 0);
+
+    if(score > oldScore){
+
+        localStorage.setItem(
+            "tm_key_blaster_best",
+            score
+        );
+
+    }
+
+    const oldWpm =
+        Number(localStorage.getItem("tm_key_blaster_best_wpm") || 0);
+
+    const elapsedMinutes =
+        Math.max((Date.now() - startTime) / 60000, 1/60);
+
+    const currentWpm =
+        Math.round(correctHits / elapsedMinutes);
+
+    if(currentWpm > oldWpm){
+
+        localStorage.setItem(
+            "tm_key_blaster_best_wpm",
+            currentWpm
+        );
+
+    }
+
+}
+
+function unlockAchievement(id, text){
+
+    const key = "tm_achievement_" + id;
+
+    if(localStorage.getItem(key) === "1"){
+        return;
+    }
+
+    localStorage.setItem(key,"1");
+
+    const box =
+        document.getElementById("achievementBox");
+
+    const achievementText =
+        document.getElementById("achievementText");
+
+    achievementText.textContent = text;
+
+    box.style.display = "block";
+
+}
+
+function saveAchievements(finalWpm, finalAccuracy){
+
+    // First game
+    unlockAchievement(
+        "firstGame",
+        "First Game - You completed your first Key Blaster game!"
+    );
+
+    // 20 WPM
+    if(finalWpm >= 20){
+
+        unlockAchievement(
+            "twentyWpm",
+            "Speed Runner - You reached 20+ WPM!"
+        );
+
+    }
+
+    // 30 WPM
+    if(finalWpm >= 30){
+
+        unlockAchievement(
+            "thirtyWpm",
+            "Fast Typist - You reached 30+ WPM!"
+        );
+
+    }
+
+    // 50 WPM
+    if(finalWpm >= 50){
+
+        unlockAchievement(
+            "fiftyWpm",
+            "Speed Master - You reached 50+ WPM!"
+        );
+
+    }
+
+    // Accuracy
+    if(finalAccuracy >= 95){
+
+        unlockAchievement(
+            "accuracy95",
+            "Sharp Fingers - 95%+ accuracy!"
+        );
+
+    }
+
+    if(finalAccuracy === 100){
+
+        unlockAchievement(
+            "accuracy100",
+            "Perfect Typist - 100% accuracy!"
+        );
+
+    }
+
+    // Score
+    if(score >= 100){
+
+        unlockAchievement(
+            "score100",
+            "Score Hunter - You reached 100+ points!"
+        );
+
+    }
+
+}
+
+document.addEventListener("keydown",function(event){
+
+    if(!gameRunning){
+        return;
+    }
+
+    if(event.key.length !== 1){
+        return;
+    }
+
+    const pressed =
+        event.key.toUpperCase();
+
+    totalAttempts++;
+
+    const current =
+        target.textContent;
+
+    if(pressed === current){
+
+        correctHits++;
+
+        score += 10;
+
+        moveTarget();
+
+        message.textContent =
+            "✅ Correct!";
+
+    }else{
+
+        score = Math.max(0, score - 2);
+
+        message.textContent =
+            "❌ Wrong key!";
+
+    }
+
+    updateStats();
+
+});
+
+target.addEventListener("click",function(){
+
+    if(!gameRunning){
+        return;
+    }
+
+    message.textContent =
+        "⌨️ Use your keyboard!";
+
+});
+
+moveTarget();
+
+</script>
+
+</body>
+  </html>
