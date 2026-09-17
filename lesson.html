@@ -737,14 +737,102 @@ Practice Again
 
 /* ==========================================
    TYPEMASTER PRO
-   LESSON ENGINE - VERSION 1
+   MULTI LESSON ENGINE
 ========================================== */
 
 
-/* ================= TEXT ================= */
+/* ================= LESSON DATA ================= */
 
-const lessonText =
-"asdf jkl; asdf jkl; sad lad fall ask flask dad all;";
+const lessons = {
+
+    "home-row-1": {
+        number: 1,
+        title: "Home Row Basics",
+        level: "BEGINNER",
+        description: "Learn the correct finger position and practice the home row.",
+        text: "asdf jkl; asdf jkl; sad lad fall ask flask dad all;"
+    },
+
+    "left-hand-1": {
+        number: 2,
+        title: "Left Hand Practice",
+        level: "BEGINNER",
+        description: "Practice the A, S, D and F keys using the correct fingers.",
+        text: "asdf sad dad fad ask flask salad fall all dad"
+    },
+
+    "right-hand-1": {
+        number: 3,
+        title: "Right Hand Practice",
+        level: "BEGINNER",
+        description: "Practice the J, K, L and semicolon keys with proper finger placement.",
+        text: "jkl; jak kill jail like lake all; ask lad"
+    },
+
+    "home-row-words": {
+        number: 4,
+        title: "Home Row Words",
+        level: "BEGINNER",
+        description: "Combine home row letters to type simple words.",
+        text: "sad dad lad all fall ask flask salad lass"
+    },
+
+    "top-row-1": {
+        number: 5,
+        title: "Top Row",
+        level: "BEGINNER",
+        description: "Practice the top row of the keyboard.",
+        text: "qwerty ytrewq we were write type quite power"
+    },
+
+    "bottom-row-1": {
+        number: 6,
+        title: "Bottom Row",
+        level: "BEGINNER",
+        description: "Practice the bottom row of the keyboard.",
+        text: "zxcv bnm zxcv bnm move zone zoom box van"
+    },
+
+    "capital-letters": {
+        number: 7,
+        title: "Capital Letters",
+        level: "BEGINNER",
+        description: "Learn how to use Shift correctly while typing capital letters.",
+        text: "Hello World This Is TypeMaster Pro Learn Typing"
+    },
+
+    "numbers-1": {
+        number: 8,
+        title: "Numbers",
+        level: "INTERMEDIATE",
+        description: "Practice numbers and number combinations.",
+        text: "12345 67890 12345 67890 2026 123 456 789"
+    },
+
+    "punctuation-1": {
+        number: 9,
+        title: "Punctuation",
+        level: "INTERMEDIATE",
+        description: "Practice common punctuation keys.",
+        text: "Hello, world. How are you? I am learning typing!"
+    }
+
+};
+
+
+/* ================= GET LESSON ID ================= */
+
+const params =
+new URLSearchParams(window.location.search);
+
+const lessonId =
+params.get("id") || "home-row-1";
+
+
+/* ================= SELECT LESSON ================= */
+
+const currentLesson =
+lessons[lessonId] || lessons["home-row-1"];
 
 
 /* ================= VARIABLES ================= */
@@ -758,6 +846,23 @@ let startTime = null;
 let timerInterval = null;
 
 let totalErrors = 0;
+
+
+/* ================= UPDATE HEADER ================= */
+
+document.querySelector(".badge").textContent =
+"LESSON " +
+currentLesson.number +
+" · " +
+currentLesson.level;
+
+
+document.querySelector(".lesson-header h1").textContent =
+currentLesson.title;
+
+
+document.querySelector(".lesson-header p").textContent =
+currentLesson.description;
 
 
 /* ================= ELEMENTS ================= */
@@ -796,7 +901,11 @@ function renderText(){
 
     textDisplay.innerHTML = "";
 
-    for(let i = 0; i < lessonText.length; i++){
+    for(
+        let i = 0;
+        i < currentLesson.text.length;
+        i++
+    ){
 
         const span =
         document.createElement("span");
@@ -804,7 +913,7 @@ function renderText(){
         span.className = "char";
 
         span.textContent =
-        lessonText[i];
+        currentLesson.text[i];
 
         textDisplay.appendChild(span);
 
@@ -820,8 +929,11 @@ function renderText(){
 function startLesson(){
 
     if(started){
+
         typingInput.focus();
+
         return;
+
     }
 
     started = true;
@@ -840,65 +952,90 @@ function startLesson(){
     "Typing...";
 
     timerInterval =
-    setInterval(updateStats, 250);
+    setInterval(
+        updateStats,
+        250
+    );
 
 }
 
 
 /* ================= INPUT ================= */
 
-typingInput.addEventListener("input", function(){
+typingInput.addEventListener(
+    "input",
+    function(){
 
-    if(!started || finished){
-        return;
-    }
+        if(!started || finished){
 
-    const typed =
-    typingInput.value;
+            return;
 
-    totalErrors = 0;
+        }
 
-    for(let i = 0; i < typed.length; i++){
 
-        if(
-            i >= lessonText.length ||
-            typed[i] !== lessonText[i]
+        const typed =
+        typingInput.value;
+
+
+        totalErrors = 0;
+
+
+        for(
+            let i = 0;
+            i < typed.length;
+            i++
         ){
 
-            totalErrors++;
+            if(
+                i >= currentLesson.text.length ||
+                typed[i] !== currentLesson.text[i]
+            ){
+
+                totalErrors++;
+
+            }
+
+        }
+
+
+        updateCharacterColors();
+
+        updateCurrentCharacter();
+
+        updateStats();
+
+
+        const progress =
+        Math.min(
+            100,
+            Math.round(
+                (
+                    typed.length /
+                    currentLesson.text.length
+                ) * 100
+            )
+        );
+
+
+        progressFill.style.width =
+        progress + "%";
+
+
+        progressText.textContent =
+        progress + "%";
+
+
+        if(
+            typed.length >=
+            currentLesson.text.length
+        ){
+
+            finishLesson();
 
         }
 
     }
-
-    updateCharacterColors();
-
-    updateCurrentCharacter();
-
-    updateStats();
-
-    const progress =
-    Math.min(
-        100,
-        Math.round(
-            (typed.length / lessonText.length) * 100
-        )
-    );
-
-    progressFill.style.width =
-    progress + "%";
-
-    progressText.textContent =
-    progress + "%";
-
-
-    if(typed.length >= lessonText.length){
-
-        finishLesson();
-
-    }
-
-});
+);
 
 
 /* ================= CHARACTER COLORS ================= */
@@ -912,31 +1049,40 @@ function updateCharacterColors(){
     textDisplay.querySelectorAll(".char");
 
 
-    chars.forEach(function(char,index){
+    chars.forEach(
+        function(char,index){
 
-        char.classList.remove(
-            "correct",
-            "wrong"
-        );
+            char.classList.remove(
+                "correct",
+                "wrong"
+            );
 
-
-        if(index < typed.length){
 
             if(
-                typed[index] === lessonText[index]
+                index < typed.length
             ){
 
-                char.classList.add("correct");
+                if(
+                    typed[index] ===
+                    currentLesson.text[index]
+                ){
 
-            }else{
+                    char.classList.add(
+                        "correct"
+                    );
 
-                char.classList.add("wrong");
+                }else{
+
+                    char.classList.add(
+                        "wrong"
+                    );
+
+                }
 
             }
 
         }
-
-    });
+    );
 
 }
 
@@ -948,23 +1094,31 @@ function updateCurrentCharacter(){
     const typedLength =
     typingInput.value.length;
 
+
     const chars =
     textDisplay.querySelectorAll(".char");
 
 
-    chars.forEach(function(char){
+    chars.forEach(
+        function(char){
 
-        char.classList.remove("current");
+            char.classList.remove(
+                "current"
+            );
 
-    });
+        }
+    );
 
 
     if(
-        typedLength < chars.length
+        typedLength <
+        chars.length
     ){
 
         chars[typedLength]
-        .classList.add("current");
+        .classList.add(
+            "current"
+        );
 
     }
 
@@ -976,7 +1130,9 @@ function updateCurrentCharacter(){
 function updateStats(){
 
     if(!startTime){
+
         return;
+
     }
 
 
@@ -998,15 +1154,24 @@ function updateStats(){
     /* TIME */
 
     const minutesPart =
-    Math.floor(elapsedSeconds / 60);
+    Math.floor(
+        elapsedSeconds / 60
+    );
+
 
     const secondsPart =
-    Math.floor(elapsedSeconds % 60);
+    Math.floor(
+        elapsedSeconds % 60
+    );
+
 
     timeDisplay.textContent =
     minutesPart +
     ":" +
-    String(secondsPart).padStart(2,"0");
+    String(secondsPart).padStart(
+        2,
+        "0"
+    );
 
 
     /* WPM */
@@ -1017,31 +1182,37 @@ function updateStats(){
 
     const wpm =
     Math.round(
-        (correctCharacters / 5) /
-        minutes
+        (
+            correctCharacters / 5
+        ) / minutes
     );
 
 
     wpmDisplay.textContent =
-    Math.max(0,wpm);
+    Math.max(
+        0,
+        wpm
+    );
 
 
     /* ACCURACY */
 
-    const totalTyped =
-    typed.length;
-
-
     let accuracy = 100;
 
 
-    if(totalTyped > 0){
+    if(
+        typed.length > 0
+    ){
 
         accuracy =
         Math.round(
-            ((totalTyped - totalErrors) /
-            totalTyped) *
-            100
+            (
+                (
+                    typed.length -
+                    totalErrors
+                ) /
+                typed.length
+            ) * 100
         );
 
     }
@@ -1050,7 +1221,10 @@ function updateStats(){
     accuracy =
     Math.max(
         0,
-        Math.min(100,accuracy)
+        Math.min(
+            100,
+            accuracy
+        )
     );
 
 
@@ -1081,8 +1255,10 @@ function calculateCorrectCharacters(){
     ){
 
         if(
-            i < lessonText.length &&
-            typed[i] === lessonText[i]
+            i <
+            currentLesson.text.length &&
+            typed[i] ===
+            currentLesson.text[i]
         ){
 
             correct++;
@@ -1102,16 +1278,26 @@ function calculateCorrectCharacters(){
 function finishLesson(){
 
     if(finished){
+
         return;
+
     }
+
 
     finished = true;
 
-    clearInterval(timerInterval);
+
+    clearInterval(
+        timerInterval
+    );
+
 
     typingInput.disabled = true;
 
-    document.getElementById("startBtn").textContent =
+
+    document.getElementById(
+        "startBtn"
+    ).textContent =
     "Completed";
 
 
@@ -1119,7 +1305,9 @@ function finishLesson(){
 
 
     const finalWpm =
-    parseInt(wpmDisplay.textContent) || 0;
+    parseInt(
+        wpmDisplay.textContent
+    ) || 0;
 
 
     const finalAccuracy =
@@ -1130,15 +1318,21 @@ function finishLesson(){
     totalErrors;
 
 
-    document.getElementById("resultWpm").textContent =
+    document.getElementById(
+        "resultWpm"
+    ).textContent =
     finalWpm;
 
 
-    document.getElementById("resultAccuracy").textContent =
+    document.getElementById(
+        "resultAccuracy"
+    ).textContent =
     finalAccuracy;
 
 
-    document.getElementById("resultErrors").textContent =
+    document.getElementById(
+        "resultErrors"
+    ).textContent =
     finalErrors;
 
 
@@ -1146,50 +1340,70 @@ function finishLesson(){
     "block";
 
 
-    saveProgress(finalWpm);
+    saveProgress(
+        currentLesson.number,
+        finalWpm
+    );
 
 }
 
 
 /* ================= SAVE PROGRESS ================= */
 
-function saveProgress(wpm){
+function saveProgress(
+    lessonNumber,
+    wpm
+){
 
     localStorage.setItem(
-        "tm_lesson_1_completed",
+        "tm_lesson_" +
+        lessonNumber +
+        "_completed",
         "true"
     );
 
 
     localStorage.setItem(
-        "tm_lesson_1_wpm",
+        "tm_lesson_" +
+        lessonNumber +
+        "_wpm",
         wpm
     );
 
 
-    /* Update completed lessons */
+    /* Completed lessons */
 
-    let completed =
-    Number(
-        localStorage.getItem(
-            "tm_completed_lessons"
-        )
-    ) || 0;
+    let completed = 0;
 
 
-    if(completed < 1){
+    for(
+        let i = 1;
+        i <= 9;
+        i++
+    ){
 
-        completed = 1;
+        if(
+            localStorage.getItem(
+                "tm_lesson_" +
+                i +
+                "_completed"
+            ) === "true"
+        ){
 
-        localStorage.setItem(
-            "tm_completed_lessons",
-            completed
-        );
+            completed++;
+
+        }
 
     }
 
 
-    /* Update best WPM */
+    localStorage.setItem(
+        "tm_completed_lessons",
+        completed
+    );
+
+
+    /* Best WPM */
 
     let best =
     Number(
@@ -1215,7 +1429,10 @@ function saveProgress(wpm){
 
 function resetLesson(){
 
-    clearInterval(timerInterval);
+    clearInterval(
+        timerInterval
+    );
+
 
     started = false;
 
@@ -1225,33 +1442,45 @@ function resetLesson(){
 
     totalErrors = 0;
 
+
     typingInput.value = "";
 
     typingInput.disabled = true;
 
+
     timeDisplay.textContent =
     "0:00";
+
 
     wpmDisplay.textContent =
     "0";
 
+
     accuracyDisplay.textContent =
     "100%";
+
 
     errorsDisplay.textContent =
     "0";
 
+
     progressFill.style.width =
     "0%";
+
 
     progressText.textContent =
     "0%";
 
-    document.getElementById("startBtn").textContent =
+
+    document.getElementById(
+        "startBtn"
+    ).textContent =
     "Start Lesson";
+
 
     result.style.display =
     "none";
+
 
     renderText();
 
@@ -1264,8 +1493,13 @@ document.addEventListener(
     "keydown",
     function(event){
 
-        if(!started || finished){
+        if(
+            !started ||
+            finished
+        ){
+
             return;
+
         }
 
 
@@ -1273,26 +1507,33 @@ document.addEventListener(
         event.key.toUpperCase();
 
 
-        if(key === " "){
+        if(
+            key === " "
+        ){
+
             key = "SPACE";
+
         }
 
 
-        const keys =
-        document.querySelectorAll(".key");
+        document
+        .querySelectorAll(".key")
+        .forEach(
+            function(k){
 
+                if(
+                    k.textContent.trim() ===
+                    key
+                ){
 
-        keys.forEach(function(k){
+                    k.classList.add(
+                        "active"
+                    );
 
-            if(
-                k.textContent.trim() === key
-            ){
-
-                k.classList.add("active");
+                }
 
             }
-
-        });
+        );
 
     }
 );
@@ -1304,11 +1545,15 @@ document.addEventListener(
 
         document
         .querySelectorAll(".key")
-        .forEach(function(k){
+        .forEach(
+            function(k){
 
-            k.classList.remove("active");
+                k.classList.remove(
+                    "active"
+                );
 
-        });
+            }
+        );
 
     }
 );
@@ -1321,4 +1566,4 @@ renderText();
 </script>
 
 </body>
-  </html>
+</html>
