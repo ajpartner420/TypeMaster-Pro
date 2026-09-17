@@ -361,134 +361,76 @@ button{
 
 const words = [
 
-"apple",
-"orange",
-"banana",
-"computer",
-"keyboard",
-"mouse",
-"screen",
-"window",
-"school",
-"student",
-"teacher",
-"typing",
-"practice",
-"learning",
-"future",
-"success",
-"speed",
-"accuracy",
-"challenge",
-"master",
-"online",
-"website",
-"internet",
-"program",
-"coding",
-"javascript",
-"browser",
-"information",
-"office",
-"company",
-"worker",
-"manager",
-"project",
-"system",
-"technology",
-"business",
-"people",
-"country",
-"world",
-"simple",
-"better",
-"strong",
-"power",
-"quick",
-"smart",
-"happy",
-"great",
-"today",
-"morning",
-"evening",
-"friend",
-"family",
-"house",
-"water",
-"music",
-"game",
-"player",
-"score",
-"level",
-"target",
-"result",
-"answer",
-"question",
-"language",
-"english",
-"india",
-"gujarat",
-"typingmaster",
-"keyboard",
-"lesson",
-"exercise",
-"correct",
-"focus",
-"finger",
-"letter",
-"number",
-"word",
-"sentence"
+"apple","orange","banana","computer","keyboard","mouse",
+"screen","window","school","student","teacher","typing",
+"practice","learning","future","success","speed","accuracy",
+"challenge","master","online","website","internet","program",
+"coding","javascript","browser","information","office","company",
+"worker","manager","project","system","technology","business",
+"people","country","world","simple","better","strong","power",
+"quick","smart","happy","great","today","morning","evening",
+"friend","family","house","water","music","game","player",
+"score","level","target","result","answer","question","language",
+"english","india","gujarat","typingmaster","lesson","exercise",
+"correct","focus","finger","letter","number","word","sentence"
 
 ];
 
-
 let currentWord = "";
-
 let timeLeft = 60;
-
 let score = 0;
-
 let correctWords = 0;
-
 let totalAttempts = 0;
-
-let totalTypedCharacters = 0;
-
 let gameRunning = false;
-
 let timerInterval;
 
 
-const timeElement = document.getElementById("time");
+/* ELEMENTS */
 
-const timerDisplay = document.getElementById("timerDisplay");
+const timeElement =
+    document.getElementById("time");
 
-const scoreElement = document.getElementById("score");
+const timerDisplay =
+    document.getElementById("timerDisplay");
 
-const wpmElement = document.getElementById("wpm");
+const scoreElement =
+    document.getElementById("score");
 
-const accuracyElement = document.getElementById("accuracy");
+const wpmElement =
+    document.getElementById("wpm");
 
-const wordElement = document.getElementById("word");
+const accuracyElement =
+    document.getElementById("accuracy");
 
-const inputElement = document.getElementById("typingInput");
+const wordElement =
+    document.getElementById("word");
 
-const startButton = document.getElementById("startBtn");
+const inputElement =
+    document.getElementById("typingInput");
 
-const messageElement = document.getElementById("message");
+const startButton =
+    document.getElementById("startBtn");
 
-const resultElement = document.getElementById("result");
+const messageElement =
+    document.getElementById("message");
 
+const resultElement =
+    document.getElementById("result");
+
+
+/* RANDOM WORD */
 
 function randomWord(){
 
-    const index = Math.floor(Math.random() * words.length);
+    const index =
+        Math.floor(Math.random() * words.length);
 
     return words[index];
 
 }
 
+
+/* NEXT WORD */
 
 function showNextWord(){
 
@@ -501,6 +443,8 @@ function showNextWord(){
 }
 
 
+/* START GAME */
+
 function startGame(){
 
     if(gameRunning) return;
@@ -508,14 +452,9 @@ function startGame(){
     gameRunning = true;
 
     timeLeft = 60;
-
     score = 0;
-
     correctWords = 0;
-
     totalAttempts = 0;
-
-    totalTypedCharacters = 0;
 
     resultElement.style.display = "none";
 
@@ -525,7 +464,8 @@ function startGame(){
 
     startButton.disabled = true;
 
-    startButton.textContent = "🎮 Game Running";
+    startButton.textContent =
+        "🎮 Game Running";
 
     scoreElement.textContent = "0";
 
@@ -547,10 +487,11 @@ function startGame(){
 
         timeLeft--;
 
-        timeElement.textContent = timeLeft;
+        timeElement.textContent =
+            timeLeft;
 
-        timerDisplay.textContent = timeLeft;
-
+        timerDisplay.textContent =
+            timeLeft;
 
         updateWPM();
 
@@ -566,53 +507,61 @@ function startGame(){
 }
 
 
-inputElement.addEventListener("keydown", function(event){
+/* ENTER KEY */
 
-    if(!gameRunning) return;
+inputElement.addEventListener(
+    "keydown",
+    function(event){
 
+        if(!gameRunning) return;
 
-    if(event.key === "Enter"){
+        if(event.key === "Enter"){
 
-        event.preventDefault();
+            event.preventDefault();
 
-        checkWord();
+            checkWord();
+
+        }
 
     }
+);
 
-});
 
+/* CHECK WORD */
 
 function checkWord(){
 
-    const typed = inputElement.value.trim();
+    const typed =
+        inputElement.value.trim();
 
     if(typed === "") return;
 
-
     totalAttempts++;
 
-    totalTypedCharacters += typed.length;
 
-
-    if(typed.toLowerCase() === currentWord.toLowerCase()){
+    if(
+        typed.toLowerCase() ===
+        currentWord.toLowerCase()
+    ){
 
         correctWords++;
 
         score += 10;
 
-        messageElement.textContent = "✅ Correct!";
+        messageElement.textContent =
+            "✅ Correct!";
 
     }
-
     else{
 
         messageElement.textContent =
-            "❌ Wrong word! Next one...";
+            "❌ Wrong word!";
 
     }
 
 
-    scoreElement.textContent = score;
+    scoreElement.textContent =
+        score;
 
     updateAccuracy();
 
@@ -621,11 +570,14 @@ function checkWord(){
 }
 
 
+/* ACCURACY */
+
 function updateAccuracy(){
 
     if(totalAttempts === 0){
 
-        accuracyElement.textContent = "100%";
+        accuracyElement.textContent =
+            "100%";
 
         return;
 
@@ -633,17 +585,23 @@ function updateAccuracy(){
 
 
     const accuracy =
-        Math.round((correctWords / totalAttempts) * 100);
+        Math.round(
+            (correctWords / totalAttempts) * 100
+        );
 
 
-    accuracyElement.textContent = accuracy + "%";
+    accuracyElement.textContent =
+        accuracy + "%";
 
 }
 
 
+/* WPM */
+
 function updateWPM(){
 
-    const elapsedSeconds = 60 - timeLeft;
+    const elapsedSeconds =
+        60 - timeLeft;
 
     if(elapsedSeconds <= 0){
 
@@ -654,14 +612,256 @@ function updateWPM(){
     }
 
 
-    const minutes = elapsedSeconds / 60;
+    const minutes =
+        elapsedSeconds / 60;
 
-    const wpm = Math.round(correctWords / minutes);
 
-    wpmElement.textContent = wpm;
+    const wpm =
+        Math.round(correctWords / minutes);
+
+
+    wpmElement.textContent =
+        wpm;
 
 }
 
+
+/* ACHIEVEMENT SYSTEM */
+
+function unlockAchievement(id){
+
+    const key =
+        "tm_achievement_" + id;
+
+    const alreadyUnlocked =
+        localStorage.getItem(key) === "true";
+
+
+    if(!alreadyUnlocked){
+
+        localStorage.setItem(key,"true");
+
+        showAchievementPopup(id);
+
+    }
+
+}
+
+
+/* ACHIEVEMENT POPUP */
+
+function showAchievementPopup(id){
+
+    const names = {
+
+        firstGame:
+            "🎮 First Game",
+
+        tenWords:
+            "🎯 Word Starter",
+
+        twentyWpm:
+            "⚡ Speed Runner",
+
+        thirtyWpm:
+            "🔥 Fast Typist",
+
+        fiftyWpm:
+            "🚀 Speed Master",
+
+        accuracy95:
+            "🎯 Sharp Fingers",
+
+        accuracy100:
+            "💯 Perfect Typist",
+
+        score100:
+            "🏆 Score Hunter",
+
+        typingMaster:
+            "👑 Typing Master"
+
+    };
+
+
+    const popup =
+        document.createElement("div");
+
+
+    popup.style.position = "fixed";
+
+    popup.style.top = "25px";
+
+    popup.style.right = "25px";
+
+    popup.style.zIndex = "9999";
+
+    popup.style.background =
+        "rgba(15,23,42,.97)";
+
+    popup.style.border =
+        "1px solid rgba(56,189,248,.5)";
+
+    popup.style.borderRadius = "16px";
+
+    popup.style.padding = "18px 22px";
+
+    popup.style.boxShadow =
+        "0 15px 40px rgba(0,0,0,.4)";
+
+    popup.style.color = "white";
+
+    popup.style.fontWeight = "bold";
+
+    popup.innerHTML =
+        "🏆 Achievement Unlocked!<br><br>" +
+        (names[id] || id);
+
+
+    document.body.appendChild(popup);
+
+
+    setTimeout(function(){
+
+        popup.style.transition =
+            "opacity .5s";
+
+        popup.style.opacity = "0";
+
+
+        setTimeout(function(){
+
+            popup.remove();
+
+        },500);
+
+    },2500);
+
+}
+
+
+/* CHECK ACHIEVEMENTS */
+
+function checkAchievements(){
+
+    const finalWPM =
+        parseInt(wpmElement.textContent) || 0;
+
+
+    const finalAccuracy =
+        parseInt(
+            accuracyElement.textContent
+        ) || 0;
+
+
+    /* First Game */
+
+    unlockAchievement("firstGame");
+
+
+    /* 10 CORRECT WORDS */
+
+    if(correctWords >= 10){
+
+        unlockAchievement("tenWords");
+
+    }
+
+
+    /* WPM */
+
+    if(finalWPM >= 20){
+
+        unlockAchievement("twentyWpm");
+
+    }
+
+
+    if(finalWPM >= 30){
+
+        unlockAchievement("thirtyWpm");
+
+    }
+
+
+    if(finalWPM >= 50){
+
+        unlockAchievement("fiftyWpm");
+
+    }
+
+
+    /* ACCURACY */
+
+    if(finalAccuracy >= 95){
+
+        unlockAchievement("accuracy95");
+
+    }
+
+
+    if(finalAccuracy === 100){
+
+        unlockAchievement("accuracy100");
+
+    }
+
+
+    /* SCORE */
+
+    if(score >= 100){
+
+        unlockAchievement("score100");
+
+    }
+
+
+    /* TYPING MASTER */
+
+    let unlockedCount = 0;
+
+
+    const achievementList = [
+
+        "firstGame",
+        "tenWords",
+        "twentyWpm",
+        "thirtyWpm",
+        "fiftyWpm",
+        "accuracy95",
+        "accuracy100",
+        "score100"
+
+    ];
+
+
+    achievementList.forEach(function(id){
+
+        if(
+            localStorage.getItem(
+                "tm_achievement_" + id
+            ) === "true"
+        ){
+
+            unlockedCount++;
+
+        }
+
+    });
+
+
+    if(unlockedCount >= 5){
+
+        unlockAchievement(
+            "typingMaster"
+        );
+
+    }
+
+}
+
+
+/* END GAME */
 
 function endGame(){
 
@@ -673,35 +873,50 @@ function endGame(){
 
     startButton.disabled = false;
 
-    startButton.textContent = "▶ Start Game";
+    startButton.textContent =
+        "▶ Start Game";
 
-    wordElement.textContent = "GAME OVER";
+    wordElement.textContent =
+        "GAME OVER";
 
     messageElement.textContent =
         "Great job! Try again and beat your high score.";
+
 
     updateAccuracy();
 
     updateWPM();
 
 
-    const finalWPM = parseInt(wpmElement.textContent) || 0;
+    const finalWPM =
+        parseInt(wpmElement.textContent) || 0;
 
-    const finalAccuracy = accuracyElement.textContent;
+
+    const finalAccuracy =
+        accuracyElement.textContent;
 
 
-    document.getElementById("finalScore").textContent =
-        score;
+    document.getElementById(
+        "finalScore"
+    ).textContent = score;
 
-    document.getElementById("finalWpm").textContent =
-        finalWPM;
 
-    document.getElementById("finalAccuracy").textContent =
-        finalAccuracy;
+    document.getElementById(
+        "finalWpm"
+    ).textContent = finalWPM;
+
+
+    document.getElementById(
+        "finalAccuracy"
+    ).textContent = finalAccuracy;
 
 
     let bestScore =
-        parseInt(localStorage.getItem("tm_word_rush_best") || "0");
+        parseInt(
+            localStorage.getItem(
+                "tm_word_rush_best"
+            ) || "0"
+        );
 
 
     if(score > bestScore){
@@ -713,31 +928,56 @@ function endGame(){
             bestScore
         );
 
-        document.getElementById("bestMessage").textContent =
-            "🎉 NEW HIGH SCORE: " + bestScore;
+        document.getElementById(
+            "bestMessage"
+        ).textContent =
+            "🎉 NEW HIGH SCORE: " +
+            bestScore;
 
     }
-
     else{
 
-        document.getElementById("bestMessage").textContent =
-            "🏆 Best Score: " + bestScore;
+        document.getElementById(
+            "bestMessage"
+        ).textContent =
+            "🏆 Best Score: " +
+            bestScore;
 
     }
 
 
-    resultElement.style.display = "block";
+    resultElement.style.display =
+        "block";
 
 
-    /* Save general game achievement */
+    /* SAVE BEST WPM */
 
-    localStorage.setItem(
-        "tm_game_played",
-        "true"
-    );
+    let oldBestWpm =
+        parseInt(
+            localStorage.getItem(
+                "tm_word_rush_best_wpm"
+            ) || "0"
+        );
+
+
+    if(finalWPM > oldBestWpm){
+
+        localStorage.setItem(
+            "tm_word_rush_best_wpm",
+            finalWPM
+        );
+
+    }
+
+
+    /* ACHIEVEMENTS */
+
+    checkAchievements();
 
 }
 
+
+/* RESTART */
 
 function restartGame(){
 
@@ -753,16 +993,17 @@ function restartGame(){
 
     totalAttempts = 0;
 
-    totalTypedCharacters = 0;
-
 
     inputElement.disabled = true;
 
     inputElement.value = "";
 
+
     startButton.disabled = false;
 
-    startButton.textContent = "▶ Start Game";
+    startButton.textContent =
+        "▶ Start Game";
+
 
     timeElement.textContent = "60";
 
@@ -774,16 +1015,20 @@ function restartGame(){
 
     accuracyElement.textContent = "100%";
 
-    wordElement.textContent = "Press Start";
+    wordElement.textContent =
+        "Press Start";
+
 
     messageElement.textContent =
         "You have 60 seconds. Type as many correct words as possible.";
 
-    resultElement.style.display = "none";
+
+    resultElement.style.display =
+        "none";
 
 }
 
 </script>
 
 </body>
-  </html>
+</html>
