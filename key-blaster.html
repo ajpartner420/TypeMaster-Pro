@@ -13,33 +13,33 @@
 body{
     margin:0;
     min-height:100vh;
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
     background:linear-gradient(135deg,#0f172a,#1e293b,#312e81);
     color:white;
     display:flex;
     justify-content:center;
     align-items:center;
-    padding:20px;
+    padding:18px;
 }
 
 .game{
     width:100%;
-    max-width:900px;
+    max-width:950px;
     background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.15);
+    border:1px solid rgba(255,255,255,.14);
     border-radius:24px;
-    padding:30px;
-    box-shadow:0 20px 60px rgba(0,0,0,.35);
+    padding:28px;
+    box-shadow:0 20px 60px rgba(0,0,0,.4);
     backdrop-filter:blur(12px);
 }
 
 .header{
     text-align:center;
-    margin-bottom:25px;
+    margin-bottom:22px;
 }
 
 .header h1{
-    margin:0 0 8px;
+    margin:0 0 7px;
     font-size:36px;
 }
 
@@ -50,64 +50,103 @@ body{
 
 .stats{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:12px;
-    margin-bottom:25px;
+    grid-template-columns:repeat(5,1fr);
+    gap:10px;
+    margin-bottom:18px;
 }
 
 .stat{
     background:rgba(255,255,255,.08);
-    border-radius:15px;
-    padding:15px;
+    border-radius:14px;
+    padding:13px 8px;
     text-align:center;
 }
 
 .stat small{
     display:block;
     color:#cbd5e1;
-    margin-bottom:6px;
+    margin-bottom:5px;
 }
 
 .stat strong{
-    font-size:24px;
+    font-size:22px;
 }
 
 .arena{
-    height:350px;
     position:relative;
+    height:470px;
     overflow:hidden;
-    background:rgba(0,0,0,.22);
-    border-radius:20px;
+    background:
+        linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px),
+        rgba(0,0,0,.28);
+    background-size:40px 40px;
     border:1px solid rgba(255,255,255,.12);
-    margin-bottom:20px;
+    border-radius:20px;
 }
 
-.target{
+.arena::after{
+    content:"";
     position:absolute;
-    width:65px;
-    height:65px;
-    border-radius:50%;
+    left:0;
+    right:0;
+    bottom:0;
+    height:7px;
+    background:#ef4444;
+    box-shadow:0 -4px 18px rgba(239,68,68,.5);
+}
+
+.key{
+    position:absolute;
+    width:62px;
+    height:62px;
+    border-radius:14px;
     display:flex;
     justify-content:center;
     align-items:center;
-    font-size:28px;
+    font-size:27px;
     font-weight:bold;
-    background:#fff;
+    background:white;
     color:#111827;
-    box-shadow:0 8px 25px rgba(0,0,0,.35);
+    box-shadow:0 7px 22px rgba(0,0,0,.4);
     user-select:none;
+    z-index:2;
 }
 
-.message{
+.key.hit{
+    transform:scale(1.35);
+    opacity:0;
+    transition:.12s;
+}
+
+.key.missed{
+    opacity:0;
+    transform:scale(.7);
+    transition:.2s;
+}
+
+.start-screen{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
     text-align:center;
-    min-height:30px;
-    font-size:18px;
+    z-index:10;
+    background:rgba(15,23,42,.88);
+    border-radius:20px;
+}
+
+.start-screen h2{
+    font-size:30px;
+    margin:0 0 10px;
+}
+
+.start-screen p{
     color:#cbd5e1;
-}
-
-.controls{
-    text-align:center;
-    margin-top:20px;
+    max-width:520px;
+    line-height:1.6;
 }
 
 button{
@@ -117,7 +156,7 @@ button{
     font-size:16px;
     font-weight:bold;
     cursor:pointer;
-    background:#fff;
+    background:white;
     color:#111827;
 }
 
@@ -125,7 +164,15 @@ button:hover{
     transform:translateY(-1px);
 }
 
-#result{
+.message{
+    min-height:30px;
+    text-align:center;
+    margin:14px 0;
+    color:#cbd5e1;
+    font-size:17px;
+}
+
+.result{
     display:none;
     text-align:center;
     margin-top:20px;
@@ -134,25 +181,65 @@ button:hover{
     border-radius:18px;
 }
 
-.result-score{
-    font-size:42px;
+.result h2{
+    margin-top:0;
+}
+
+.final-score{
+    font-size:44px;
     font-weight:bold;
-    margin:10px 0;
+    margin:8px 0;
+}
+
+.result-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin:20px auto;
+    max-width:600px;
+}
+
+.result-box{
+    background:rgba(255,255,255,.08);
+    padding:12px;
+    border-radius:12px;
+}
+
+.result-box small{
+    display:block;
+    color:#cbd5e1;
+    margin-bottom:5px;
 }
 
 .achievement{
     display:none;
-    margin:15px auto 0;
-    padding:12px;
-    max-width:450px;
+    margin:15px auto;
+    max-width:500px;
+    padding:13px;
     border-radius:12px;
-    background:rgba(250,204,21,.15);
+    background:rgba(250,204,21,.13);
     border:1px solid rgba(250,204,21,.4);
 }
 
-@media(max-width:650px){
+.links{
+    margin-top:18px;
+}
+
+.links a{
+    color:white;
+    text-decoration:none;
+    margin:0 8px;
+}
+
+@media(max-width:700px){
+
+    body{
+        padding:10px;
+    }
+
     .game{
-        padding:20px;
+        padding:16px;
+        border-radius:18px;
     }
 
     .header h1{
@@ -160,17 +247,25 @@ button:hover{
     }
 
     .stats{
-        grid-template-columns:repeat(2,1fr);
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .stat strong{
+        font-size:19px;
     }
 
     .arena{
-        height:300px;
+        height:420px;
     }
 
-    .target{
-        width:58px;
-        height:58px;
-        font-size:24px;
+    .key{
+        width:54px;
+        height:54px;
+        font-size:23px;
+    }
+
+    .result-grid{
+        grid-template-columns:1fr 1fr;
     }
 }
 </style>
@@ -182,10 +277,11 @@ button:hover{
 
     <div class="header">
         <h1>⌨️ Key Blaster</h1>
-        <p>Hit the correct keys before they disappear!</p>
+        <p>Type the falling keys before they reach the bottom.</p>
     </div>
 
     <div class="stats">
+
         <div class="stat">
             <small>Time</small>
             <strong id="time">60</strong>
@@ -197,61 +293,96 @@ button:hover{
         </div>
 
         <div class="stat">
-            <small>Accuracy</small>
-            <strong id="accuracy">100%</strong>
+            <small>Lives</small>
+            <strong id="lives">❤️❤️❤️</strong>
+        </div>
+
+        <div class="stat">
+            <small>Level</small>
+            <strong id="level">1</strong>
         </div>
 
         <div class="stat">
             <small>WPM</small>
             <strong id="wpm">0</strong>
         </div>
+
     </div>
 
     <div class="arena" id="arena">
-        <div class="target" id="target">A</div>
+
+        <div class="start-screen" id="startScreen">
+
+            <h2>🎯 Ready?</h2>
+
+            <p>
+                Falling keys will appear from the top.
+                Type the correct letter before it reaches the bottom.
+            </p>
+
+            <button onclick="startGame()">▶ Start Game</button>
+
+        </div>
+
     </div>
 
     <div class="message" id="message">
-        Press Start Game to begin
+        Get ready!
     </div>
 
-    <div class="controls">
-        <button id="startBtn" onclick="startGame()">▶ Start Game</button>
-    </div>
-
-    <div id="result">
+    <div class="result" id="result">
 
         <h2>🎮 Game Over!</h2>
 
-        <div class="result-score" id="finalScore">0</div>
+        <div class="final-score" id="finalScore">0</div>
+        <div>Final Score</div>
 
-        <p>Score</p>
+        <div class="result-grid">
 
-        <p>
-            WPM: <strong id="finalWpm">0</strong>
-            &nbsp; | &nbsp;
-            Accuracy: <strong id="finalAccuracy">0%</strong>
-        </p>
+            <div class="result-box">
+                <small>WPM</small>
+                <strong id="finalWpm">0</strong>
+            </div>
 
-        <p>
-            Correct Hits:
-            <strong id="finalHits">0</strong>
-        </p>
+            <div class="result-box">
+                <small>Accuracy</small>
+                <strong id="finalAccuracy">0%</strong>
+            </div>
+
+            <div class="result-box">
+                <small>Correct</small>
+                <strong id="finalCorrect">0</strong>
+            </div>
+
+            <div class="result-box">
+                <small>Missed</small>
+                <strong id="finalMissed">0</strong>
+            </div>
+
+            <div class="result-box">
+                <small>Level</small>
+                <strong id="finalLevel">1</strong>
+            </div>
+
+            <div class="result-box">
+                <small>Best Score</small>
+                <strong id="bestScore">0</strong>
+            </div>
+
+        </div>
 
         <div class="achievement" id="achievementBox">
             🏆 Achievement Unlocked!
             <div id="achievementText"></div>
         </div>
 
-        <br>
-
         <button onclick="startGame()">🔄 Play Again</button>
 
-        <br><br>
-
-        <a href="games.html" style="color:#fff;text-decoration:none;">
-            ← Back to Games
-        </a>
+        <div class="links">
+            <a href="games.html">← Games</a>
+            <a href="learn.html">📚 Learn</a>
+            <a href="index.html">⌨️ Typing Test</a>
+        </div>
 
     </div>
 
@@ -262,23 +393,41 @@ button:hover{
 const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 let gameRunning = false;
+
 let timeLeft = 60;
 let score = 0;
+let lives = 3;
+let level = 1;
+
 let correctHits = 0;
-let totalAttempts = 0;
+let wrongHits = 0;
+let missedKeys = 0;
+
 let startTime = 0;
+
 let timerInterval = null;
+let spawnInterval = null;
+let animationFrame = null;
+
+let fallingKeys = [];
+
+const arena = document.getElementById("arena");
 
 const timeEl = document.getElementById("time");
 const scoreEl = document.getElementById("score");
-const accuracyEl = document.getElementById("accuracy");
+const livesEl = document.getElementById("lives");
+const levelEl = document.getElementById("level");
 const wpmEl = document.getElementById("wpm");
 
-const arena = document.getElementById("arena");
-const target = document.getElementById("target");
-const message = document.getElementById("message");
-const startBtn = document.getElementById("startBtn");
-const result = document.getElementById("result");
+const startScreen =
+    document.getElementById("startScreen");
+
+const message =
+    document.getElementById("message");
+
+const result =
+    document.getElementById("result");
+
 
 function randomLetter(){
 
@@ -288,63 +437,49 @@ function randomLetter(){
 
 }
 
-function moveTarget(){
-
-    const maxX = arena.clientWidth - target.offsetWidth;
-    const maxY = arena.clientHeight - target.offsetHeight;
-
-    const x = Math.floor(Math.random() * Math.max(maxX,1));
-    const y = Math.floor(Math.random() * Math.max(maxY,1));
-
-    target.style.left = x + "px";
-    target.style.top = y + "px";
-
-    target.textContent = randomLetter();
-
-}
-
-function updateStats(){
-
-    scoreEl.textContent = score;
-
-    let accuracy = totalAttempts === 0
-        ? 100
-        : Math.round((correctHits / totalAttempts) * 100);
-
-    accuracyEl.textContent = accuracy + "%";
-
-    const elapsedMinutes =
-        Math.max((Date.now() - startTime) / 60000, 1/60);
-
-    const wpm = Math.round(correctHits / elapsedMinutes);
-
-    wpmEl.textContent = wpm;
-
-}
 
 function startGame(){
 
     clearInterval(timerInterval);
+    clearInterval(spawnInterval);
+    cancelAnimationFrame(animationFrame);
+
+    fallingKeys.forEach(item => {
+        item.el.remove();
+    });
+
+    fallingKeys = [];
 
     gameRunning = true;
 
     timeLeft = 60;
     score = 0;
+    lives = 3;
+    level = 1;
+
     correctHits = 0;
-    totalAttempts = 0;
+    wrongHits = 0;
+    missedKeys = 0;
 
     startTime = Date.now();
 
+    startScreen.style.display = "none";
     result.style.display = "none";
-    startBtn.style.display = "none";
 
     message.textContent =
-        "Type the letter shown on the target!";
-
-    timeEl.textContent = timeLeft;
+        "⌨️ Type the falling letters!";
 
     updateStats();
-    moveTarget();
+
+    spawnKey();
+
+    spawnInterval = setInterval(function(){
+
+        if(gameRunning){
+            spawnKey();
+        }
+
+    },850);
 
     timerInterval = setInterval(function(){
 
@@ -352,7 +487,9 @@ function startGame(){
 
         timeEl.textContent = timeLeft;
 
-        updateStats();
+        updateWpm();
+
+        updateLevel();
 
         if(timeLeft <= 0){
 
@@ -362,92 +499,403 @@ function startGame(){
 
     },1000);
 
+    animationFrame =
+        requestAnimationFrame(gameLoop);
+
 }
 
+
+function spawnKey(){
+
+    if(!gameRunning){
+        return;
+    }
+
+    const key = document.createElement("div");
+
+    key.className = "key";
+
+    key.textContent = randomLetter();
+
+    const maxX =
+        arena.clientWidth - 62;
+
+    const x =
+        Math.floor(Math.random() * Math.max(maxX,1));
+
+    key.style.left = x + "px";
+    key.style.top = "-70px";
+
+    arena.appendChild(key);
+
+    const item = {
+
+        el:key,
+
+        letter:key.textContent,
+
+        x:x,
+
+        y:-70,
+
+        speed:getSpeed()
+
+    };
+
+    fallingKeys.push(item);
+
+}
+
+
+function getSpeed(){
+
+    return 1.15 + (level - 1) * 0.22;
+
+}
+
+
+function gameLoop(){
+
+    if(!gameRunning){
+        return;
+    }
+
+    for(let i = fallingKeys.length - 1; i >= 0; i--){
+
+        const item = fallingKeys[i];
+
+        item.speed = getSpeed();
+
+        item.y += item.speed;
+
+        item.el.style.top =
+            item.y + "px";
+
+        if(item.y >= arena.clientHeight - 72){
+
+            item.el.classList.add("missed");
+
+            setTimeout(() => {
+
+                if(item.el){
+                    item.el.remove();
+                }
+
+            },180);
+
+            fallingKeys.splice(i,1);
+
+            missedKeys++;
+
+            lives--;
+
+            updateLives();
+
+            message.textContent =
+                "💥 Missed! A life was lost.";
+
+            if(lives <= 0){
+
+                endGame();
+                return;
+
+            }
+
+        }
+
+    }
+
+    updateWpm();
+
+    animationFrame =
+        requestAnimationFrame(gameLoop);
+
+}
+
+
+document.addEventListener("keydown",function(event){
+
+    if(!gameRunning){
+        return;
+    }
+
+    if(event.key.length !== 1){
+        return;
+    }
+
+    const pressed =
+        event.key.toUpperCase();
+
+    let targetIndex = -1;
+
+    /*
+       Find the lowest falling key with
+       the pressed letter.
+    */
+
+    for(let i = fallingKeys.length - 1; i >= 0; i--){
+
+        if(fallingKeys[i].letter === pressed){
+
+            targetIndex = i;
+            break;
+
+        }
+
+    }
+
+    if(targetIndex !== -1){
+
+        const item =
+            fallingKeys[targetIndex];
+
+        correctHits++;
+
+        score += 10 + (level - 1) * 2;
+
+        item.el.classList.add("hit");
+
+        setTimeout(() => {
+
+            if(item.el){
+                item.el.remove();
+            }
+
+        },120);
+
+        fallingKeys.splice(targetIndex,1);
+
+        message.textContent =
+            "💥 BLAST! +"+(10 + (level - 1) * 2);
+
+        updateStats();
+
+    }else{
+
+        wrongHits++;
+
+        score =
+            Math.max(0,score - 2);
+
+        message.textContent =
+            "❌ Wrong key!";
+
+        updateStats();
+
+    }
+
+});
+
+
+function updateStats(){
+
+    scoreEl.textContent = score;
+
+    timeEl.textContent = timeLeft;
+
+    levelEl.textContent = level;
+
+    updateLives();
+
+    updateWpm();
+
+}
+
+
+function updateLives(){
+
+    let hearts = "";
+
+    for(let i = 0; i < lives; i++){
+
+        hearts += "❤️";
+
+    }
+
+    if(lives <= 0){
+        hearts = "💀";
+    }
+
+    livesEl.textContent = hearts;
+
+}
+
+
+function updateWpm(){
+
+    if(!startTime){
+        return;
+    }
+
+    const elapsed =
+        Math.max(
+            (Date.now() - startTime) / 60000,
+            1 / 60
+        );
+
+    const wpm =
+        Math.round(correctHits / elapsed);
+
+    wpmEl.textContent = wpm;
+
+}
+
+
+function updateLevel(){
+
+    const newLevel =
+        Math.min(
+            10,
+            Math.floor(correctHits / 10) + 1
+        );
+
+    if(newLevel !== level){
+
+        level = newLevel;
+
+        message.textContent =
+            "🚀 Level " + level + " reached!";
+
+        updateStats();
+
+    }
+
+}
+
+
 function endGame(){
+
+    if(!gameRunning){
+        return;
+    }
 
     gameRunning = false;
 
     clearInterval(timerInterval);
+    clearInterval(spawnInterval);
+    cancelAnimationFrame(animationFrame);
 
-    target.style.display = "none";
+    fallingKeys.forEach(item => {
 
-    const elapsedMinutes =
-        Math.max((Date.now() - startTime) / 60000, 1/60);
+        item.el.remove();
+
+    });
+
+    fallingKeys = [];
+
+    const elapsed =
+        Math.max(
+            (Date.now() - startTime) / 60000,
+            1 / 60
+        );
 
     const finalWpm =
-        Math.round(correctHits / elapsedMinutes);
+        Math.round(correctHits / elapsed);
+
+    const totalAttempts =
+        correctHits + wrongHits + missedKeys;
 
     const finalAccuracy =
         totalAttempts === 0
         ? 100
-        : Math.round((correctHits / totalAttempts) * 100);
-
-    document.getElementById("finalScore").textContent =
-        score;
-
-    document.getElementById("finalWpm").textContent =
-        finalWpm;
-
-    document.getElementById("finalAccuracy").textContent =
-        finalAccuracy + "%";
-
-    document.getElementById("finalHits").textContent =
-        correctHits;
-
-    result.style.display = "block";
-    startBtn.style.display = "inline-block";
-
-    startBtn.textContent = "▶ Start New Game";
-
-    message.textContent =
-        "Game finished!";
-
-    saveBestScore();
-    saveAchievements(finalWpm, finalAccuracy);
-
-}
-
-function saveBestScore(){
-
-    const oldScore =
-        Number(localStorage.getItem("tm_key_blaster_best") || 0);
-
-    if(score > oldScore){
-
-        localStorage.setItem(
-            "tm_key_blaster_best",
-            score
+        : Math.round(
+            (correctHits / totalAttempts) * 100
         );
 
-    }
+    const oldBest =
+        Number(
+            localStorage.getItem(
+                "tm_key_blaster_best"
+            ) || 0
+        );
 
-    const oldWpm =
-        Number(localStorage.getItem("tm_key_blaster_best_wpm") || 0);
+    const newBest =
+        Math.max(score,oldBest);
 
-    const elapsedMinutes =
-        Math.max((Date.now() - startTime) / 60000, 1/60);
+    localStorage.setItem(
+        "tm_key_blaster_best",
+        newBest
+    );
 
-    const currentWpm =
-        Math.round(correctHits / elapsedMinutes);
+    const oldBestWpm =
+        Number(
+            localStorage.getItem(
+                "tm_key_blaster_best_wpm"
+            ) || 0
+        );
 
-    if(currentWpm > oldWpm){
+    if(finalWpm > oldBestWpm){
 
         localStorage.setItem(
             "tm_key_blaster_best_wpm",
-            currentWpm
+            finalWpm
         );
 
     }
 
+    /*
+       Save best accuracy for certificate
+    */
+
+    const oldAccuracy =
+        Number(
+            localStorage.getItem(
+                "tm_key_blaster_best_accuracy"
+            ) || 0
+        );
+
+    if(finalAccuracy > oldAccuracy){
+
+        localStorage.setItem(
+            "tm_key_blaster_best_accuracy",
+            finalAccuracy
+        );
+
+    }
+
+    document.getElementById("finalScore")
+        .textContent = score;
+
+    document.getElementById("finalWpm")
+        .textContent = finalWpm;
+
+    document.getElementById("finalAccuracy")
+        .textContent = finalAccuracy + "%";
+
+    document.getElementById("finalCorrect")
+        .textContent = correctHits;
+
+    document.getElementById("finalMissed")
+        .textContent = missedKeys;
+
+    document.getElementById("finalLevel")
+        .textContent = level;
+
+    document.getElementById("bestScore")
+        .textContent = newBest;
+
+    result.style.display = "block";
+
+    startScreen.style.display = "none";
+
+    message.textContent =
+        "Game Over! Try again and beat your score.";
+
+    checkAchievements(
+        finalWpm,
+        finalAccuracy
+    );
+
 }
 
-function unlockAchievement(id, text){
 
-    const key = "tm_achievement_" + id;
+function unlockAchievement(id,text){
+
+    const key =
+        "tm_achievement_" + id;
 
     if(localStorage.getItem(key) === "1"){
-        return;
+        return false;
     }
 
     localStorage.setItem(key,"1");
@@ -462,47 +910,57 @@ function unlockAchievement(id, text){
 
     box.style.display = "block";
 
+    return true;
+
 }
 
-function saveAchievements(finalWpm, finalAccuracy){
 
-    // First game
+function checkAchievements(
+    finalWpm,
+    finalAccuracy
+){
+
     unlockAchievement(
         "firstGame",
-        "First Game - You completed your first Key Blaster game!"
+        "First Game - You completed a game!"
     );
 
-    // 20 WPM
+    if(correctHits >= 10){
+
+        unlockAchievement(
+            "tenWords",
+            "Word Starter - 10+ successful hits!"
+        );
+
+    }
+
     if(finalWpm >= 20){
 
         unlockAchievement(
             "twentyWpm",
-            "Speed Runner - You reached 20+ WPM!"
+            "Speed Runner - 20+ WPM!"
         );
 
     }
 
-    // 30 WPM
     if(finalWpm >= 30){
 
         unlockAchievement(
             "thirtyWpm",
-            "Fast Typist - You reached 30+ WPM!"
+            "Fast Typist - 30+ WPM!"
         );
 
     }
 
-    // 50 WPM
     if(finalWpm >= 50){
 
         unlockAchievement(
             "fiftyWpm",
-            "Speed Master - You reached 50+ WPM!"
+            "Speed Master - 50+ WPM!"
         );
 
     }
 
-    // Accuracy
     if(finalAccuracy >= 95){
 
         unlockAchievement(
@@ -521,74 +979,63 @@ function saveAchievements(finalWpm, finalAccuracy){
 
     }
 
-    // Score
     if(score >= 100){
 
         unlockAchievement(
             "score100",
-            "Score Hunter - You reached 100+ points!"
+            "Score Hunter - 100+ points!"
+        );
+
+    }
+
+    checkTypingMaster();
+
+}
+
+
+function checkTypingMaster(){
+
+    const ids = [
+
+        "firstGame",
+        "tenWords",
+        "twentyWpm",
+        "thirtyWpm",
+        "fiftyWpm",
+        "accuracy95",
+        "accuracy100",
+        "score100"
+
+    ];
+
+    let count = 0;
+
+    ids.forEach(id => {
+
+        if(
+            localStorage.getItem(
+                "tm_achievement_" + id
+            ) === "1"
+        ){
+
+            count++;
+
+        }
+
+    });
+
+    if(count >= 5){
+
+        unlockAchievement(
+            "typingMaster",
+            "Typing Master - You unlocked 5 achievements!"
         );
 
     }
 
 }
 
-document.addEventListener("keydown",function(event){
-
-    if(!gameRunning){
-        return;
-    }
-
-    if(event.key.length !== 1){
-        return;
-    }
-
-    const pressed =
-        event.key.toUpperCase();
-
-    totalAttempts++;
-
-    const current =
-        target.textContent;
-
-    if(pressed === current){
-
-        correctHits++;
-
-        score += 10;
-
-        moveTarget();
-
-        message.textContent =
-            "✅ Correct!";
-
-    }else{
-
-        score = Math.max(0, score - 2);
-
-        message.textContent =
-            "❌ Wrong key!";
-
-    }
-
-    updateStats();
-
-});
-
-target.addEventListener("click",function(){
-
-    if(!gameRunning){
-        return;
-    }
-
-    message.textContent =
-        "⌨️ Use your keyboard!";
-
-});
-
-moveTarget();
-
 </script>
 
 </body>
-  </html>
+</html>
