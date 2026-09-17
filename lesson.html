@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Home Row Typing Lesson | TypeMaster Pro</title>
+
+<meta name="description" content="Learn home row typing with a free interactive typing lesson from TypeMaster Pro. Practice ASDF JKL and improve typing accuracy and speed.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://ajpartner420.github.io/TypeMaster-Pro/lesson.html">
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#0b1020;
+    color:#fff;
+    min-height:100vh;
+}
+
+/* ================= HEADER ================= */
+
+.header{
+    height:64px;
+    border-bottom:1px solid rgba(255,255,255,.1);
+    background:#0e1528;
+}
+
+.nav{
+    max-width:1200px;
+    height:100%;
+    margin:auto;
+    padding:0 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    text-decoration:none;
+    color:white;
+    font-size:22px;
+    font-weight:800;
+}
+
+.logo span{
+    color:#60a5fa;
+}
+
+.back{
+    color:#cbd5e1;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.back:hover{
+    color:#fff;
+}
+
+/* ================= PAGE ================= */
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:35px 20px 60px;
+}
+
+.lesson-header{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.badge{
+    display:inline-block;
+    padding:6px 12px;
+    border-radius:20px;
+    background:rgba(96,165,250,.12);
+    color:#93c5fd;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:12px;
+}
+
+.lesson-header h1{
+    font-size:34px;
+    margin-bottom:8px;
+}
+
+.lesson-header p{
+    color:#94a3b8;
+}
+
+/* ================= PROGRESS ================= */
+
+.progress-box{
+    margin-bottom:22px;
+}
+
+.progress-info{
+    display:flex;
+    justify-content:space-between;
+    color:#94a3b8;
+    font-size:13px;
+    margin-bottom:7px;
+}
+
+.progress-bar{
+    width:100%;
+    height:8px;
+    background:rgba(255,255,255,.08);
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-fill{
+    width:0%;
+    height:100%;
+    background:#3b82f6;
+    transition:.25s;
+}
+
+/* ================= STATS ================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin-bottom:20px;
+}
+
+.stat{
+    background:#111a30;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:12px;
+    padding:15px;
+    text-align:center;
+}
+
+.stat-label{
+    color:#94a3b8;
+    font-size:12px;
+    margin-bottom:7px;
+}
+
+.stat-value{
+    font-size:24px;
+    font-weight:bold;
+}
+
+/* ================= TYPING AREA ================= */
+
+.typing-card{
+    background:#111a30;
+    border:1px solid rgba(255,255,255,.09);
+    border-radius:16px;
+    padding:25px;
+}
+
+.instruction{
+    text-align:center;
+    color:#94a3b8;
+    font-size:14px;
+    margin-bottom:18px;
+}
+
+.text-display{
+    min-height:130px;
+    padding:22px;
+    border-radius:12px;
+    background:#080d1b;
+    border:1px solid rgba(255,255,255,.08);
+    font-size:24px;
+    line-height:1.8;
+    letter-spacing:1px;
+    margin-bottom:20px;
+    word-wrap:break-word;
+}
+
+.char{
+    color:#64748b;
+}
+
+.char.current{
+    color:#fff;
+    background:rgba(59,130,246,.35);
+    border-radius:3px;
+}
+
+.char.correct{
+    color:#4ade80;
+}
+
+.char.wrong{
+    color:#f87171;
+    background:rgba(248,113,113,.12);
+}
+
+/* ================= INPUT ================= */
+
+#typingInput{
+    width:100%;
+    min-height:110px;
+    resize:none;
+    padding:17px;
+    border-radius:11px;
+    border:1px solid rgba(255,255,255,.12);
+    background:#080d1b;
+    color:white;
+    font-size:18px;
+    outline:none;
+}
+
+#typingInput:focus{
+    border-color:#3b82f6;
+}
+
+#typingInput:disabled{
+    opacity:.5;
+}
+
+/* ================= CONTROLS ================= */
+
+.controls{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:18px;
+}
+
+button{
+    border:none;
+    cursor:pointer;
+    border-radius:9px;
+    padding:11px 20px;
+    font-weight:bold;
+    font-size:14px;
+}
+
+.start-btn{
+    background:#2563eb;
+    color:#fff;
+}
+
+.start-btn:hover{
+    background:#3b82f6;
+}
+
+.reset-btn{
+    background:#1e293b;
+    color:#cbd5e1;
+}
+
+.reset-btn:hover{
+    background:#334155;
+}
+
+/* ================= KEYBOARD ================= */
+
+.keyboard-title{
+    text-align:center;
+    color:#94a3b8;
+    margin:28px 0 12px;
+    font-size:14px;
+}
+
+.keyboard{
+    background:#080d1b;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:14px;
+    padding:15px;
+    overflow-x:auto;
+}
+
+.key-row{
+    display:flex;
+    justify-content:center;
+    gap:6px;
+    margin-bottom:6px;
+}
+
+.key{
+    min-width:42px;
+    height:42px;
+    border-radius:7px;
+    background:#1a2439;
+    border:1px solid rgba(255,255,255,.08);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#cbd5e1;
+    font-weight:bold;
+    font-size:13px;
+    transition:.1s;
+}
+
+.key.active{
+    background:#2563eb;
+    color:#fff;
+    transform:translateY(-2px);
+}
+
+.key.wide{
+    min-width:70px;
+}
+
+.key.space{
+    min-width:280px;
+}
+
+/* ================= FINGERS ================= */
+
+.finger-info{
+    margin-top:20px;
+    padding:16px;
+    background:rgba(96,165,250,.06);
+    border:1px solid rgba(96,165,250,.12);
+    border-radius:10px;
+    text-align:center;
+    color:#94a3b8;
+    font-size:13px;
+}
+
+.finger-info strong{
+    color:#fff;
+}
+
+/* ================= RESULT ================= */
+
+.result{
+    display:none;
+    margin-top:22px;
+    padding:25px;
+    border-radius:15px;
+    background:#111a30;
+    border:1px solid rgba(255,255,255,.1);
+    text-align:center;
+}
+
+.result h2{
+    margin-bottom:20px;
+}
+
+.result-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-bottom:20px;
+}
+
+.result-item{
+    background:#080d1b;
+    padding:15px;
+    border-radius:10px;
+}
+
+.result-item span{
+    display:block;
+    color:#94a3b8;
+    font-size:12px;
+    margin-bottom:5px;
+}
+
+.result-item strong{
+    font-size:22px;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:700px){
+
+    .container{
+        padding:25px 12px 40px;
+    }
+
+    .lesson-header h1{
+        font-size:27px;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .stat-value{
+        font-size:21px;
+    }
+
+    .typing-card{
+        padding:15px;
+    }
+
+    .text-display{
+        font-size:19px;
+        padding:15px;
+    }
+
+    .key{
+        min-width:34px;
+        height:38px;
+        font-size:11px;
+    }
+
+    .key.space{
+        min-width:180px;
+    }
+
+    .result-grid{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+<nav class="nav">
+
+<a href="index.html" class="logo">
+TypeMaster <span>Pro</span>
+</a>
+
+<a href="learn.html" class="back">
+← Back to Lessons
+</a>
+
+</nav>
+
+</header>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="container">
+
+
+<div class="lesson-header">
+
+<div class="badge">
+LESSON 1 · BEGINNER
+</div>
+
+<h1>
+Home Row Basics
+</h1>
+
+<p>
+Learn the correct finger position and practice the home row.
+</p>
+
+</div>
+
+
+<!-- PROGRESS -->
+
+<div class="progress-box">
+
+<div class="progress-info">
+
+<span>Lesson Progress</span>
+
+<span id="progressText">
+0%
+</span>
+
+</div>
+
+<div class="progress-bar">
+
+<div
+class="progress-fill"
+id="progressFill">
+</div>
+
+</div>
+
+</div>
+
+
+<!-- STATS -->
+
+<div class="stats">
+
+<div class="stat">
+
+<div class="stat-label">
+TIME
+</div>
+
+<div class="stat-value" id="time">
+0:00
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div class="stat-label">
+WPM
+</div>
+
+<div class="stat-value" id="wpm">
+0
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div class="stat-label">
+ACCURACY
+</div>
+
+<div class="stat-value" id="accuracy">
+100%
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div class="stat-label">
+ERRORS
+</div>
+
+<div class="stat-value" id="errors">
+0
+</div>
+
+</div>
+
+</div>
+
+
+<!-- TYPING CARD -->
+
+<div class="typing-card">
+
+<div class="instruction">
+Press <strong>Start Lesson</strong> and type the text below.
+</div>
+
+
+<div
+class="text-display"
+id="textDisplay">
+</div>
+
+
+<textarea
+id="typingInput"
+placeholder="Click Start Lesson and begin typing..."
+disabled
+spellcheck="false"
+autocomplete="off"
+autocorrect="off"
+autocapitalize="off"></textarea>
+
+
+<div class="controls">
+
+<button
+class="start-btn"
+id="startBtn"
+onclick="startLesson()">
+Start Lesson
+</button>
+
+<button
+class="reset-btn"
+onclick="resetLesson()">
+Reset
+</button>
+
+</div>
+
+
+<!-- KEYBOARD -->
+
+<div class="keyboard-title">
+Keyboard Guide
+</div>
+
+<div class="keyboard">
+
+<div class="key-row">
+
+<div class="key">Q</div>
+<div class="key">W</div>
+<div class="key">E</div>
+<div class="key">R</div>
+<div class="key">T</div>
+<div class="key">Y</div>
+<div class="key">U</div>
+<div class="key">I</div>
+<div class="key">O</div>
+<div class="key">P</div>
+
+</div>
+
+
+<div class="key-row">
+
+<div class="key">A</div>
+<div class="key">S</div>
+<div class="key">D</div>
+<div class="key">F</div>
+<div class="key">G</div>
+<div class="key">H</div>
+<div class="key">J</div>
+<div class="key">K</div>
+<div class="key">L</div>
+
+</div>
+
+
+<div class="key-row">
+
+<div class="key">Z</div>
+<div class="key">X</div>
+<div class="key">C</div>
+<div class="key">V</div>
+<div class="key">B</div>
+<div class="key">N</div>
+<div class="key">M</div>
+
+</div>
+
+
+<div class="key-row">
+
+<div class="key space">
+SPACE
+</div>
+
+</div>
+
+</div>
+
+
+<div class="finger-info">
+
+Home row:
+<strong>A S D F</strong>
+&nbsp;&nbsp; | &nbsp;&nbsp;
+<strong>J K L</strong>
+
+<br><br>
+
+Keep your fingers relaxed and return them to the home position after each keystroke.
+
+</div>
+
+</div>
+
+
+<!-- RESULT -->
+
+<div
+class="result"
+id="result">
+
+<h2>
+🎉 Lesson Complete!
+</h2>
+
+<div class="result-grid">
+
+<div class="result-item">
+
+<span>
+WPM
+</span>
+
+<strong id="resultWpm">
+0
+</strong>
+
+</div>
+
+
+<div class="result-item">
+
+<span>
+Accuracy
+</span>
+
+<strong id="resultAccuracy">
+0%
+</strong>
+
+</div>
+
+
+<div class="result-item">
+
+<span>
+Errors
+</span>
+
+<strong id="resultErrors">
+0
+</strong>
+
+</div>
+
+</div>
+
+<button
+class="start-btn"
+onclick="resetLesson()">
+Practice Again
+</button>
+
+</div>
+
+
+</main>
+
+
+<script>
+
+/* ==========================================
+   TYPEMASTER PRO
+   LESSON ENGINE - VERSION 1
+========================================== */
+
+
+/* ================= TEXT ================= */
+
+const lessonText =
+"asdf jkl; asdf jkl; sad lad fall ask flask dad all;";
+
+
+/* ================= VARIABLES ================= */
+
+let started = false;
+
+let finished = false;
+
+let startTime = null;
+
+let timerInterval = null;
+
+let totalErrors = 0;
+
+
+/* ================= ELEMENTS ================= */
+
+const textDisplay =
+document.getElementById("textDisplay");
+
+const typingInput =
+document.getElementById("typingInput");
+
+const timeDisplay =
+document.getElementById("time");
+
+const wpmDisplay =
+document.getElementById("wpm");
+
+const accuracyDisplay =
+document.getElementById("accuracy");
+
+const errorsDisplay =
+document.getElementById("errors");
+
+const progressFill =
+document.getElementById("progressFill");
+
+const progressText =
+document.getElementById("progressText");
+
+const result =
+document.getElementById("result");
+
+
+/* ================= SHOW TEXT ================= */
+
+function renderText(){
+
+    textDisplay.innerHTML = "";
+
+    for(let i = 0; i < lessonText.length; i++){
+
+        const span =
+        document.createElement("span");
+
+        span.className = "char";
+
+        span.textContent =
+        lessonText[i];
+
+        textDisplay.appendChild(span);
+
+    }
+
+    updateCurrentCharacter();
+
+}
+
+
+/* ================= START ================= */
+
+function startLesson(){
+
+    if(started){
+        typingInput.focus();
+        return;
+    }
+
+    started = true;
+
+    finished = false;
+
+    startTime = Date.now();
+
+    typingInput.disabled = false;
+
+    typingInput.value = "";
+
+    typingInput.focus();
+
+    document.getElementById("startBtn").textContent =
+    "Typing...";
+
+    timerInterval =
+    setInterval(updateStats, 250);
+
+}
+
+
+/* ================= INPUT ================= */
+
+typingInput.addEventListener("input", function(){
+
+    if(!started || finished){
+        return;
+    }
+
+    const typed =
+    typingInput.value;
+
+    totalErrors = 0;
+
+    for(let i = 0; i < typed.length; i++){
+
+        if(
+            i >= lessonText.length ||
+            typed[i] !== lessonText[i]
+        ){
+
+            totalErrors++;
+
+        }
+
+    }
+
+    updateCharacterColors();
+
+    updateCurrentCharacter();
+
+    updateStats();
+
+    const progress =
+    Math.min(
+        100,
+        Math.round(
+            (typed.length / lessonText.length) * 100
+        )
+    );
+
+    progressFill.style.width =
+    progress + "%";
+
+    progressText.textContent =
+    progress + "%";
+
+
+    if(typed.length >= lessonText.length){
+
+        finishLesson();
+
+    }
+
+});
+
+
+/* ================= CHARACTER COLORS ================= */
+
+function updateCharacterColors(){
+
+    const typed =
+    typingInput.value;
+
+    const chars =
+    textDisplay.querySelectorAll(".char");
+
+
+    chars.forEach(function(char,index){
+
+        char.classList.remove(
+            "correct",
+            "wrong"
+        );
+
+
+        if(index < typed.length){
+
+            if(
+                typed[index] === lessonText[index]
+            ){
+
+                char.classList.add("correct");
+
+            }else{
+
+                char.classList.add("wrong");
+
+            }
+
+        }
+
+    });
+
+}
+
+
+/* ================= CURRENT CHARACTER ================= */
+
+function updateCurrentCharacter(){
+
+    const typedLength =
+    typingInput.value.length;
+
+    const chars =
+    textDisplay.querySelectorAll(".char");
+
+
+    chars.forEach(function(char){
+
+        char.classList.remove("current");
+
+    });
+
+
+    if(
+        typedLength < chars.length
+    ){
+
+        chars[typedLength]
+        .classList.add("current");
+
+    }
+
+}
+
+
+/* ================= STATS ================= */
+
+function updateStats(){
+
+    if(!startTime){
+        return;
+    }
+
+
+    const elapsedSeconds =
+    Math.max(
+        1,
+        (Date.now() - startTime) / 1000
+    );
+
+
+    const minutes =
+    elapsedSeconds / 60;
+
+
+    const typed =
+    typingInput.value;
+
+
+    /* TIME */
+
+    const minutesPart =
+    Math.floor(elapsedSeconds / 60);
+
+    const secondsPart =
+    Math.floor(elapsedSeconds % 60);
+
+    timeDisplay.textContent =
+    minutesPart +
+    ":" +
+    String(secondsPart).padStart(2,"0");
+
+
+    /* WPM */
+
+    const correctCharacters =
+    calculateCorrectCharacters();
+
+
+    const wpm =
+    Math.round(
+        (correctCharacters / 5) /
+        minutes
+    );
+
+
+    wpmDisplay.textContent =
+    Math.max(0,wpm);
+
+
+    /* ACCURACY */
+
+    const totalTyped =
+    typed.length;
+
+
+    let accuracy = 100;
+
+
+    if(totalTyped > 0){
+
+        accuracy =
+        Math.round(
+            ((totalTyped - totalErrors) /
+            totalTyped) *
+            100
+        );
+
+    }
+
+
+    accuracy =
+    Math.max(
+        0,
+        Math.min(100,accuracy)
+    );
+
+
+    accuracyDisplay.textContent =
+    accuracy + "%";
+
+
+    errorsDisplay.textContent =
+    totalErrors;
+
+}
+
+
+/* ================= CORRECT CHARACTERS ================= */
+
+function calculateCorrectCharacters(){
+
+    const typed =
+    typingInput.value;
+
+    let correct = 0;
+
+
+    for(
+        let i = 0;
+        i < typed.length;
+        i++
+    ){
+
+        if(
+            i < lessonText.length &&
+            typed[i] === lessonText[i]
+        ){
+
+            correct++;
+
+        }
+
+    }
+
+
+    return correct;
+
+}
+
+
+/* ================= FINISH ================= */
+
+function finishLesson(){
+
+    if(finished){
+        return;
+    }
+
+    finished = true;
+
+    clearInterval(timerInterval);
+
+    typingInput.disabled = true;
+
+    document.getElementById("startBtn").textContent =
+    "Completed";
+
+
+    updateStats();
+
+
+    const finalWpm =
+    parseInt(wpmDisplay.textContent) || 0;
+
+
+    const finalAccuracy =
+    accuracyDisplay.textContent;
+
+
+    const finalErrors =
+    totalErrors;
+
+
+    document.getElementById("resultWpm").textContent =
+    finalWpm;
+
+
+    document.getElementById("resultAccuracy").textContent =
+    finalAccuracy;
+
+
+    document.getElementById("resultErrors").textContent =
+    finalErrors;
+
+
+    result.style.display =
+    "block";
+
+
+    saveProgress(finalWpm);
+
+}
+
+
+/* ================= SAVE PROGRESS ================= */
+
+function saveProgress(wpm){
+
+    localStorage.setItem(
+        "tm_lesson_1_completed",
+        "true"
+    );
+
+
+    localStorage.setItem(
+        "tm_lesson_1_wpm",
+        wpm
+    );
+
+
+    /* Update completed lessons */
+
+    let completed =
+    Number(
+        localStorage.getItem(
+            "tm_completed_lessons"
+        )
+    ) || 0;
+
+
+    if(completed < 1){
+
+        completed = 1;
+
+        localStorage.setItem(
+            "tm_completed_lessons",
+            completed
+        );
+
+    }
+
+
+    /* Update best WPM */
+
+    let best =
+    Number(
+        localStorage.getItem(
+            "tm_best_wpm"
+        )
+    ) || 0;
+
+
+    if(wpm > best){
+
+        localStorage.setItem(
+            "tm_best_wpm",
+            wpm
+        );
+
+    }
+
+}
+
+
+/* ================= RESET ================= */
+
+function resetLesson(){
+
+    clearInterval(timerInterval);
+
+    started = false;
+
+    finished = false;
+
+    startTime = null;
+
+    totalErrors = 0;
+
+    typingInput.value = "";
+
+    typingInput.disabled = true;
+
+    timeDisplay.textContent =
+    "0:00";
+
+    wpmDisplay.textContent =
+    "0";
+
+    accuracyDisplay.textContent =
+    "100%";
+
+    errorsDisplay.textContent =
+    "0";
+
+    progressFill.style.width =
+    "0%";
+
+    progressText.textContent =
+    "0%";
+
+    document.getElementById("startBtn").textContent =
+    "Start Lesson";
+
+    result.style.display =
+    "none";
+
+    renderText();
+
+}
+
+
+/* ================= KEYBOARD HIGHLIGHT ================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(!started || finished){
+            return;
+        }
+
+
+        let key =
+        event.key.toUpperCase();
+
+
+        if(key === " "){
+            key = "SPACE";
+        }
+
+
+        const keys =
+        document.querySelectorAll(".key");
+
+
+        keys.forEach(function(k){
+
+            if(
+                k.textContent.trim() === key
+            ){
+
+                k.classList.add("active");
+
+            }
+
+        });
+
+    }
+);
+
+
+document.addEventListener(
+    "keyup",
+    function(){
+
+        document
+        .querySelectorAll(".key")
+        .forEach(function(k){
+
+            k.classList.remove("active");
+
+        });
+
+    }
+);
+
+
+/* ================= INITIALIZE ================= */
+
+renderText();
+
+</script>
+
+</body>
+  </html>
