@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Typing Certificate | TypeMaster Pro</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Georgia, "Times New Roman", serif;
+    background:#eef2f7;
+    color:#172033;
+    padding:25px;
+}
+
+.container{
+    max-width:1050px;
+    margin:auto;
+}
+
+.controls{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    margin-bottom:25px;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+    font-family:Arial,sans-serif;
+}
+
+.controls h2{
+    margin-top:0;
+}
+
+.input{
+    width:100%;
+    padding:13px;
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+    font-size:16px;
+    margin:8px 0 15px;
+}
+
+.button{
+    border:0;
+    padding:12px 20px;
+    border-radius:8px;
+    background:#172033;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    margin-right:8px;
+}
+
+.button:hover{
+    opacity:.9;
+}
+
+.certificate{
+    position:relative;
+    background:#fff;
+    border:12px solid #172033;
+    padding:15px;
+    box-shadow:0 10px 35px rgba(0,0,0,.15);
+}
+
+.inner{
+    border:3px solid #b8860b;
+    min-height:620px;
+    padding:45px 35px;
+    text-align:center;
+    position:relative;
+}
+
+.brand{
+    font-family:Arial,sans-serif;
+    font-size:30px;
+    font-weight:800;
+    letter-spacing:2px;
+}
+
+.brand span{
+    color:#2563eb;
+}
+
+.small-title{
+    margin-top:18px;
+    letter-spacing:4px;
+    font-size:15px;
+    color:#64748b;
+}
+
+.title{
+    font-size:48px;
+    margin:20px 0 8px;
+    color:#172033;
+}
+
+.subtitle{
+    font-size:18px;
+    color:#64748b;
+}
+
+.name{
+    font-size:38px;
+    font-weight:bold;
+    margin:30px 0 10px;
+    border-bottom:2px solid #b8860b;
+    display:inline-block;
+    padding:0 50px 8px;
+}
+
+.text{
+    font-size:17px;
+    line-height:1.7;
+    max-width:720px;
+    margin:20px auto;
+}
+
+.stats{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    margin:25px auto;
+    max-width:700px;
+}
+
+.stat{
+    min-width:150px;
+    padding:14px;
+    border:1px solid #dbe2ea;
+    border-radius:10px;
+}
+
+.stat-number{
+    font-size:25px;
+    font-weight:bold;
+}
+
+.stat-label{
+    font-family:Arial,sans-serif;
+    font-size:11px;
+    color:#64748b;
+    margin-top:4px;
+}
+
+.footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    margin-top:35px;
+    font-family:Arial,sans-serif;
+    font-size:12px;
+}
+
+.signature{
+    border-top:1px solid #172033;
+    padding-top:7px;
+    width:180px;
+}
+
+.certificate-id{
+    color:#64748b;
+}
+
+@media(max-width:700px){
+
+    body{
+        padding:10px;
+    }
+
+    .inner{
+        padding:30px 15px;
+        min-height:auto;
+    }
+
+    .title{
+        font-size:35px;
+    }
+
+    .name{
+        font-size:28px;
+        padding:0 15px 8px;
+    }
+
+    .stats{
+        flex-direction:column;
+        gap:10px;
+    }
+
+    .stat{
+        width:100%;
+    }
+
+    .footer{
+        flex-direction:column;
+        gap:25px;
+        align-items:center;
+    }
+}
+
+@media print{
+
+    body{
+        background:white;
+        padding:0;
+    }
+
+    .controls{
+        display:none;
+    }
+
+    .container{
+        max-width:none;
+    }
+
+    .certificate{
+        box-shadow:none;
+        width:100%;
+    }
+
+    @page{
+        size:A4 landscape;
+        margin:8mm;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="controls">
+
+        <h2>📜 Generate Your Certificate</h2>
+
+        <label>Your Name</label>
+
+        <input
+            id="nameInput"
+            class="input"
+            type="text"
+            placeholder="Enter your full name"
+            maxlength="50"
+        >
+
+        <button
+            class="button"
+            onclick="generateCertificate()">
+            Generate Certificate
+        </button>
+
+        <button
+            class="button"
+            onclick="window.print()">
+            🖨️ Print / Save PDF
+        </button>
+
+    </div>
+
+
+    <div class="certificate">
+
+        <div class="inner">
+
+            <div class="brand">
+                Type<span>Master</span> Pro
+            </div>
+
+            <div class="small-title">
+                TYPING ACHIEVEMENT
+            </div>
+
+            <div class="title">
+                Certificate
+            </div>
+
+            <div class="subtitle">
+                Certificate of Typing Achievement
+            </div>
+
+
+            <div class="text">
+                This certificate is proudly presented to
+            </div>
+
+
+            <div class="name" id="certificateName">
+                Your Name
+            </div>
+
+
+            <div class="text">
+
+                for successfully completing a
+                TypeMaster Pro typing achievement
+                and demonstrating typing speed,
+                accuracy and consistency.
+
+            </div>
+
+
+            <div class="stats">
+
+                <div class="stat">
+
+                    <div
+                        class="stat-number"
+                        id="certificateWpm">
+                        0
+                    </div>
+
+                    <div class="stat-label">
+                        BEST WPM
+                    </div>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div
+                        class="stat-number"
+                        id="certificateAccuracy">
+                        0%
+                    </div>
+
+                    <div class="stat-label">
+                        ACCURACY
+                    </div>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div
+                        class="stat-number"
+                        id="certificateScore">
+                        0
+                    </div>
+
+                    <div class="stat-label">
+                        BEST SCORE
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer">
+
+                <div>
+
+                    <div class="signature">
+                        TypeMaster Pro
+                    </div>
+
+                </div>
+
+
+                <div class="certificate-id">
+
+                    Certificate ID:
+                    <strong id="certificateId">
+                        TM-PENDING
+                    </strong>
+
+                    <br><br>
+
+                    Date:
+                    <strong id="certificateDate">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function generateCertificate(){
+
+    const input =
+        document.getElementById("nameInput");
+
+    const name =
+        input.value.trim();
+
+
+    if(name === ""){
+
+        alert("Please enter your name.");
+
+        input.focus();
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "certificateName"
+    ).textContent = name;
+
+
+    /* Best WPM */
+
+    const bestWpm =
+        localStorage.getItem(
+            "tm_word_rush_best_wpm"
+        ) || localStorage.getItem(
+            "tm_best_wpm"
+        ) || "0";
+
+
+    document.getElementById(
+        "certificateWpm"
+    ).textContent = bestWpm;
+
+
+    /* Best Score */
+
+    const bestScore =
+        localStorage.getItem(
+            "tm_word_rush_best"
+        ) || "0";
+
+
+    document.getElementById(
+        "certificateScore"
+    ).textContent = bestScore;
+
+
+    /* Accuracy */
+
+    const accuracy =
+        localStorage.getItem(
+            "tm_accuracy"
+        ) || "0";
+
+
+    document.getElementById(
+        "certificateAccuracy"
+    ).textContent =
+        accuracy.toString().includes("%")
+        ? accuracy
+        : accuracy + "%";
+
+
+    /* Date */
+
+    const now = new Date();
+
+
+    const date =
+        now.toLocaleDateString(
+            "en-IN",
+            {
+                day:"2-digit",
+                month:"long",
+                year:"numeric"
+            }
+        );
+
+
+    document.getElementById(
+        "certificateDate"
+    ).textContent = date;
+
+
+    /* Certificate ID */
+
+    const id =
+        "TM-" +
+        now.getFullYear() +
+        "-" +
+        Math.random()
+            .toString(36)
+            .substring(2,8)
+            .toUpperCase();
+
+
+    document.getElementById(
+        "certificateId"
+    ).textContent = id;
+
+}
+
+
+/* Load saved name if available */
+
+const savedName =
+    localStorage.getItem(
+        "tm_certificate_name"
+    );
+
+
+if(savedName){
+
+    document.getElementById(
+        "nameInput"
+    ).value = savedName;
+
+}
+
+
+/* Save name while typing */
+
+document.getElementById(
+    "nameInput"
+).addEventListener(
+    "input",
+    function(){
+
+        localStorage.setItem(
+            "tm_certificate_name",
+            this.value
+        );
+
+    }
+);
+
+</script>
+
+</body>
+  </html>
