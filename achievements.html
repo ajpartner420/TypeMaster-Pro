@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Typing Achievements | TypeMaster Pro</title>
+
+<meta name="description" content="Track your typing achievements, milestones and typing game progress with TypeMaster Pro.">
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    min-height:100vh;
+    background:linear-gradient(135deg,#0f172a,#1e293b,#312e81);
+    color:#fff;
+    padding:25px 15px;
+}
+
+.container{
+    max-width:1050px;
+    margin:auto;
+}
+
+.header{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.logo{
+    font-size:32px;
+    font-weight:800;
+}
+
+.logo span{
+    color:#38bdf8;
+}
+
+.header p{
+    color:#cbd5e1;
+    margin-top:8px;
+}
+
+.summary{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.summary-card{
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:18px;
+    padding:20px;
+    text-align:center;
+}
+
+.summary-number{
+    font-size:32px;
+    font-weight:bold;
+    margin-bottom:5px;
+}
+
+.summary-label{
+    color:#94a3b8;
+    font-size:13px;
+}
+
+.achievement-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.achievement{
+    position:relative;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:20px;
+    padding:24px;
+    text-align:center;
+    transition:.25s;
+}
+
+.achievement:hover{
+    transform:translateY(-5px);
+}
+
+.achievement.locked{
+    opacity:.48;
+    filter:grayscale(.8);
+}
+
+.icon{
+    font-size:55px;
+    margin-bottom:12px;
+}
+
+.achievement h2{
+    font-size:20px;
+    margin-bottom:8px;
+}
+
+.achievement p{
+    color:#cbd5e1;
+    font-size:14px;
+    line-height:1.5;
+    min-height:42px;
+}
+
+.status{
+    display:inline-block;
+    margin-top:15px;
+    padding:6px 13px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.unlocked .status{
+    background:rgba(34,197,94,.15);
+    color:#86efac;
+}
+
+.locked .status{
+    background:rgba(148,163,184,.12);
+    color:#94a3b8;
+}
+
+.progress-box{
+    margin-top:30px;
+    background:rgba(255,255,255,.07);
+    border-radius:18px;
+    padding:22px;
+    text-align:center;
+}
+
+.progress-track{
+    height:12px;
+    background:#334155;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:15px;
+}
+
+.progress-bar{
+    height:100%;
+    width:0%;
+    border-radius:20px;
+    background:#38bdf8;
+    transition:.5s;
+}
+
+.progress-text{
+    margin-top:10px;
+    color:#cbd5e1;
+    font-size:14px;
+}
+
+.back{
+    display:block;
+    text-align:center;
+    margin-top:22px;
+    color:#7dd3fc;
+    text-decoration:none;
+}
+
+@media(max-width:800px){
+
+    .achievement-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:550px){
+
+    .summary{
+        grid-template-columns:1fr;
+    }
+
+    .achievement-grid{
+        grid-template-columns:1fr;
+    }
+
+    .logo{
+        font-size:27px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <div class="logo">
+            Type<span>Master</span> Pro
+        </div>
+
+        <p>🏆 Your Typing Achievements</p>
+
+    </div>
+
+
+    <div class="summary">
+
+        <div class="summary-card">
+
+            <div class="summary-number" id="unlockedCount">
+                0
+            </div>
+
+            <div class="summary-label">
+                ACHIEVEMENTS UNLOCKED
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-number" id="bestScore">
+                0
+            </div>
+
+            <div class="summary-label">
+                WORD RUSH BEST SCORE
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-number" id="bestWpm">
+                0
+            </div>
+
+            <div class="summary-label">
+                BEST WPM
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="achievement-grid">
+
+
+        <!-- FIRST GAME -->
+
+        <div class="achievement locked" id="firstGame">
+
+            <div class="icon">🎮</div>
+
+            <h2>First Game</h2>
+
+            <p>
+                Complete your first typing game.
+            </p>
+
+            <span class="status">
+                🔒 LOCKED
+            </span>
+
+        </div>
+
+
+        <!-- 10 WORDS -->
+
+        <div class="achievement locked" id="tenWords">
+
+            <div class="icon">🎯</div>
+
+            <h2>Word Starter</h2>
+
+            <p>
+                Type 10 correct words in Word Rush.
+            </p>
+
+            <span class="status">
+                🔒 LOCKED
+            </span>
+
+        </div>
+
+
+        <!-- 20 WPM -->
+
+        <div class="achievement locked" id="twentyWpm">
+
+            <div class="icon">⚡</div>
+
+            <h2>Speed Runner</h2>
+
+            <p>
+                Reach 20 WPM in Word Rush.
+            </p>
+
+            <span class="status">
+                🔒 LOCKED
+            </span>
+
+        </div>
+
+
+        <!-- 30 WPM -->
+
+        <div class="achievement locked" id="thirtyWpm">
+
+            <div class="icon">🔥</div>
+
+            <h2>Fast Typist</h2>
+
+            <p>
+                Reach 30 WPM in Word Rush.
+            </p>
+
+            <span class="status">
+                🔒 LOCKED
+            </span>
+
+        </div>
+
+
+        <!-- 50 WPM -->
+
+        <div class="achievement locked" id="fiftyWpm">
+
+            <div class="icon">🚀</div>
+
+            <h2>Speed Master</h2>
+
+            <p>
+                Reach 50 WPM in Word Rush.
+            </p>
+
+            <span class="status">
+                🔒 LOCKED
+            </span>
+
+        </div>
+
+
+        <!-- 95 ACCURACY -->
+
+        <div class="achievement locked" id="accuracy95">
+
+            <div class="icon">🎯</div>
+
+            <h2>Sharp Fingers</h2>
+
+            <p>
+                Achieve 95% accuracy in Word Rush.
+            </p>
+
+            <span class="status">
+                🔒 LOCKED
+            </span>
+
+        </div>
+
+
+        <!-- 100 ACCURACY -->
+
+        <div class="achievement locked" id="accuracy100">
+
+            <div class="icon">💯</div>
+
+            <h2>Perfect Typist</h2>
+
+            <p>
+                Achieve 100% accuracy in a game.
+            </p>
+
+            <span class="status">
+                🔒 LOCKED
+            </span>
+
+        </div>
+
+
+        <!-- 100 SCORE -->
+
+        <div class="achievement locked" id="score100">
+
+            <div class="icon">🏆</div>
+
+            <h2>Score Hunter</h2>
+
+            <p>
+                Reach a Word Rush score of 100.
+            </p>
+
+            <span class="status">
+                🔒 LOCKED
+            </span>
+
+        </div>
+
+
+        <!-- TYPING MASTER -->
+
+        <div class="achievement locked" id="typingMaster">
+
+            <div class="icon">👑</div>
+
+            <h2>Typing Master</h2>
+
+            <p>
+                Unlock 5 different achievements.
+            </p>
+
+            <span class="status">
+                🔒 LOCKED
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="progress-box">
+
+        <h2>🏆 Achievement Progress</h2>
+
+        <div class="progress-track">
+
+            <div class="progress-bar" id="progressBar"></div>
+
+        </div>
+
+        <div class="progress-text" id="progressText">
+            0 / 9 achievements unlocked
+        </div>
+
+    </div>
+
+
+    <a class="back" href="games.html">
+        ← Back to Games
+    </a>
+
+    <a class="back" href="learn.html">
+        📚 Back to Learn Typing
+    </a>
+
+    <a class="back" href="index.html">
+        🏠 Back to Typing Test
+    </a>
+
+</div>
+
+
+<script>
+
+const achievements = [
+
+    "firstGame",
+    "tenWords",
+    "twentyWpm",
+    "thirtyWpm",
+    "fiftyWpm",
+    "accuracy95",
+    "accuracy100",
+    "score100",
+    "typingMaster"
+
+];
+
+
+function unlock(id){
+
+    const element = document.getElementById(id);
+
+    if(!element) return;
+
+    element.classList.remove("locked");
+
+    element.classList.add("unlocked");
+
+    const status = element.querySelector(".status");
+
+    if(status){
+
+        status.textContent = "🏆 UNLOCKED";
+
+    }
+
+}
+
+
+function isUnlocked(id){
+
+    return localStorage.getItem(
+        "tm_achievement_" + id
+    ) === "true";
+
+}
+
+
+function updateSummary(){
+
+    let count = 0;
+
+    achievements.forEach(function(id){
+
+        if(isUnlocked(id)){
+
+            unlock(id);
+
+            count++;
+
+        }
+
+    });
+
+
+    document.getElementById("unlockedCount")
+        .textContent = count;
+
+
+    const bestScore =
+        localStorage.getItem("tm_word_rush_best") || "0";
+
+    document.getElementById("bestScore")
+        .textContent = bestScore;
+
+
+    const bestWpm =
+        localStorage.getItem("tm_best_wpm") || "0";
+
+    document.getElementById("bestWpm")
+        .textContent = bestWpm;
+
+
+    const percentage =
+        Math.round((count / achievements.length) * 100);
+
+
+    document.getElementById("progressBar")
+        .style.width = percentage + "%";
+
+
+    document.getElementById("progressText")
+        .textContent =
+        count + " / " + achievements.length +
+        " achievements unlocked";
+
+
+    if(count >= 5){
+
+        localStorage.setItem(
+            "tm_achievement_typingMaster",
+            "true"
+        );
+
+        unlock("typingMaster");
+
+    }
+
+}
+
+
+updateSummary();
+
+</script>
+
+</body>
+  </html>
