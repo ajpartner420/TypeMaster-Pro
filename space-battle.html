@@ -541,36 +541,25 @@ body{
 <script>
 
 const words = [
-    "space",
-    "battle",
-    "rocket",
-    "planet",
-    "galaxy",
-    "asteroid",
-    "meteor",
-    "star",
-    "orbit",
-    "cosmos",
-    "energy",
-    "laser",
-    "fighter",
-    "mission",
-    "future",
-    "speed",
-    "power",
-    "target",
-    "attack",
-    "defense",
-    "shield",
-    "rocket",
-    "satellite",
-    "universe",
-    "explorer",
-    "computer",
-    "keyboard",
-    "master",
-    "typing",
-    "warrior"
+    // LEVEL 1 — very easy
+    "cat","dog","sun","red","box","car","map","run",
+    "pen","top","man","hat","cup","key","bus","big",
+    "hot","new","win","fun",
+
+    // LEVEL 2
+    "book","home","game","star","moon","fish","tree",
+    "road","time","word","type","fast","blue","green",
+    "fire","ship","ball","door","milk","hand",
+
+    // LEVEL 3
+    "space","battle","rocket","planet","galaxy","laser",
+    "speed","power","target","attack","shield","fighter",
+    "typing","master","future","energy","mission",
+
+    // LEVEL 4+
+    "keyboard","asteroid","satellite","universe",
+    "explorer","computer","defense","technology",
+    "challenge","adventure"
 ];
 
 const game = document.querySelector(".game");
@@ -596,7 +585,7 @@ let destroyed = 0;
 let missed = 0;
 
 let totalTyped = 0;
-let correctTyped = 0;
+let correctCharacters = 0;
 
 let startTime = 0;
 let gameRunning = false;
@@ -607,11 +596,53 @@ let spawnInterval;
 let enemies = [];
 let currentTarget = null;
 
-function randomWord(){
 
-    return words[Math.floor(Math.random() * words.length)];
+/* =========================
+   GET WORD BY LEVEL
+========================= */
 
+function getWord(){
+
+    let availableWords;
+
+    if(level === 1){
+
+        availableWords =
+            words.filter(word => word.length <= 3);
+
+    }
+    else if(level === 2){
+
+        availableWords =
+            words.filter(word => word.length >= 3 && word.length <= 5);
+
+    }
+    else if(level === 3){
+
+        availableWords =
+            words.filter(word => word.length >= 4 && word.length <= 7);
+
+    }
+    else{
+
+        availableWords =
+            words.filter(word => word.length >= 5);
+
+    }
+
+    if(availableWords.length === 0){
+        availableWords = words;
+    }
+
+    return availableWords[
+        Math.floor(Math.random() * availableWords.length)
+    ];
 }
+
+
+/* =========================
+   HUD
+========================= */
 
 function updateHUD(){
 
@@ -623,54 +654,116 @@ function updateHUD(){
     livesEl.textContent =
         "❤️".repeat(lives) +
         "🖤".repeat(3 - lives);
-
 }
+
+
+/* =========================
+   CREATE ENEMY
+========================= */
 
 function createEnemy(){
 
     if(!gameRunning) return;
 
+    /*
+       Level 1:
+       Only 1 enemy
+
+       Level 2:
+       Maximum 2
+
+       Level 3+:
+       Maximum 3
+    */
+
+    let maxEnemies = 1;
+
+    if(level >= 2) maxEnemies = 2;
+    if(level >= 4) maxEnemies = 3;
+
+    if(enemies.length >= maxEnemies) return;
+
+
     const enemy = document.createElement("div");
 
     enemy.className = "enemy";
 
-    const word = randomWord();
+    const word = getWord();
 
     enemy.dataset.word = word;
-    enemy.dataset.progress = "";
 
     enemy.innerHTML = `
         <span class="ship">👾</span>
         <span class="word">${word}</span>
     `;
 
-    const maxLeft = Math.max(20, window.innerWidth - 150);
 
-    const left = 20 + Math.random() * (maxLeft - 20);
+    /*
+       Keep enemies away from screen edges
+    */
+
+    const gameWidth = game.clientWidth;
+
+    const enemyWidth = 120;
+
+    const left =
+        20 +
+        Math.random() *
+        Math.max(20, gameWidth - enemyWidth - 40);
 
     enemy.style.left = left + "px";
     enemy.style.top = "-80px";
 
     game.appendChild(enemy);
 
+
+    /*
+       MUCH SLOWER SPEED
+    */
+
+    let speed = 0.20;
+
+    if(level === 2){
+        speed = 0.28;
+    }
+    else if(level === 3){
+        speed = 0.36;
+    }
+    else if(level === 4){
+        speed = 0.45;
+    }
+    else if(level >= 5){
+        speed = 0.55 + ((level - 5) * 0.04);
+    }
+
+
     const obj = {
         el: enemy,
         word: word,
         y: -80,
-        speed: 0.45 + (level * 0.12)
+        speed: speed
     };
 
     enemies.push(obj);
-
 }
+
+
+/* =========================
+   DESTROY ENEMY
+========================= */
 
 function destroyEnemy(obj){
 
     if(!obj) return;
 
-    const rect = obj.el.getBoundingClientRect();
+    const rect =
+        obj.el.getBoundingClientRect();
 
-    const explosion = document.createElement("div");
+
+    /* Explosion */
+
+    const explosion =
+        document.createElement("div");
 
     explosion.className = "explosion";
     explosion.textContent = "💥";
@@ -683,13 +776,23 @@ function destroyEnemy(obj){
 
     document.body.appendChild(explosion);
 
-    setTimeout(() => explosion.remove(),450);
+    setTimeout(() => {
+        explosion.remove();
+    },450);
 
-    createLaser(rect.left + rect.width / 2);
+
+    /* Laser */
+
+    createLaser(
+        rect.left + rect.width / 2
+    );
+
 
     obj.el.remove();
 
-    enemies = enemies.filter(e => e !== obj);
+    enemies =
+        enemies.filter(e => e !== obj);
+
 
     destroyed++;
 
@@ -698,6 +801,9 @@ function destroyEnemy(obj){
     if(combo > bestCombo){
         bestCombo = combo;
     }
+
+
+    /* Combo scoring */
 
     let multiplier = 1;
 
@@ -711,34 +817,69 @@ function destroyEnemy(obj){
         multiplier = 2;
     }
 
+
     score += 10 * multiplier;
 
-    if(destroyed % 5 === 0){
-        level++;
+
+    /*
+       LEVEL UP
+
+       First level needs only 5 kills.
+    */
+
+    if(destroyed >= 5 && level === 1){
+        level = 2;
     }
+
+    if(destroyed >= 12 && level === 2){
+        level = 3;
+    }
+
+    if(destroyed >= 22 && level === 3){
+        level = 4;
+    }
+
+    if(destroyed >= 35 && level === 4){
+        level = 5;
+    }
+
 
     currentTarget = null;
 
     input.value = "";
 
     updateHUD();
-
 }
+
+
+/* =========================
+   LASER
+========================= */
 
 function createLaser(x){
 
-    const laser = document.createElement("div");
+    const laser =
+        document.createElement("div");
 
     laser.className = "laser";
 
-    laser.style.left = (x - 2) + "px";
-    laser.style.bottom = "95px";
+    laser.style.left =
+        (x - 2) + "px";
+
+    laser.style.bottom =
+        "95px";
 
     game.appendChild(laser);
 
-    setTimeout(() => laser.remove(),300);
-
+    setTimeout(() => {
+        laser.remove();
+    },300);
 }
+
+
+/* =========================
+   MISSED ENEMY
+========================= */
 
 function missEnemy(obj){
 
@@ -746,7 +887,8 @@ function missEnemy(obj){
 
     obj.el.remove();
 
-    enemies = enemies.filter(e => e !== obj);
+    enemies =
+        enemies.filter(e => e !== obj);
 
     missed++;
 
@@ -756,29 +898,56 @@ function missEnemy(obj){
 
     updateHUD();
 
+
     if(lives <= 0){
 
         endGame();
 
     }
-
 }
+
+
+/* =========================
+   GAME LOOP
+========================= */
 
 function gameLoop(){
 
     if(!gameRunning) return;
 
-    const bottomLimit = window.innerHeight - 120;
 
-    enemies.forEach(obj => {
+    /*
+       Give player more time.
+
+       Enemy can reach near bottom
+       before being counted as missed.
+    */
+
+    const bottomLimit =
+        game.clientHeight - 125;
+
+
+    /*
+       Copy array so removal
+       doesn't cause issues.
+    */
+
+    [...enemies].forEach(obj => {
 
         obj.y += obj.speed;
 
-        obj.el.style.top = obj.y + "px";
+        obj.el.style.top =
+            obj.y + "px";
 
-        const rect = obj.el.getBoundingClientRect();
 
-        if(rect.top > bottomLimit){
+        const rect =
+            obj.el.getBoundingClientRect();
+
+
+        if(
+            obj.y >
+            bottomLimit
+        ){
 
             missEnemy(obj);
 
@@ -786,33 +955,49 @@ function gameLoop(){
 
     });
 
-    requestAnimationFrame(gameLoop);
 
+    requestAnimationFrame(gameLoop);
 }
+
+
+/* =========================
+   FIND TARGET
+========================= */
 
 function findTarget(value){
 
     if(!value){
+
         currentTarget = null;
 
-        enemies.forEach(obj =>
-            obj.el.classList.remove("target")
-        );
+        enemies.forEach(obj => {
+            obj.el.classList.remove("target");
+        });
 
         return;
     }
 
-    let target = enemies.find(obj =>
-        obj.word.startsWith(value)
-    );
 
-    enemies.forEach(obj =>
-        obj.el.classList.remove("target")
-    );
+    /*
+       Find enemy whose word
+       starts with what user typed
+    */
+
+    let target =
+        enemies.find(obj =>
+            obj.word.startsWith(value)
+        );
+
+
+    enemies.forEach(obj => {
+        obj.el.classList.remove("target");
+    });
+
 
     if(target){
 
         currentTarget = target;
+
         target.el.classList.add("target");
 
     }
@@ -821,28 +1006,64 @@ function findTarget(value){
         currentTarget = null;
 
     }
-
 }
+
+
+/* =========================
+   TYPING INPUT
+========================= */
 
 input.addEventListener("input", () => {
 
     if(!gameRunning) return;
 
-    const value = input.value.toLowerCase();
+
+    const value =
+        input.value.toLowerCase();
+
+
+    /*
+       Count characters
+    */
 
     totalTyped++;
 
+
+    /*
+       Find target
+    */
+
     findTarget(value);
+
+
+    /*
+       Correct character
+    */
 
     if(currentTarget){
 
-        const targetWord = currentTarget.word;
+        const targetWord =
+            currentTarget.word;
 
-        const typedPart = value;
 
-        correctTyped =
-            correctTyped +
-            (typedPart.length > 0 ? 1 : 0);
+        /*
+           Every typed character
+           that matches target
+        */
+
+        if(
+            value.length > 0 &&
+            targetWord.startsWith(value)
+        ){
+
+            correctCharacters++;
+
+        }
+
+
+        /*
+           COMPLETE WORD
+        */
 
         if(value === targetWord){
 
@@ -854,30 +1075,47 @@ input.addEventListener("input", () => {
 
 });
 
+
+/* =========================
+   ENTER DISABLED
+========================= */
+
 input.addEventListener("keydown", e => {
 
     if(e.key === "Enter"){
+
         e.preventDefault();
+
     }
 
 });
+
+
+/* =========================
+   START GAME
+========================= */
 
 function startGame(){
 
     score = 0;
     combo = 0;
     bestCombo = 0;
+
     lives = 3;
+
     level = 1;
+
     time = 60;
 
     destroyed = 0;
     missed = 0;
 
     totalTyped = 0;
-    correctTyped = 0;
+    correctCharacters = 0;
 
-    enemies.forEach(e => e.el.remove());
+    enemies.forEach(e => {
+        e.el.remove();
+    });
 
     enemies = [];
 
@@ -887,46 +1125,86 @@ function startGame(){
 
     startTime = Date.now();
 
+
     startScreen.classList.add("hidden");
+
     resultScreen.classList.add("hidden");
 
+
     input.disabled = false;
+
     input.value = "";
 
     input.focus();
 
+
     updateHUD();
+
 
     clearInterval(timerInterval);
     clearInterval(spawnInterval);
 
-    timerInterval = setInterval(() => {
 
-        if(!gameRunning) return;
+    /*
+       TIMER
+    */
 
-        time--;
+    timerInterval =
+        setInterval(() => {
 
-        updateHUD();
+            if(!gameRunning) return;
 
-        if(time <= 0){
+            time--;
 
-            endGame();
+            updateHUD();
 
+
+            if(time <= 0){
+
+                endGame();
+
+            }
+
+        },1000);
+
+
+    /*
+       MUCH SLOWER SPAWN
+
+       Level 1 = 2.5 sec
+       Level 2 = 2.0 sec
+       Level 3 = 1.6 sec
+       Level 4+ = 1.3 sec
+    */
+
+    spawnInterval =
+        setInterval(() => {
+
+            createEnemy();
+
+        },2500);
+
+
+    /*
+       First enemy
+    */
+
+    setTimeout(() => {
+
+        if(gameRunning){
+            createEnemy();
         }
 
-    },1000);
+    },500);
 
-    spawnInterval = setInterval(() => {
-
-        createEnemy();
-
-    },900);
-
-    createEnemy();
 
     requestAnimationFrame(gameLoop);
-
 }
+
+
+/* =========================
+   END GAME
+========================= */
 
 function endGame(){
 
@@ -934,33 +1212,79 @@ function endGame(){
 
     gameRunning = false;
 
+
     clearInterval(timerInterval);
     clearInterval(spawnInterval);
 
+
     input.disabled = true;
 
-    enemies.forEach(e => e.el.remove());
+
+    enemies.forEach(e => {
+        e.el.remove();
+    });
 
     enemies = [];
 
     currentTarget = null;
 
+
+    /*
+       WPM
+
+       Destroyed words × average
+       word length / 5
+    */
+
     const elapsedMinutes =
-        Math.max((Date.now() - startTime) / 60000, 1/60);
+        Math.max(
+            (Date.now() - startTime) / 60000,
+            1 / 60
+        );
+
+
+    const totalCharacters =
+        destroyed * 5;
+
 
     const wpm =
-        Math.round((correctTyped / 5) / elapsedMinutes);
+        Math.round(
+            (totalCharacters / 5) /
+            elapsedMinutes
+        );
+
+
+    /*
+       Accuracy
+    */
 
     const accuracy =
         totalTyped > 0
-        ? Math.round((correctTyped / totalTyped) * 100)
+        ? Math.round(
+            (correctCharacters / totalTyped) * 100
+        )
         : 0;
 
+
+    /*
+       BEST SCORE
+    */
+
     const oldBest =
-        Number(localStorage.getItem("tm_space_battle_best") || 0);
+        Number(
+            localStorage.getItem(
+                "tm_space_battle_best"
+            ) || 0
+        );
+
 
     const oldBestWpm =
-        Number(localStorage.getItem("tm_space_battle_best_wpm") || 0);
+        Number(
+            localStorage.getItem(
+                "tm_space_battle_best_wpm"
+            ) || 0
+        );
+
 
     if(score > oldBest){
 
@@ -971,6 +1295,7 @@ function endGame(){
 
     }
 
+
     if(wpm > oldBestWpm){
 
         localStorage.setItem(
@@ -980,31 +1305,92 @@ function endGame(){
 
     }
 
-    document.getElementById("finalScore").textContent = score;
-    document.getElementById("finalWpm").textContent = wpm;
-    document.getElementById("finalAccuracy").textContent =
+
+    /*
+       SAVE ACCURACY
+    */
+
+    const oldBestAccuracy =
+        Number(
+            localStorage.getItem(
+                "tm_space_battle_best_accuracy"
+            ) || 0
+        );
+
+
+    if(accuracy > oldBestAccuracy){
+
+        localStorage.setItem(
+            "tm_space_battle_best_accuracy",
+            accuracy
+        );
+
+    }
+
+
+    /*
+       RESULT
+    */
+
+    document.getElementById(
+        "finalScore"
+    ).textContent = score;
+
+
+    document.getElementById(
+        "finalWpm"
+    ).textContent = wpm;
+
+
+    document.getElementById(
+        "finalAccuracy"
+    ).textContent =
         accuracy + "%";
 
-    document.getElementById("finalDestroyed").textContent =
+
+    document.getElementById(
+        "finalDestroyed"
+    ).textContent =
         destroyed;
 
-    document.getElementById("finalMissed").textContent =
+
+    document.getElementById(
+        "finalMissed"
+    ).textContent =
         missed;
 
-    document.getElementById("finalCombo").textContent =
+
+    document.getElementById(
+        "finalCombo"
+    ).textContent =
         bestCombo;
 
-    resultScreen.classList.remove("hidden");
+
+    resultScreen.classList.remove(
+        "hidden"
+    );
 
 }
 
+
+/* =========================
+   BUTTONS
+========================= */
+
 document.getElementById("startBtn")
-.addEventListener("click",startGame);
+.addEventListener(
+    "click",
+    startGame
+);
+
 
 document.getElementById("restartBtn")
-.addEventListener("click",startGame);
+.addEventListener(
+    "click",
+    startGame
+);
 
 </script>
 
 </body>
-  </html>
+</html>
