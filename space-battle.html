@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Space Battle - TypeMaster Pro</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#050816;
+    color:white;
+    min-height:100vh;
+    overflow:hidden;
+}
+
+.topbar{
+    height:64px;
+    background:#0b1024;
+    border-bottom:1px solid #26304f;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 20px;
+    position:relative;
+    z-index:20;
+}
+
+.logo{
+    font-size:21px;
+    font-weight:800;
+}
+
+.logo span{
+    color:#6ee7ff;
+}
+
+.back{
+    color:white;
+    text-decoration:none;
+    background:#151d38;
+    border:1px solid #303b61;
+    padding:9px 14px;
+    border-radius:9px;
+}
+
+.game{
+    height:calc(100vh - 64px);
+    position:relative;
+    overflow:hidden;
+    background:
+        radial-gradient(circle at 20% 20%,rgba(70,100,255,.12),transparent 25%),
+        radial-gradient(circle at 80% 70%,rgba(0,220,255,.08),transparent 25%),
+        #050816;
+}
+
+.stars{
+    position:absolute;
+    inset:0;
+    background-image:
+        radial-gradient(circle,#fff 1px,transparent 1px),
+        radial-gradient(circle,#8edcff 1px,transparent 1px);
+    background-size:100px 100px,170px 170px;
+    background-position:20px 30px,60px 80px;
+    opacity:.35;
+    animation:starsMove 12s linear infinite;
+}
+
+@keyframes starsMove{
+    from{transform:translateY(0)}
+    to{transform:translateY(100px)}
+}
+
+.hud{
+    position:absolute;
+    top:15px;
+    left:50%;
+    transform:translateX(-50%);
+    width:min(900px,94%);
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:10px;
+    z-index:10;
+}
+
+.stat{
+    background:rgba(12,18,42,.88);
+    border:1px solid #29375e;
+    border-radius:12px;
+    padding:9px;
+    text-align:center;
+    backdrop-filter:blur(8px);
+}
+
+.stat small{
+    display:block;
+    color:#8e9bbd;
+    font-size:11px;
+    margin-bottom:4px;
+}
+
+.stat strong{
+    font-size:19px;
+}
+
+#score{color:#6ee7ff}
+#combo{color:#ffd166}
+#level{color:#b58cff}
+#lives{color:#ff6b81}
+
+.enemy{
+    position:absolute;
+    min-width:105px;
+    padding:10px 13px;
+    border-radius:12px;
+    border:2px solid #ff5577;
+    background:linear-gradient(145deg,#351329,#171025);
+    box-shadow:0 0 20px rgba(255,50,100,.25);
+    text-align:center;
+    font-weight:800;
+    z-index:5;
+    transition:transform .08s;
+}
+
+.enemy .ship{
+    font-size:24px;
+    display:block;
+    margin-bottom:4px;
+}
+
+.enemy .word{
+    font-size:15px;
+    letter-spacing:.5px;
+}
+
+.enemy .typed{
+    color:#6ee7ff;
+}
+
+.target{
+    border-color:#6ee7ff;
+    box-shadow:0 0 28px rgba(110,231,255,.5);
+}
+
+.player{
+    position:absolute;
+    bottom:32px;
+    left:50%;
+    transform:translateX(-50%);
+    text-align:center;
+    z-index:8;
+}
+
+.ship-player{
+    font-size:58px;
+    filter:drop-shadow(0 0 14px #48d9ff);
+}
+
+.player-name{
+    font-size:11px;
+    color:#7f91bd;
+    margin-top:3px;
+}
+
+.laser{
+    position:absolute;
+    width:5px;
+    height:70px;
+    background:#6ee7ff;
+    box-shadow:0 0 15px #6ee7ff;
+    border-radius:10px;
+    z-index:6;
+    animation:laserMove .28s linear forwards;
+}
+
+@keyframes laserMove{
+    from{transform:translateY(0)}
+    to{transform:translateY(-300px);opacity:0}
+}
+
+.explosion{
+    position:absolute;
+    font-size:38px;
+    z-index:15;
+    animation:explode .45s ease-out forwards;
+}
+
+@keyframes explode{
+    0%{
+        transform:scale(.4);
+        opacity:1;
+    }
+    100%{
+        transform:scale(1.8);
+        opacity:0;
+    }
+}
+
+.message{
+    position:absolute;
+    top:105px;
+    left:50%;
+    transform:translateX(-50%);
+    color:#9aabd2;
+    font-size:14px;
+    z-index:9;
+    text-align:center;
+}
+
+.input-area{
+    position:absolute;
+    bottom:12px;
+    left:50%;
+    transform:translateX(-50%);
+    width:min(500px,90%);
+    z-index:20;
+}
+
+#typingInput{
+    width:100%;
+    padding:14px 16px;
+    border-radius:12px;
+    border:2px solid #29375e;
+    background:#0b1024;
+    color:white;
+    outline:none;
+    font-size:17px;
+    text-align:center;
+}
+
+#typingInput:focus{
+    border-color:#6ee7ff;
+    box-shadow:0 0 18px rgba(110,231,255,.15);
+}
+
+.start-screen,
+.result-screen{
+    position:absolute;
+    inset:0;
+    z-index:30;
+    background:rgba(3,6,20,.94);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.panel{
+    width:min(500px,100%);
+    background:#0d1430;
+    border:1px solid #34446e;
+    border-radius:20px;
+    padding:30px;
+    text-align:center;
+    box-shadow:0 20px 70px rgba(0,0,0,.5);
+}
+
+.panel h1{
+    font-size:34px;
+    margin-bottom:10px;
+}
+
+.panel h1 span{
+    color:#6ee7ff;
+}
+
+.panel p{
+    color:#9ca9c8;
+    line-height:1.6;
+    margin:10px 0 22px;
+}
+
+.start-btn,
+.restart-btn{
+    border:0;
+    background:#6ee7ff;
+    color:#06101b;
+    font-weight:800;
+    font-size:16px;
+    padding:13px 28px;
+    border-radius:11px;
+    cursor:pointer;
+}
+
+.instructions{
+    text-align:left;
+    background:#080e23;
+    border:1px solid #202d51;
+    border-radius:12px;
+    padding:15px;
+    margin-bottom:22px;
+    color:#b6c2dc;
+    font-size:14px;
+    line-height:1.8;
+}
+
+.result-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    margin:20px 0;
+}
+
+.result-box{
+    background:#080e23;
+    border:1px solid #202d51;
+    border-radius:10px;
+    padding:12px;
+}
+
+.result-box small{
+    display:block;
+    color:#7f8bab;
+    margin-bottom:5px;
+}
+
+.result-box strong{
+    font-size:21px;
+}
+
+.hidden{
+    display:none!important;
+}
+
+@media(max-width:600px){
+
+    .topbar{
+        padding:0 12px;
+        height:58px;
+    }
+
+    .logo{
+        font-size:17px;
+    }
+
+    .game{
+        height:calc(100vh - 58px);
+    }
+
+    .hud{
+        grid-template-columns:repeat(3,1fr);
+        top:10px;
+        gap:6px;
+    }
+
+    .stat{
+        padding:7px 4px;
+    }
+
+    .stat strong{
+        font-size:15px;
+    }
+
+    .stat small{
+        font-size:9px;
+    }
+
+    .message{
+        top:125px;
+        font-size:12px;
+        width:90%;
+    }
+
+    .enemy{
+        min-width:90px;
+        padding:8px 10px;
+    }
+
+    .enemy .ship{
+        font-size:20px;
+    }
+
+    .enemy .word{
+        font-size:13px;
+    }
+
+    .player{
+        bottom:65px;
+    }
+
+    .ship-player{
+        font-size:48px;
+    }
+
+    .input-area{
+        bottom:8px;
+    }
+
+    .panel{
+        padding:23px 18px;
+    }
+
+    .panel h1{
+        font-size:27px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+    <div class="logo">🚀 TypeMaster <span>Pro</span></div>
+    <a class="back" href="games.html">← Games</a>
+</header>
+
+<div class="game">
+
+    <div class="stars"></div>
+
+    <div class="hud">
+        <div class="stat">
+            <small>SCORE</small>
+            <strong id="score">0</strong>
+        </div>
+
+        <div class="stat">
+            <small>COMBO</small>
+            <strong id="combo">0</strong>
+        </div>
+
+        <div class="stat">
+            <small>LEVEL</small>
+            <strong id="level">1</strong>
+        </div>
+
+        <div class="stat">
+            <small>LIVES</small>
+            <strong id="lives">❤️❤️❤️</strong>
+        </div>
+
+        <div class="stat">
+            <small>TIME</small>
+            <strong id="time">60</strong>
+        </div>
+    </div>
+
+    <div class="message">
+        Type the enemy word before it reaches your spaceship!
+    </div>
+
+    <div class="player">
+        <div class="ship-player">🚀</div>
+        <div class="player-name">YOUR SHIP</div>
+    </div>
+
+    <div class="input-area">
+        <input
+            id="typingInput"
+            type="text"
+            autocomplete="off"
+            autocapitalize="off"
+            spellcheck="false"
+            placeholder="Type enemy word..."
+            disabled
+        >
+    </div>
+
+    <!-- START -->
+    <div class="start-screen" id="startScreen">
+        <div class="panel">
+
+            <h1>🚀 Space <span>Battle</span></h1>
+
+            <p>
+                Destroy enemy ships by typing the words before
+                they reach your spaceship.
+            </p>
+
+            <div class="instructions">
+                👾 Enemy ships will fall from above<br>
+                ⌨️ Type their word to target them<br>
+                💥 Complete the word to destroy the enemy<br>
+                🔥 Build combos for extra points<br>
+                ❤️ Missing enemies costs a life<br>
+                📈 Every level becomes faster
+            </div>
+
+            <button class="start-btn" id="startBtn">
+                🚀 START BATTLE
+            </button>
+
+        </div>
+    </div>
+
+    <!-- RESULT -->
+    <div class="result-screen hidden" id="resultScreen">
+        <div class="panel">
+
+            <h1>🏆 Battle <span>Complete</span></h1>
+
+            <div class="result-grid">
+
+                <div class="result-box">
+                    <small>Score</small>
+                    <strong id="finalScore">0</strong>
+                </div>
+
+                <div class="result-box">
+                    <small>WPM</small>
+                    <strong id="finalWpm">0</strong>
+                </div>
+
+                <div class="result-box">
+                    <small>Accuracy</small>
+                    <strong id="finalAccuracy">0%</strong>
+                </div>
+
+                <div class="result-box">
+                    <small>Destroyed</small>
+                    <strong id="finalDestroyed">0</strong>
+                </div>
+
+                <div class="result-box">
+                    <small>Missed</small>
+                    <strong id="finalMissed">0</strong>
+                </div>
+
+                <div class="result-box">
+                    <small>Best Combo</small>
+                    <strong id="finalCombo">0</strong>
+                </div>
+
+            </div>
+
+            <button class="restart-btn" id="restartBtn">
+                🚀 PLAY AGAIN
+            </button>
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+const words = [
+    "space",
+    "battle",
+    "rocket",
+    "planet",
+    "galaxy",
+    "asteroid",
+    "meteor",
+    "star",
+    "orbit",
+    "cosmos",
+    "energy",
+    "laser",
+    "fighter",
+    "mission",
+    "future",
+    "speed",
+    "power",
+    "target",
+    "attack",
+    "defense",
+    "shield",
+    "rocket",
+    "satellite",
+    "universe",
+    "explorer",
+    "computer",
+    "keyboard",
+    "master",
+    "typing",
+    "warrior"
+];
+
+const game = document.querySelector(".game");
+const input = document.getElementById("typingInput");
+
+const scoreEl = document.getElementById("score");
+const comboEl = document.getElementById("combo");
+const levelEl = document.getElementById("level");
+const livesEl = document.getElementById("lives");
+const timeEl = document.getElementById("time");
+
+const startScreen = document.getElementById("startScreen");
+const resultScreen = document.getElementById("resultScreen");
+
+let score = 0;
+let combo = 0;
+let bestCombo = 0;
+let lives = 3;
+let level = 1;
+let time = 60;
+
+let destroyed = 0;
+let missed = 0;
+
+let totalTyped = 0;
+let correctTyped = 0;
+
+let startTime = 0;
+let gameRunning = false;
+
+let timerInterval;
+let spawnInterval;
+
+let enemies = [];
+let currentTarget = null;
+
+function randomWord(){
+
+    return words[Math.floor(Math.random() * words.length)];
+
+}
+
+function updateHUD(){
+
+    scoreEl.textContent = score;
+    comboEl.textContent = combo;
+    levelEl.textContent = level;
+    timeEl.textContent = time;
+
+    livesEl.textContent =
+        "❤️".repeat(lives) +
+        "🖤".repeat(3 - lives);
+
+}
+
+function createEnemy(){
+
+    if(!gameRunning) return;
+
+    const enemy = document.createElement("div");
+
+    enemy.className = "enemy";
+
+    const word = randomWord();
+
+    enemy.dataset.word = word;
+    enemy.dataset.progress = "";
+
+    enemy.innerHTML = `
+        <span class="ship">👾</span>
+        <span class="word">${word}</span>
+    `;
+
+    const maxLeft = Math.max(20, window.innerWidth - 150);
+
+    const left = 20 + Math.random() * (maxLeft - 20);
+
+    enemy.style.left = left + "px";
+    enemy.style.top = "-80px";
+
+    game.appendChild(enemy);
+
+    const obj = {
+        el: enemy,
+        word: word,
+        y: -80,
+        speed: 0.45 + (level * 0.12)
+    };
+
+    enemies.push(obj);
+
+}
+
+function destroyEnemy(obj){
+
+    if(!obj) return;
+
+    const rect = obj.el.getBoundingClientRect();
+
+    const explosion = document.createElement("div");
+
+    explosion.className = "explosion";
+    explosion.textContent = "💥";
+
+    explosion.style.left =
+        (rect.left + rect.width / 2 - 20) + "px";
+
+    explosion.style.top =
+        (rect.top + rect.height / 2 - 20) + "px";
+
+    document.body.appendChild(explosion);
+
+    setTimeout(() => explosion.remove(),450);
+
+    createLaser(rect.left + rect.width / 2);
+
+    obj.el.remove();
+
+    enemies = enemies.filter(e => e !== obj);
+
+    destroyed++;
+
+    combo++;
+
+    if(combo > bestCombo){
+        bestCombo = combo;
+    }
+
+    let multiplier = 1;
+
+    if(combo >= 20){
+        multiplier = 4;
+    }
+    else if(combo >= 10){
+        multiplier = 3;
+    }
+    else if(combo >= 5){
+        multiplier = 2;
+    }
+
+    score += 10 * multiplier;
+
+    if(destroyed % 5 === 0){
+        level++;
+    }
+
+    currentTarget = null;
+
+    input.value = "";
+
+    updateHUD();
+
+}
+
+function createLaser(x){
+
+    const laser = document.createElement("div");
+
+    laser.className = "laser";
+
+    laser.style.left = (x - 2) + "px";
+    laser.style.bottom = "95px";
+
+    game.appendChild(laser);
+
+    setTimeout(() => laser.remove(),300);
+
+}
+
+function missEnemy(obj){
+
+    if(!obj) return;
+
+    obj.el.remove();
+
+    enemies = enemies.filter(e => e !== obj);
+
+    missed++;
+
+    lives--;
+
+    combo = 0;
+
+    updateHUD();
+
+    if(lives <= 0){
+
+        endGame();
+
+    }
+
+}
+
+function gameLoop(){
+
+    if(!gameRunning) return;
+
+    const bottomLimit = window.innerHeight - 120;
+
+    enemies.forEach(obj => {
+
+        obj.y += obj.speed;
+
+        obj.el.style.top = obj.y + "px";
+
+        const rect = obj.el.getBoundingClientRect();
+
+        if(rect.top > bottomLimit){
+
+            missEnemy(obj);
+
+        }
+
+    });
+
+    requestAnimationFrame(gameLoop);
+
+}
+
+function findTarget(value){
+
+    if(!value){
+        currentTarget = null;
+
+        enemies.forEach(obj =>
+            obj.el.classList.remove("target")
+        );
+
+        return;
+    }
+
+    let target = enemies.find(obj =>
+        obj.word.startsWith(value)
+    );
+
+    enemies.forEach(obj =>
+        obj.el.classList.remove("target")
+    );
+
+    if(target){
+
+        currentTarget = target;
+        target.el.classList.add("target");
+
+    }
+    else{
+
+        currentTarget = null;
+
+    }
+
+}
+
+input.addEventListener("input", () => {
+
+    if(!gameRunning) return;
+
+    const value = input.value.toLowerCase();
+
+    totalTyped++;
+
+    findTarget(value);
+
+    if(currentTarget){
+
+        const targetWord = currentTarget.word;
+
+        const typedPart = value;
+
+        correctTyped =
+            correctTyped +
+            (typedPart.length > 0 ? 1 : 0);
+
+        if(value === targetWord){
+
+            destroyEnemy(currentTarget);
+
+        }
+
+    }
+
+});
+
+input.addEventListener("keydown", e => {
+
+    if(e.key === "Enter"){
+        e.preventDefault();
+    }
+
+});
+
+function startGame(){
+
+    score = 0;
+    combo = 0;
+    bestCombo = 0;
+    lives = 3;
+    level = 1;
+    time = 60;
+
+    destroyed = 0;
+    missed = 0;
+
+    totalTyped = 0;
+    correctTyped = 0;
+
+    enemies.forEach(e => e.el.remove());
+
+    enemies = [];
+
+    currentTarget = null;
+
+    gameRunning = true;
+
+    startTime = Date.now();
+
+    startScreen.classList.add("hidden");
+    resultScreen.classList.add("hidden");
+
+    input.disabled = false;
+    input.value = "";
+
+    input.focus();
+
+    updateHUD();
+
+    clearInterval(timerInterval);
+    clearInterval(spawnInterval);
+
+    timerInterval = setInterval(() => {
+
+        if(!gameRunning) return;
+
+        time--;
+
+        updateHUD();
+
+        if(time <= 0){
+
+            endGame();
+
+        }
+
+    },1000);
+
+    spawnInterval = setInterval(() => {
+
+        createEnemy();
+
+    },900);
+
+    createEnemy();
+
+    requestAnimationFrame(gameLoop);
+
+}
+
+function endGame(){
+
+    if(!gameRunning) return;
+
+    gameRunning = false;
+
+    clearInterval(timerInterval);
+    clearInterval(spawnInterval);
+
+    input.disabled = true;
+
+    enemies.forEach(e => e.el.remove());
+
+    enemies = [];
+
+    currentTarget = null;
+
+    const elapsedMinutes =
+        Math.max((Date.now() - startTime) / 60000, 1/60);
+
+    const wpm =
+        Math.round((correctTyped / 5) / elapsedMinutes);
+
+    const accuracy =
+        totalTyped > 0
+        ? Math.round((correctTyped / totalTyped) * 100)
+        : 0;
+
+    const oldBest =
+        Number(localStorage.getItem("tm_space_battle_best") || 0);
+
+    const oldBestWpm =
+        Number(localStorage.getItem("tm_space_battle_best_wpm") || 0);
+
+    if(score > oldBest){
+
+        localStorage.setItem(
+            "tm_space_battle_best",
+            score
+        );
+
+    }
+
+    if(wpm > oldBestWpm){
+
+        localStorage.setItem(
+            "tm_space_battle_best_wpm",
+            wpm
+        );
+
+    }
+
+    document.getElementById("finalScore").textContent = score;
+    document.getElementById("finalWpm").textContent = wpm;
+    document.getElementById("finalAccuracy").textContent =
+        accuracy + "%";
+
+    document.getElementById("finalDestroyed").textContent =
+        destroyed;
+
+    document.getElementById("finalMissed").textContent =
+        missed;
+
+    document.getElementById("finalCombo").textContent =
+        bestCombo;
+
+    resultScreen.classList.remove("hidden");
+
+}
+
+document.getElementById("startBtn")
+.addEventListener("click",startGame);
+
+document.getElementById("restartBtn")
+.addEventListener("click",startGame);
+
+</script>
+
+</body>
+  </html>
