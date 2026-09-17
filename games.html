@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Typing Games – Free Typing Games | TypeMaster Pro</title>
+
+<meta name="description" content="Play free typing games online with TypeMaster Pro. Improve your typing speed, accuracy and keyboard skills with fun typing challenges.">
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial, sans-serif;
+    min-height:100vh;
+    background:linear-gradient(135deg,#0f172a,#1e293b,#312e81);
+    color:#fff;
+    padding:30px 15px;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+}
+
+.header{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.logo{
+    font-size:34px;
+    font-weight:800;
+    margin-bottom:10px;
+}
+
+.logo span{
+    color:#38bdf8;
+}
+
+.header p{
+    color:#cbd5e1;
+    font-size:17px;
+}
+
+.games-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+}
+
+.game-card{
+    background:rgba(255,255,255,.09);
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:22px;
+    padding:28px;
+    text-align:center;
+    backdrop-filter:blur(12px);
+    transition:.25s;
+}
+
+.game-card:hover{
+    transform:translateY(-7px);
+    background:rgba(255,255,255,.13);
+}
+
+.game-icon{
+    font-size:60px;
+    margin-bottom:18px;
+}
+
+.game-card h2{
+    font-size:24px;
+    margin-bottom:12px;
+}
+
+.game-card p{
+    color:#cbd5e1;
+    line-height:1.6;
+    min-height:78px;
+}
+
+.badge{
+    display:inline-block;
+    margin:15px 0;
+    padding:6px 12px;
+    border-radius:20px;
+    background:rgba(56,189,248,.15);
+    color:#7dd3fc;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.play-btn{
+    display:inline-block;
+    width:100%;
+    padding:13px 20px;
+    border:none;
+    border-radius:12px;
+    background:#38bdf8;
+    color:#082f49;
+    font-size:16px;
+    font-weight:700;
+    cursor:pointer;
+    text-decoration:none;
+    transition:.2s;
+}
+
+.play-btn:hover{
+    transform:scale(1.03);
+}
+
+.soon{
+    background:#475569;
+    color:#e2e8f0;
+    cursor:not-allowed;
+}
+
+.info{
+    margin-top:40px;
+    padding:25px;
+    text-align:center;
+    background:rgba(255,255,255,.06);
+    border-radius:18px;
+}
+
+.info h2{
+    margin-bottom:10px;
+}
+
+.info p{
+    color:#cbd5e1;
+    line-height:1.7;
+}
+
+.back{
+    display:block;
+    text-align:center;
+    margin-top:25px;
+    color:#7dd3fc;
+    text-decoration:none;
+}
+
+@media(max-width:800px){
+    .games-grid{
+        grid-template-columns:1fr;
+    }
+
+    .logo{
+        font-size:28px;
+    }
+
+    .game-card p{
+        min-height:auto;
+        margin-bottom:10px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <div class="logo">
+            Type<span>Master</span> Pro
+        </div>
+
+        <p>🎮 Improve your typing skills while having fun!</p>
+    </div>
+
+
+    <div class="games-grid">
+
+        <!-- WORD RUSH -->
+        <div class="game-card">
+
+            <div class="game-icon">🎯</div>
+
+            <h2>Word Rush</h2>
+
+            <span class="badge">COMING SOON</span>
+
+            <p>
+                Type as many words as possible before the timer runs out.
+                Improve your speed and reaction time.
+            </p>
+
+            <button class="play-btn soon" disabled>
+                Coming Soon
+            </button>
+
+        </div>
+
+
+        <!-- KEY BLASTER -->
+        <div class="game-card">
+
+            <div class="game-icon">⌨️</div>
+
+            <h2>Key Blaster</h2>
+
+            <span class="badge">COMING SOON</span>
+
+            <p>
+                Type the falling keys before they reach the bottom.
+                A fun way to master your keyboard.
+            </p>
+
+            <button class="play-btn soon" disabled>
+                Coming Soon
+            </button>
+
+        </div>
+
+
+        <!-- SPEED CHALLENGE -->
+        <div class="game-card">
+
+            <div class="game-icon">⚡</div>
+
+            <h2>Speed Challenge</h2>
+
+            <span class="badge">COMING SOON</span>
+
+            <p>
+                Challenge yourself to type faster and beat your personal
+                typing speed record.
+            </p>
+
+            <button class="play-btn soon" disabled>
+                Coming Soon
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="info">
+
+        <h2>🏆 Your Game Progress</h2>
+
+        <p>
+            Your game scores, high scores and achievements will be saved
+            automatically in your browser.
+        </p>
+
+    </div>
+
+
+    <a class="back" href="learn.html">
+        ← Back to Learn Typing
+    </a>
+
+    <a class="back" href="index.html">
+        🏠 Back to Typing Test
+    </a>
+
+</div>
+
+</body>
+</html>
