@@ -711,7 +711,7 @@ function updateHUD(){
 
     livesEl.textContent =
         "❤️".repeat(lives) +
-        "🖤".repeat(3 - lives);
+        "🖤".repeat(Math.max(0, 5 - lives));
 }
 
 
