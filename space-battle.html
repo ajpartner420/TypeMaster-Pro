@@ -727,12 +727,12 @@ function createPowerUp(){
     item.className = "power-up";
     item.textContent = "❤️";
 
-    const x = Math.random() * (gameArea.clientWidth - 50);
+    const x = Math.random() * (game.clientWidth - 50);
 
     item.style.left = x + "px";
     item.style.top = "95px";
 
-    gameArea.appendChild(item);
+    game.appendChild(item);
 
     powerUp = {
         element: item,
@@ -1062,6 +1062,24 @@ function gameLoop(){
 
     });
 
+/* ❤️ POWER-UP MOVEMENT */
+
+if(powerUp){
+
+    powerUp.y += powerUp.speed;
+
+    powerUp.element.style.top =
+        powerUp.y + "px";
+
+    if(powerUp.y > bottomLimit){
+
+        powerUp.element.remove();
+
+        powerUp = null;
+
+    }
+}
+    
 powerUpTimer++;
 
 if(powerUpTimer >= 900){
@@ -1134,6 +1152,22 @@ input.addEventListener("input", () => {
     const value =
         input.value.toLowerCase();
 
+    /* ❤️ EXTRA LIFE POWER-UP */
+
+if(powerUp && value === "life"){
+
+    lives = Math.min(lives + 1, 5);
+
+    powerUp.element.remove();
+
+    powerUp = null;
+
+    input.value = "";
+
+    updateHUD();
+
+    return;
+}
 
     /*
        Count characters
