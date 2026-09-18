@@ -748,7 +748,7 @@ function createEnemy(){
         Math.max(20, gameWidth - enemyWidth - 40);
 
     enemy.style.left = left + "px";
-    enemy.style.top = "-80px";
+    enemy.style.top = "95px";
 
     game.appendChild(enemy);
 
@@ -757,7 +757,7 @@ function createEnemy(){
        MUCH SLOWER SPEED
     */
 
-    let speed = 0.29;
+    let speed = 0.35;
 
     if(level === 2){
         speed = 0.35;
@@ -776,7 +776,7 @@ function createEnemy(){
     const obj = {
         el: enemy,
         word: word,
-        y: -80,
+        y: 95,
         speed: speed
     };
 
