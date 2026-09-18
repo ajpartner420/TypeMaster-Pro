@@ -1158,6 +1158,7 @@ if(powerUp && value === "life"){
 
     lives = Math.min(lives + 1, 5);
 
+if(powerUp.element){    
     powerUp.element.remove();
 
     powerUp = null;
