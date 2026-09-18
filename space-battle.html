@@ -148,6 +148,42 @@ body{
     box-shadow:0 0 28px rgba(110,231,255,.5);
 }
 
+.combo-pop{
+    position:absolute;
+    z-index:25;
+    color:#ffd166;
+    font-size:22px;
+    font-weight:900;
+    text-shadow:0 0 12px rgba(255,209,102,.8);
+    pointer-events:none;
+    animation:comboPop .7s ease-out forwards;
+}
+
+@keyframes comboPop{
+    0%{
+        transform:translateY(0) scale(.7);
+        opacity:0;
+    }
+    20%{
+        transform:translateY(-5px) scale(1.15);
+        opacity:1;
+    }
+    100%{
+        transform:translateY(-55px) scale(1);
+        opacity:0;
+    }
+}
+
+.combo-active{
+    animation:comboPulse .3s ease-out;
+}
+
+@keyframes comboPulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.18);}
+    100%{transform:scale(1);}
+}
+    
 .player{
     position:absolute;
     bottom:32px;
@@ -819,6 +855,32 @@ function destroyEnemy(obj){
 
 
     score += 10 * multiplier;
+
+    if(combo >= 5){
+
+    const pop = document.createElement("div");
+
+    pop.className = "combo-pop";
+
+    pop.textContent =
+        "🔥 " + combo + " COMBO! +" +
+        (10 * multiplier) + " POINTS";
+
+    pop.style.left = "50%";
+    pop.style.top = "150px";
+
+    game.appendChild(pop);
+
+    setTimeout(() => {
+        pop.remove();
+    },700);
+
+    comboEl.classList.remove("combo-active");
+
+    void comboEl.offsetWidth;
+
+    comboEl.classList.add("combo-active");
+    }
 
 
     /*
