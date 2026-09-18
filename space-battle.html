@@ -436,6 +436,26 @@ body{
         font-size:27px;
     }
 }
+
+.power-up{
+    position:absolute;
+    font-size:38px;
+    font-weight:bold;
+    z-index:7;
+    filter:drop-shadow(0 0 12px rgba(255,0,0,.8));
+    animation:powerPulse .6s infinite alternate;
+    user-select:none;
+}
+
+@keyframes powerPulse{
+    from{
+        transform:scale(1);
+    }
+    to{
+        transform:scale(1.18);
+    }
+}
+    
 </style>
 </head>
 
@@ -611,6 +631,8 @@ const startScreen = document.getElementById("startScreen");
 const resultScreen = document.getElementById("resultScreen");
 
 let score = 0;
+let powerUp = null;
+let powerUpTimer = 0;
 let combo = 0;
 let bestCombo = 0;
 let lives = 3;
@@ -697,6 +719,29 @@ function updateHUD(){
    CREATE ENEMY
 ========================= */
 
+function createPowerUp(){
+
+    if(powerUp !== null) return;
+
+    const item = document.createElement("div");
+    item.className = "power-up";
+    item.textContent = "❤️";
+
+    const x = Math.random() * (gameArea.clientWidth - 50);
+
+    item.style.left = x + "px";
+    item.style.top = "95px";
+
+    gameArea.appendChild(item);
+
+    powerUp = {
+        element: item,
+        x: x,
+        y: 95,
+        speed: 0.30
+    };
+    }
+    
 function createEnemy(){
 
     if(!gameRunning) return;
@@ -1017,7 +1062,13 @@ function gameLoop(){
 
     });
 
+powerUpTimer++;
 
+if(powerUpTimer >= 900){
+    createPowerUp();
+    powerUpTimer = 0;
+}
+    
     requestAnimationFrame(gameLoop);
 }
 
@@ -1159,6 +1210,8 @@ input.addEventListener("keydown", e => {
 
 function startGame(){
 
+    powerUpTimer = 0;
+    powerUp = null;
     score = 0;
     combo = 0;
     bestCombo = 0;
