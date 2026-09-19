@@ -441,6 +441,19 @@ body {
     border-bottom: 1px solid rgba(255,255,255,.70) !important;
 }
 
+.tm-nav-right {
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+}
+
+.tm-theme-btn {
+    width: 42px !important;
+    height: 42px !important;
+    margin: 0 !important;
+    flex: 0 0 42px !important;
+}
+    
 .tm-logo {
     color: #6366f1 !important;
 }
@@ -725,6 +738,25 @@ body.dark-mode .reset-btn {
     background: rgba(255,255,255,.06) !important;
     color: #cbd5e1 !important;
     }
+
+/* ===== BACK TO LESSONS ===== */
+
+.back-lessons {
+    display: inline-block;
+    margin-bottom: 14px;
+    color: #6366f1;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.back-lessons:hover {
+    color: #8b5cf6;
+}
+
+body.dark-mode .back-lessons {
+    color: #a5b4fc;
+}
     
 </style>
 </head>
@@ -785,7 +817,10 @@ body.dark-mode .reset-btn {
 
 <main class="container">
 
-
+<a href="learn.html" class="back-lessons">
+    ← Back to Lessons
+</a>
+    
 <div class="lesson-header">
 
 <div class="badge">
