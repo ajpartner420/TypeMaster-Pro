@@ -1,65 +1,111 @@
-(function(){
-    const KEY = "tm_theme";
+(function () {
 
-    function applyTheme(theme){
+    const THEME_KEY = "tm_theme";
+
+    function applyTheme(theme) {
+
         const dark = theme === "dark";
+
         document.body.classList.toggle("dark-mode", dark);
 
         const btn = document.getElementById("tmThemeBtn");
 
-        if(btn){
+        if (btn) {
+
             btn.textContent = dark ? "☀️" : "🌙";
+
             btn.title = dark
                 ? "Switch to Light Mode"
                 : "Switch to Dark Mode";
 
-            btn.setAttribute("aria-label", btn.title);
+            btn.setAttribute(
+                "aria-label",
+                btn.title
+            );
         }
     }
 
-    function savedTheme(){
-        const saved = localStorage.getItem(KEY);
 
-        if(saved === "dark" || saved === "light"){
+    function getSavedTheme() {
+
+        const saved =
+            localStorage.getItem(THEME_KEY);
+
+        if (
+            saved === "dark" ||
+            saved === "light"
+        ) {
             return saved;
         }
 
         return window.matchMedia &&
-               window.matchMedia("(prefers-color-scheme: dark)").matches
-               ? "dark"
-               : "light";
+            window.matchMedia(
+                "(prefers-color-scheme: dark)"
+            ).matches
+            ? "dark"
+            : "light";
     }
 
-    window.toggleTMTheme = function(){
+
+    window.toggleTMTheme = function () {
+
         const next =
             document.body.classList.contains("dark-mode")
-            ? "light"
-            : "dark";
+                ? "light"
+                : "dark";
 
-        localStorage.setItem(KEY, next);
+        localStorage.setItem(
+            THEME_KEY,
+            next
+        );
+
         applyTheme(next);
     };
 
-    document.addEventListener("DOMContentLoaded", function(){
 
-        applyTheme(savedTheme());
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
 
-        const current =
-            location.pathname.split("/").pop() || "index.html";
+            applyTheme(
+                getSavedTheme()
+            );
 
-        document.querySelectorAll(".tm-menu a").forEach(function(link){
 
-            const href = link.getAttribute("href") || "";
+            const currentPage =
+                location.pathname
+                    .split("/")
+                    .pop() ||
+                "index.html";
 
-            const page =
-                href.split("/").pop().split("?")[0];
 
-            if(page === current){
-                link.classList.add("active");
-            }
+            document
+                .querySelectorAll(
+                    ".tm-menu a"
+                )
+                .forEach(function (link) {
 
-        });
+                    const href =
+                        link.getAttribute("href") ||
+                        "";
 
-    });
+                    const page =
+                        href
+                            .split("/")
+                            .pop()
+                            .split("?")[0];
+
+                    if (
+                        page === currentPage
+                    ) {
+                        link.classList.add(
+                            "active"
+                        );
+                    }
+
+                });
+
+        }
+    );
 
 })();
