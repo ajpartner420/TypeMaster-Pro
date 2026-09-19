@@ -38,7 +38,7 @@ href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 
     --shadow:0 20px 60px rgba(15,23,42,.12);
 }
 
-body.dark{
+body.dark-mode{
     --bg:#080b16;
     --text:#f8fafc;
     --muted:#94a3b8;
@@ -378,7 +378,7 @@ textarea:disabled{
     overflow-x:auto;
 }
 
-body.dark .keyboard{
+body.dark-mode .keyboard{
     background:rgba(255,255,255,.04);
 }
 
@@ -751,7 +751,12 @@ footer{
 
 </div>
 
-<button class="icon-btn" onclick="toggleDark()" id="themeBtn">🌙</button>
+<button 
+    class="icon-btn" 
+    onclick="toggleTMTheme()" 
+    id="TmThemeBtn">
+    🌙
+</button>
 
 </div>
 
@@ -2296,43 +2301,6 @@ function resetTest(){
 
 
 /* =========================
-   DARK MODE
-========================= */
-
-function toggleDark(){
-
-    document.body.classList.toggle("dark");
-
-    const dark =
-        document.body.classList.contains("dark");
-
-    localStorage.setItem(
-        "darkMode",
-        dark ? "1" : "0"
-    );
-
-    document.getElementById("themeBtn")
-        .textContent =
-        dark ? "☀️" : "🌙";
-
-}
-
-
-if(
-    localStorage.getItem("darkMode")
-    ===
-    "1"
-){
-
-    document.body.classList.add("dark");
-
-    document.getElementById("themeBtn")
-        .textContent = "☀️";
-
-}
-
-
-/* =========================
    KEYBOARD VISUAL
 ========================= */
 
@@ -2524,6 +2492,8 @@ updateBestDisplay();
 
 
 </script>
-
+    
+<script src="theme.js"></script>
+    
 </body>
 </html>
