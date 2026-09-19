@@ -456,6 +456,21 @@ body{
     }
 }
     
+    .time-buster{
+        position:absolute;
+        font-size:38px;
+        font-weight:bold;
+        z-index:7;
+        filter:drop-shadow(0 0 14px rgba(80,180,255,.95));
+        animation:timePulse .55s infinite alternate;
+        user-select:none;
+    }
+
+    @keyframes timePulse{
+        from{ transform:scale(1); }
+        to{ transform:scale(1.2); }
+    }
+
 </style>
 </head>
 
@@ -633,6 +648,9 @@ const resultScreen = document.getElementById("resultScreen");
 let score = 0;
 let powerUp = null;
 let powerUpTimer = 0;
+
+let timeBuster = null;
+let timeBusterStage = 0;
 let combo = 0;
 let bestCombo = 0;
 let lives = 3;
@@ -742,6 +760,81 @@ function createPowerUp(){
     };
     }
     
+function createTimeBuster(stage){
+
+    if(timeBuster !== null) return;
+
+    const item = document.createElement("div");
+    item.className = "time-buster";
+    item.textContent = "⏱️";
+
+    const x = Math.random() * Math.max(20, game.clientWidth - 50);
+
+    item.style.left = x + "px";
+    item.style.top = "95px";
+
+    game.appendChild(item);
+
+    timeBuster = {
+        element: item,
+        x: x,
+        y: 95,
+        speed: 1.10,
+        stage: stage
+    };
+}
+
+
+function removeTimeBuster(){
+
+    if(timeBuster && timeBuster.element){
+        timeBuster.element.remove();
+    }
+
+    timeBuster = null;
+}
+
+
+function checkTimeBuster(){
+
+    if(!gameRunning) return;
+
+    if(time <= 25 && timeBusterStage === 0){
+        timeBusterStage = 1;
+        createTimeBuster(1);
+        return;
+    }
+
+    if(time <= 15 && timeBusterStage === 1){
+        removeTimeBuster();
+        timeBusterStage = 2;
+        createTimeBuster(2);
+        return;
+    }
+
+    if(time <= 5 && timeBusterStage === 2){
+        removeTimeBuster();
+        timeBusterStage = 3;
+        createTimeBuster(3);
+        return;
+    }
+}
+
+
+function collectTimeBuster(){
+
+    if(!timeBuster) return;
+
+    time = Math.min(time + 30, 60);
+
+    removeTimeBuster();
+
+    timeBusterStage = 0;
+
+    updateHUD();
+}
+
+
 function createEnemy(){
 
     if(!gameRunning) return;
@@ -1087,6 +1180,27 @@ if(powerUpTimer >= 900){
     powerUpTimer = 0;
 }
     
+    /* ⏱️ TIME BUSTER MOVEMENT */
+
+    if(timeBuster){
+
+        timeBuster.y += timeBuster.speed;
+
+        timeBuster.element.style.top =
+            timeBuster.y + "px";
+
+        if(timeBuster.y > bottomLimit){
+
+            removeTimeBuster();
+
+            if(timeBusterStage === 3){
+                timeBusterStage = 4;
+            }
+        }
+    }
+
+    checkTimeBuster();
+
     requestAnimationFrame(gameLoop);
 }
 
@@ -1151,6 +1265,15 @@ input.addEventListener("input", () => {
 
     const value =
         input.value.toLowerCase();
+
+    /* ⏱️ TIME BUSTER */
+
+    if(timeBuster && value === "time"){
+
+        collectTimeBuster();
+        input.value = "";
+        return;
+    }
 
     /* ❤️ EXTRA LIFE POWER-UP */
 
@@ -1247,7 +1370,14 @@ input.addEventListener("keydown", e => {
 function startGame(){
 
     powerUpTimer = 0;
+
+    if(powerUp && powerUp.element){
+        powerUp.element.remove();
+    }
     powerUp = null;
+
+    removeTimeBuster();
+    timeBusterStage = 0;
     score = 0;
     combo = 0;
     bestCombo = 0;
@@ -1306,6 +1436,8 @@ function startGame(){
             if(!gameRunning) return;
 
             time--;
+
+            checkTimeBuster();
 
             updateHUD();
 
@@ -1366,6 +1498,14 @@ function endGame(){
 
     clearInterval(timerInterval);
     clearInterval(spawnInterval);
+
+    if(powerUp && powerUp.element){
+        powerUp.element.remove();
+    }
+    powerUp = null;
+
+    removeTimeBuster();
+    timeBusterStage = 4;
 
 
     input.disabled = true;
