@@ -1,21 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Home Row Typing Lesson | TypeMaster Pro</title>
 
-<meta name="description" content="Learn home row typing with a free interactive typing lesson from TypeMaster Pro. Practice ASDF JKL and improve typing accuracy and speed.">
+<meta
+name="description"
+content="Learn home row typing with a free interactive typing lesson from TypeMaster Pro. Practice ASDF JKL and improve typing accuracy and speed."
+>
 
-<meta name="robots" content="index, follow">
+<meta
+name="robots"
+content="index, follow"
+>
 
-<link rel="canonical" href="https://ajpartner420.github.io/TypeMaster-Pro/lesson.html">
+<link
+rel="canonical"
+href="https://ajpartner420.github.io/TypeMaster-Pro/lesson.html"
+>
 
-<link rel="stylesheet" href="theme.css">
-<script src="theme.js" defer></script>
-    
+<link
+rel="stylesheet"
+href="theme.css"
+>
+
+<script
+src="theme.js"
+defer
+></script>
+
+
 <style>
+
+/* =========================================================
+   RESET
+========================================================= */
 
 *{
     box-sizing:border-box;
@@ -23,1353 +47,2054 @@
     padding:0;
 }
 
+
+/* =========================================================
+   BODY
+========================================================= */
+
 body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:#0b1020;
-    color:#fff;
+
+    font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
     min-height:100vh;
+
+    background:
+        radial-gradient(
+            circle at 15% 10%,
+            rgba(99,102,241,.10),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(124,58,237,.08),
+            transparent 30%
+        ),
+        #eef2ff;
+
+    color:#111827;
+
+    transition:
+        background .25s ease,
+        color .25s ease;
 }
 
-/* ================= HEADER ================= */
 
-.header{
-    height:64px;
-    border-bottom:1px solid rgba(255,255,255,.1);
-    background:#0e1528;
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+body.dark-mode{
+
+    background:
+        radial-gradient(
+            circle at 15% 10%,
+            rgba(99,102,241,.12),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(124,58,237,.10),
+            transparent 30%
+        ),
+        #080b16;
+
+    color:#f8fafc;
 }
 
-.nav{
+
+/* =========================================================
+   HEADER
+   SAME STRUCTURE AS INDEX PAGE
+========================================================= */
+
+header{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:50;
+
+    backdrop-filter:blur(18px);
+
+    -webkit-backdrop-filter:blur(18px);
+
+    background:rgba(255,255,255,.15);
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.70);
+}
+
+
+/* Main header container */
+
+header .nav{
+
+    width:100%;
+
     max-width:1200px;
-    height:100%;
-    margin:auto;
+
+    height:72px;
+
+    min-height:72px;
+
+    margin:0 auto;
+
     padding:0 20px;
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
+    gap:20px;
 }
+
+
+/* Logo */
 
 .logo{
-    text-decoration:none;
-    color:white;
-    font-size:22px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    color:#6366f1;
+
+    font-size:24px;
+
     font-weight:800;
-}
 
-.logo span{
-    color:#60a5fa;
-}
+    white-space:nowrap;
 
-.back{
-    color:#cbd5e1;
     text-decoration:none;
+}
+
+
+/* Right side */
+
+.nav-right{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:flex-end;
+
+    gap:10px;
+
+    min-width:0;
+
+    flex:1;
+}
+
+
+/* Navigation */
+
+.main-nav{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:flex-end;
+
+    gap:8px;
+
+    flex-wrap:wrap;
+}
+
+
+.main-nav a{
+
+    display:block;
+
+    text-decoration:none;
+
+    color:#111827;
+
+    font-weight:700;
+
     font-size:14px;
+
+    padding:9px 12px;
+
+    border-radius:10px;
+
+    transition:.2s;
+
+    white-space:nowrap;
 }
 
-.back:hover{
-    color:#fff;
+
+.main-nav a:hover{
+
+    color:#6366f1;
+
+    background:rgba(99,102,241,.12);
 }
 
-/* ================= PAGE ================= */
 
-.container{
+.main-nav a.active{
+
+    color:#6366f1;
+
+    background:rgba(99,102,241,.12);
+}
+
+
+/* Theme button */
+
+.icon-btn{
+
+    width:42px;
+
+    height:42px;
+
+    min-width:42px;
+
+    min-height:42px;
+
+    flex:0 0 42px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:14px;
+
+    border:
+        1px solid
+        rgba(99,102,241,.18);
+
+    background:
+        rgba(255,255,255,.62);
+
+    color:#111827;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+    padding:0;
+
+    margin:0;
+
+    transition:.2s;
+}
+
+
+.icon-btn:hover{
+
+    transform:translateY(-1px);
+
+    background:
+        rgba(255,255,255,.80);
+}
+
+
+/* =========================================================
+   DARK HEADER
+========================================================= */
+
+body.dark-mode header{
+
+    background:
+        rgba(8,11,22,.72);
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.10);
+}
+
+
+body.dark-mode .main-nav a{
+
+    color:#f8fafc;
+}
+
+
+body.dark-mode .main-nav a:hover,
+body.dark-mode .main-nav a.active{
+
+    color:#a5b4fc;
+
+    background:
+        rgba(99,102,241,.15);
+}
+
+
+body.dark-mode .icon-btn{
+
+    background:
+        rgba(15,23,42,.62);
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+
+    color:#f8fafc;
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+========================================================= */
+
+main.container{
+
     max-width:1100px;
-    margin:auto;
-    padding:35px 20px 60px;
+
+    margin:0 auto;
+
+    padding:
+        30px
+        20px
+        60px;
 }
+
+
+/* =========================================================
+   BACK TO LESSONS
+========================================================= */
+
+.back-lessons{
+
+    display:inline-block;
+
+    margin-bottom:16px;
+
+    color:#6366f1;
+
+    text-decoration:none;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    transition:.2s;
+}
+
+
+.back-lessons:hover{
+
+    color:#8b5cf6;
+}
+
+
+body.dark-mode .back-lessons{
+
+    color:#a5b4fc;
+}
+
+
+/* =========================================================
+   LESSON HEADER
+========================================================= */
 
 .lesson-header{
+
     text-align:center;
+
     margin-bottom:25px;
 }
 
+
 .badge{
+
     display:inline-block;
-    padding:6px 12px;
+
+    padding:
+        7px
+        13px;
+
     border-radius:20px;
-    background:rgba(96,165,250,.12);
-    color:#93c5fd;
+
+    background:
+        rgba(99,102,241,.10);
+
+    border:
+        1px solid
+        rgba(99,102,241,.20);
+
+    color:#6366f1;
+
     font-size:12px;
-    font-weight:bold;
+
+    font-weight:800;
+
     margin-bottom:12px;
 }
 
+
 .lesson-header h1{
-    font-size:34px;
-    margin-bottom:8px;
+
+    font-size:
+        clamp(
+            28px,
+            5vw,
+            38px
+        );
+
+    line-height:1.15;
+
+    margin-bottom:9px;
+
+    color:#111827;
 }
+
 
 .lesson-header p{
+
+    color:#64748b;
+
+    font-size:15px;
+
+    line-height:1.6;
+}
+
+
+body.dark-mode .lesson-header h1{
+
+    color:#f8fafc;
+}
+
+
+body.dark-mode .lesson-header p{
+
     color:#94a3b8;
 }
 
-/* ================= PROGRESS ================= */
+
+/* =========================================================
+   PROGRESS
+========================================================= */
 
 .progress-box{
-    margin-bottom:22px;
+
+    margin-bottom:20px;
 }
 
+
 .progress-info{
+
     display:flex;
+
     justify-content:space-between;
-    color:#94a3b8;
+
+    color:#64748b;
+
     font-size:13px;
+
     margin-bottom:7px;
 }
 
+
 .progress-bar{
+
     width:100%;
-    height:8px;
-    background:rgba(255,255,255,.08);
+
+    height:9px;
+
+    background:
+        rgba(99,102,241,.10);
+
     border-radius:20px;
+
     overflow:hidden;
 }
 
+
 .progress-fill{
+
     width:0%;
+
     height:100%;
-    background:#3b82f6;
-    transition:.25s;
+
+    background:
+        linear-gradient(
+            90deg,
+            #6366f1,
+            #8b5cf6
+        );
+
+    border-radius:inherit;
+
+    transition:
+        width .25s ease;
 }
 
-/* ================= STATS ================= */
+
+body.dark-mode .progress-info{
+
+    color:#94a3b8;
+}
+
+
+body.dark-mode .progress-bar{
+
+    background:
+        rgba(255,255,255,.08);
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
 
 .stats{
+
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+
+    grid-template-columns:
+        repeat(4,1fr);
+
     gap:12px;
+
     margin-bottom:20px;
 }
 
+
 .stat{
-    background:#111a30;
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:12px;
-    padding:15px;
+
+    background:
+        rgba(255,255,255,.62);
+
+    border:
+        1px solid
+        rgba(255,255,255,.70);
+
+    border-radius:15px;
+
+    padding:17px;
+
     text-align:center;
+
+    box-shadow:
+        0 20px 60px
+        rgba(15,23,42,.12);
+
+    backdrop-filter:blur(14px);
+
+    -webkit-backdrop-filter:blur(14px);
 }
 
+
 .stat-label{
-    color:#94a3b8;
+
+    color:#64748b;
+
     font-size:12px;
+
+    font-weight:700;
+
     margin-bottom:7px;
 }
 
+
 .stat-value{
-    font-size:24px;
-    font-weight:bold;
+
+    color:#111827;
+
+    font-size:25px;
+
+    font-weight:800;
 }
 
-/* ================= TYPING AREA ================= */
+
+body.dark-mode .stat{
+
+    background:
+        rgba(15,23,42,.62);
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+
+    box-shadow:
+        0 20px 60px
+        rgba(0,0,0,.35);
+}
+
+
+body.dark-mode .stat-label{
+
+    color:#94a3b8;
+}
+
+
+body.dark-mode .stat-value{
+
+    color:#f8fafc;
+}
+
+
+/* =========================================================
+   TYPING CARD
+========================================================= */
 
 .typing-card{
-    background:#111a30;
-    border:1px solid rgba(255,255,255,.09);
-    border-radius:16px;
+
+    background:
+        rgba(255,255,255,.62);
+
+    border:
+        1px solid
+        rgba(255,255,255,.70);
+
+    border-radius:18px;
+
     padding:25px;
+
+    box-shadow:
+        0 20px 60px
+        rgba(15,23,42,.12);
+
+    backdrop-filter:blur(14px);
+
+    -webkit-backdrop-filter:blur(14px);
 }
 
+
+body.dark-mode .typing-card{
+
+    background:
+        rgba(15,23,42,.62);
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+
+    box-shadow:
+        0 20px 60px
+        rgba(0,0,0,.35);
+}
+
+
+/* =========================================================
+   INSTRUCTION
+========================================================= */
+
 .instruction{
+
     text-align:center;
-    color:#94a3b8;
+
+    color:#64748b;
+
     font-size:14px;
+
     margin-bottom:18px;
 }
 
-.text-display{
-    min-height:130px;
-    padding:22px;
-    border-radius:12px;
-    background:#080d1b;
-    border:1px solid rgba(255,255,255,.08);
-    font-size:24px;
-    line-height:1.8;
-    letter-spacing:1px;
-    margin-bottom:20px;
-    word-wrap:break-word;
+
+body.dark-mode .instruction{
+
+    color:#94a3b8;
 }
+
+
+/* =========================================================
+   TEXT DISPLAY
+========================================================= */
+
+.text-display{
+
+    min-height:130px;
+
+    padding:22px;
+
+    border-radius:12px;
+
+    background:
+        rgba(255,255,255,.55);
+
+    border:
+        1px solid
+        rgba(99,102,241,.12);
+
+    font-size:24px;
+
+    line-height:1.8;
+
+    letter-spacing:1px;
+
+    margin-bottom:20px;
+
+    word-wrap:break-word;
+
+    overflow-wrap:break-word;
+}
+
 
 .char{
-    color:#64748b;
+
+    color:#94a3b8;
 }
 
+
 .char.current{
-    color:#fff;
-    background:rgba(59,130,246,.35);
+
+    color:#111827;
+
+    background:
+        rgba(99,102,241,.18);
+
     border-radius:3px;
 }
 
+
 .char.correct{
-    color:#4ade80;
+
+    color:#16a34a;
 }
+
 
 .char.wrong{
-    color:#f87171;
-    background:rgba(248,113,113,.12);
+
+    color:#ef4444;
+
+    background:
+        rgba(239,68,68,.10);
+
+    border-radius:2px;
 }
 
-/* ================= INPUT ================= */
+
+body.dark-mode .text-display{
+
+    background:
+        rgba(8,11,22,.65);
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+}
+
+
+body.dark-mode .char{
+
+    color:#94a3b8;
+}
+
+
+body.dark-mode .char.current{
+
+    color:#f8fafc;
+
+    background:
+        rgba(99,102,241,.25);
+}
+
+
+/* =========================================================
+   INPUT
+========================================================= */
 
 #typingInput{
+
     width:100%;
+
     min-height:110px;
-    resize:none;
+
+    resize:vertical;
+
     padding:17px;
+
     border-radius:11px;
-    border:1px solid rgba(255,255,255,.12);
-    background:#080d1b;
-    color:white;
+
+    border:
+        1px solid
+        rgba(99,102,241,.15);
+
+    background:
+        rgba(255,255,255,.55);
+
+    color:#111827;
+
     font-size:18px;
+
+    line-height:1.5;
+
     outline:none;
+
+    font-family:inherit;
+
+    transition:.2s;
 }
+
 
 #typingInput:focus{
-    border-color:#3b82f6;
+
+    border-color:#6366f1;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(99,102,241,.10);
 }
+
 
 #typingInput:disabled{
-    opacity:.5;
+
+    opacity:.60;
+
+    cursor:not-allowed;
 }
 
-/* ================= CONTROLS ================= */
+
+body.dark-mode #typingInput{
+
+    background:
+        rgba(8,11,22,.65);
+
+    color:#f8fafc;
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+}
+
+
+/* =========================================================
+   CONTROLS
+========================================================= */
 
 .controls{
+
     display:flex;
+
     justify-content:center;
+
     gap:10px;
+
     margin-top:18px;
+
+    flex-wrap:wrap;
 }
+
 
 button{
+
     border:none;
+
     cursor:pointer;
-    border-radius:9px;
-    padding:11px 20px;
-    font-weight:bold;
+
+    border-radius:10px;
+
+    padding:
+        11px
+        20px;
+
+    font-weight:700;
+
     font-size:14px;
+
+    font-family:inherit;
 }
+
 
 .start-btn{
-    background:#2563eb;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6366f1,
+            #8b5cf6
+        );
+
     color:#fff;
+
+    box-shadow:
+        0 8px 20px
+        rgba(99,102,241,.18);
+
+    transition:.2s;
 }
+
 
 .start-btn:hover{
-    background:#3b82f6;
+
+    transform:translateY(-1px);
+
+    opacity:.92;
 }
+
 
 .reset-btn{
-    background:#1e293b;
-    color:#cbd5e1;
+
+    background:
+        rgba(255,255,255,.70);
+
+    color:#475569;
+
+    border:
+        1px solid
+        rgba(99,102,241,.15);
+
+    transition:.2s;
 }
+
 
 .reset-btn:hover{
-    background:#334155;
+
+    background:
+        rgba(99,102,241,.10);
 }
 
-/* ================= KEYBOARD ================= */
+
+body.dark-mode .reset-btn{
+
+    background:
+        rgba(255,255,255,.06);
+
+    color:#cbd5e1;
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+}
+
+
+/* =========================================================
+   KEYBOARD
+========================================================= */
 
 .keyboard-title{
+
     text-align:center;
-    color:#94a3b8;
-    margin:28px 0 12px;
+
+    color:#64748b;
+
+    margin:
+        28px
+        0
+        12px;
+
     font-size:14px;
+
+    font-weight:600;
 }
+
 
 .keyboard{
-    background:#080d1b;
-    border:1px solid rgba(255,255,255,.08);
+
+    background:
+        rgba(255,255,255,.45);
+
+    border:
+        1px solid
+        rgba(255,255,255,.70);
+
     border-radius:14px;
+
     padding:15px;
+
     overflow-x:auto;
+
+    backdrop-filter:blur(10px);
 }
+
 
 .key-row{
+
     display:flex;
+
     justify-content:center;
+
     gap:6px;
+
     margin-bottom:6px;
+
+    min-width:max-content;
 }
+
 
 .key{
+
     min-width:42px;
+
     height:42px;
-    border-radius:7px;
-    background:#1a2439;
-    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:8px;
+
+    background:
+        rgba(255,255,255,.70);
+
+    border:
+        1px solid
+        rgba(99,102,241,.12);
+
     display:flex;
+
     justify-content:center;
+
     align-items:center;
-    color:#cbd5e1;
-    font-weight:bold;
+
+    color:#334155;
+
+    font-weight:700;
+
     font-size:13px;
-    transition:.1s;
+
+    transition:
+        .1s;
 }
+
 
 .key.active{
-    background:#2563eb;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6366f1,
+            #8b5cf6
+        );
+
     color:#fff;
-    transform:translateY(-2px);
+
+    transform:
+        translateY(-2px);
 }
 
-.key.wide{
-    min-width:70px;
-}
 
 .key.space{
+
     min-width:280px;
 }
 
-/* ================= FINGERS ================= */
+
+body.dark-mode .keyboard-title{
+
+    color:#94a3b8;
+}
+
+
+body.dark-mode .keyboard{
+
+    background:
+        rgba(15,23,42,.50);
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+}
+
+
+body.dark-mode .key{
+
+    background:
+        rgba(255,255,255,.06);
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    color:#cbd5e1;
+}
+
+
+/* =========================================================
+   FINGER INFO
+========================================================= */
 
 .finger-info{
+
     margin-top:20px;
+
     padding:16px;
-    background:rgba(96,165,250,.06);
-    border:1px solid rgba(96,165,250,.12);
+
+    background:
+        rgba(99,102,241,.06);
+
+    border:
+        1px solid
+        rgba(99,102,241,.15);
+
     border-radius:10px;
+
     text-align:center;
-    color:#94a3b8;
+
+    color:#64748b;
+
     font-size:13px;
+
+    line-height:1.6;
 }
+
 
 .finger-info strong{
-    color:#fff;
+
+    color:#111827;
 }
 
-/* ================= RESULT ================= */
+
+body.dark-mode .finger-info{
+
+    color:#94a3b8;
+}
+
+
+body.dark-mode .finger-info strong{
+
+    color:#f8fafc;
+}
+
+
+/* =========================================================
+   RESULT
+========================================================= */
 
 .result{
+
     display:none;
+
     margin-top:22px;
+
     padding:25px;
-    border-radius:15px;
-    background:#111a30;
-    border:1px solid rgba(255,255,255,.1);
+
+    border-radius:16px;
+
+    background:
+        rgba(255,255,255,.62);
+
+    border:
+        1px solid
+        rgba(255,255,255,.70);
+
+    box-shadow:
+        0 20px 60px
+        rgba(15,23,42,.12);
+
     text-align:center;
+
+    backdrop-filter:blur(14px);
 }
+
 
 .result h2{
+
     margin-bottom:20px;
+
+    color:#111827;
 }
+
 
 .result-grid{
+
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+
+    grid-template-columns:
+        repeat(3,1fr);
+
     gap:12px;
+
     margin-bottom:20px;
 }
 
+
 .result-item{
-    background:#080d1b;
+
+    background:
+        rgba(255,255,255,.55);
+
     padding:15px;
+
     border-radius:10px;
 }
 
+
 .result-item span{
+
     display:block;
-    color:#94a3b8;
+
+    color:#64748b;
+
     font-size:12px;
+
     margin-bottom:5px;
 }
 
+
 .result-item strong{
+
+    color:#111827;
+
     font-size:22px;
 }
 
-/* ================= MOBILE ================= */
+
+body.dark-mode .result{
+
+    background:
+        rgba(15,23,42,.62);
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+
+    box-shadow:
+        0 20px 60px
+        rgba(0,0,0,.35);
+}
+
+
+body.dark-mode .result h2{
+
+    color:#f8fafc;
+}
+
+
+body.dark-mode .result-item{
+
+    background:
+        rgba(8,11,22,.65);
+}
+
+
+body.dark-mode .result-item span{
+
+    color:#94a3b8;
+}
+
+
+body.dark-mode .result-item strong{
+
+    color:#f8fafc;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:900px){
+
+    header .nav{
+
+        height:62px;
+
+        min-height:62px;
+
+        padding:
+            8px
+            12px;
+    }
+
+
+    .logo{
+
+        font-size:19px;
+    }
+
+
+    .nav-right{
+
+        gap:8px;
+    }
+
+
+    .main-nav{
+
+        max-width:68vw;
+
+        flex-wrap:nowrap;
+
+        overflow-x:auto;
+
+        scrollbar-width:none;
+    }
+
+
+    .main-nav::-webkit-scrollbar{
+
+        display:none;
+    }
+
+
+    .main-nav a{
+
+        white-space:nowrap;
+    }
+
+}
+
 
 @media(max-width:700px){
 
-    .container{
-        padding:25px 12px 40px;
+    main.container{
+
+        padding:
+            25px
+            12px
+            45px;
     }
 
-    .lesson-header h1{
-        font-size:27px;
+
+    .logo span{
+
+        display:none;
     }
+
+
+    .main-nav{
+
+        max-width:62vw;
+    }
+
+
+    .main-nav a{
+
+        padding:
+            8px;
+
+        font-size:13px;
+    }
+
 
     .stats{
-        grid-template-columns:repeat(2,1fr);
+
+        grid-template-columns:
+            repeat(2,1fr);
     }
 
+
+    .stat{
+
+        padding:15px;
+    }
+
+
     .stat-value{
+
         font-size:21px;
     }
 
+
     .typing-card{
+
         padding:15px;
     }
+
 
     .text-display{
+
         font-size:19px;
+
+        line-height:1.7;
+
         padding:15px;
+
+        min-height:110px;
     }
 
+
+    #typingInput{
+
+        font-size:16px;
+
+        min-height:100px;
+    }
+
+
     .key{
+
         min-width:34px;
+
         height:38px;
+
         font-size:11px;
     }
 
+
     .key.space{
+
         min-width:180px;
     }
 
+
     .result-grid{
-        grid-template-columns:1fr 1fr;
-    }
-}
 
-/* ==========================================
-   TYPEMASTER PRO - LESSON THEME
-   MATCH INDEX + LEARN
-========================================== */
-
-body {
-    background:
-        radial-gradient(circle at 15% 10%, rgba(99,102,241,.10), transparent 30%),
-        radial-gradient(circle at 85% 20%, rgba(124,58,237,.08), transparent 30%),
-        #eef2ff !important;
-
-    color: #111827 !important;
-}
-
-
-/* ===== HEADER ===== */
-
-.tm-header {
-    background: rgba(255,255,255,.55) !important;
-    border-bottom: 1px solid rgba(255,255,255,.70) !important;
-}
-
-.tm-nav-right {
-    display: flex !important;
-    align-items: center !important;
-    gap: 4px !important;
-}
-    
-.tm-logo {
-    color: #6366f1 !important;
-}
-    
-body.dark-mode .tm-header {
-    background: rgba(8,11,22,.72) !important;
-    border-bottom: 1px solid rgba(255,255,255,.10) !important;
-}
-
-
-/* ===== LESSON HEADER ===== */
-
-.lesson-header h1 {
-    color: #111827 !important;
-}
-
-.lesson-header p {
-    color: #64748b !important;
-}
-
-.badge {
-    background: rgba(99,102,241,.10) !important;
-    border: 1px solid rgba(99,102,241,.20) !important;
-    color: #6366f1 !important;
-}
-
-
-/* ===== PROGRESS ===== */
-
-.progress-info {
-    color: #64748b !important;
-}
-
-.progress-bar {
-    background: rgba(99,102,241,.10) !important;
-}
-
-.progress-fill {
-    background: linear-gradient(
-        90deg,
-        #6366f1,
-        #8b5cf6
-    ) !important;
-}
-
-
-/* ===== STATS ===== */
-
-.stat {
-    background: rgba(255,255,255,.62) !important;
-    border: 1px solid rgba(255,255,255,.70) !important;
-    box-shadow: 0 20px 60px rgba(15,23,42,.12) !important;
-    backdrop-filter: blur(14px) !important;
-    -webkit-backdrop-filter: blur(14px) !important;
-}
-
-.stat-label {
-    color: #64748b !important;
-}
-
-.stat-value {
-    color: #111827 !important;
-}
-
-
-/* ===== TYPING CARD ===== */
-
-.typing-card {
-    background: rgba(255,255,255,.62) !important;
-    border: 1px solid rgba(255,255,255,.70) !important;
-    box-shadow: 0 20px 60px rgba(15,23,42,.12) !important;
-    backdrop-filter: blur(14px) !important;
-    -webkit-backdrop-filter: blur(14px) !important;
-}
-
-.instruction {
-    color: #64748b !important;
-}
-
-
-/* ===== TEXT DISPLAY ===== */
-
-.text-display {
-    background: rgba(255,255,255,.55) !important;
-    border: 1px solid rgba(99,102,241,.12) !important;
-}
-
-.char {
-    color: #94a3b8 !important;
-}
-
-.char.current {
-    color: #111827 !important;
-    background: rgba(99,102,241,.18) !important;
-}
-
-.char.correct {
-    color: #16a34a !important;
-}
-
-.char.wrong {
-    color: #ef4444 !important;
-    background: rgba(239,68,68,.10) !important;
-}
-
-
-/* ===== INPUT ===== */
-
-#typingInput {
-    background: rgba(255,255,255,.55) !important;
-    color: #111827 !important;
-    border: 1px solid rgba(99,102,241,.15) !important;
-}
-
-#typingInput:focus {
-    border-color: #6366f1 !important;
-}
-
-
-/* ===== BUTTONS ===== */
-
-.start-btn {
-    background: linear-gradient(
-        135deg,
-        #6366f1,
-        #8b5cf6
-    ) !important;
-
-    color: #fff !important;
-}
-
-.start-btn:hover {
-    opacity: .92 !important;
-}
-
-.reset-btn {
-    background: rgba(255,255,255,.70) !important;
-    color: #475569 !important;
-    border: 1px solid rgba(99,102,241,.15) !important;
-}
-
-.reset-btn:hover {
-    background: rgba(99,102,241,.10) !important;
-}
-
-
-/* ===== KEYBOARD ===== */
-
-.keyboard-title {
-    color: #64748b !important;
-}
-
-.keyboard {
-    background: rgba(255,255,255,.45) !important;
-    border: 1px solid rgba(255,255,255,.70) !important;
-}
-
-.key {
-    background: rgba(255,255,255,.70) !important;
-    border: 1px solid rgba(99,102,241,.12) !important;
-    color: #334155 !important;
-}
-
-.key.active {
-    background: linear-gradient(
-        135deg,
-        #6366f1,
-        #8b5cf6
-    ) !important;
-
-    color: #fff !important;
-}
-
-
-/* ===== FINGER INFO ===== */
-
-.finger-info {
-    background: rgba(99,102,241,.06) !important;
-    border: 1px solid rgba(99,102,241,.15) !important;
-    color: #64748b !important;
-}
-
-.finger-info strong {
-    color: #111827 !important;
-}
-
-
-/* ===== RESULT ===== */
-
-.result {
-    background: rgba(255,255,255,.62) !important;
-    border: 1px solid rgba(255,255,255,.70) !important;
-    box-shadow: 0 20px 60px rgba(15,23,42,.12) !important;
-}
-
-.result-item {
-    background: rgba(255,255,255,.55) !important;
-}
-
-.result-item span {
-    color: #64748b !important;
-}
-
-.result-item strong {
-    color: #111827 !important;
-}
-
-
-/* ==========================================
-   DARK MODE
-========================================== */
-
-body.dark-mode {
-    background:
-        radial-gradient(circle at 15% 10%, rgba(99,102,241,.12), transparent 30%),
-        radial-gradient(circle at 85% 20%, rgba(124,58,237,.10), transparent 30%),
-        #080b16 !important;
-
-    color: #f8fafc !important;
-}
-
-
-body.dark-mode .lesson-header h1,
-body.dark-mode .stat-value,
-body.dark-mode .finger-info strong,
-body.dark-mode .result-item strong {
-    color: #f8fafc !important;
-}
-
-
-body.dark-mode .lesson-header p,
-body.dark-mode .progress-info,
-body.dark-mode .instruction,
-body.dark-mode .keyboard-title,
-body.dark-mode .stat-label,
-body.dark-mode .finger-info,
-body.dark-mode .result-item span {
-    color: #94a3b8 !important;
-}
-
-
-body.dark-mode .stat,
-body.dark-mode .typing-card,
-body.dark-mode .result {
-    background: rgba(15,23,42,.62) !important;
-    border: 1px solid rgba(255,255,255,.10) !important;
-    box-shadow: 0 20px 60px rgba(0,0,0,.35) !important;
-}
-
-
-body.dark-mode .text-display,
-body.dark-mode #typingInput {
-    background: rgba(8,11,22,.65) !important;
-    color: #f8fafc !important;
-}
-
-
-body.dark-mode .char {
-    color: #94a3b8 !important;
-}
-
-body.dark-mode .char.current {
-    color: #f8fafc !important;
-    background: rgba(99,102,241,.25) !important;
-}
-
-
-body.dark-mode .keyboard {
-    background: rgba(15,23,42,.50) !important;
-    border-color: rgba(255,255,255,.10) !important;
-}
-
-
-body.dark-mode .key {
-    background: rgba(255,255,255,.06) !important;
-    border-color: rgba(255,255,255,.08) !important;
-    color: #cbd5e1 !important;
-}
-
-
-body.dark-mode .reset-btn {
-    background: rgba(255,255,255,.06) !important;
-    color: #cbd5e1 !important;
+        grid-template-columns:
+            1fr 1fr;
     }
 
-/* ===== BACK TO LESSONS ===== */
-
-.back-lessons {
-    display: inline-block;
-    margin-bottom: 14px;
-    color: #6366f1;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 700;
 }
 
-.back-lessons:hover {
-    color: #8b5cf6;
-}
 
-body.dark-mode .back-lessons {
-    color: #a5b4fc;
-}
-
-/* ===== EXACT INDEX HEADER MATCH ===== */
-
-.tm-nav {
-    max-width: 1180px !important;
-    min-height: 72px !important;
-    padding: 0 !important;
-    gap: 0 !important;
-}
-
-.tm-nav-right {
-    display: flex !important;
-    align-items: center !important;
-    gap: 10px !important;
-}
-
-.tm-menu {
-    display: flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-}
-
-.tm-menu a {
-    padding: 9px 12px !important;
-}
-
-.tm-theme-btn {
-    width: 42px !important;
-    height: 42px !important;
-    margin: 0 !important;
-    flex: 0 0 42px !important;
-}
-    
-
-/* ==========================================
-   FINAL HEADER FIX - MATCH INDEX EXACTLY
-   ========================================== */
-
-header{
-    position:sticky !important;
-    top:0 !important;
-    z-index:50 !important;
-    backdrop-filter:blur(18px) !important;
-    -webkit-backdrop-filter:blur(18px) !important;
-    background:rgba(255,255,255,.15) !important;
-    border-bottom:1px solid var(--border) !important;
-}
-
-.nav{
-    width:100% !important;
-    max-width:1200px !important;
-    height:72px !important;
-    min-height:72px !important;
-    margin:0 auto !important;
-    padding:0 20px !important;
-    display:flex !important;
-    align-items:center !important;
-    justify-content:space-between !important;
-    gap:20px !important;
-}
-
-.logo{
-    display:flex !important;
-    align-items:center !important;
-    gap:8px !important;
-    color:#6366f1 !important;
-    font-size:24px !important;
-    font-weight:800 !important;
-    white-space:nowrap !important;
-    text-decoration:none !important;
-}
-
-.logo span{
-    color:#6366f1 !important;
-}
-
-.nav-right{
-    display:flex !important;
-    align-items:center !important;
-    justify-content:flex-end !important;
-    gap:10px !important;
-    min-width:0 !important;
-    flex:1 !important;
-}
-
-.main-nav{
-    display:flex !important;
-    align-items:center !important;
-    gap:8px !important;
-    flex-wrap:wrap !important;
-    justify-content:flex-end !important;
-}
-
-.main-nav a{
-    display:block !important;
-    text-decoration:none !important;
-    color:var(--text) !important;
-    font-weight:700 !important;
-    font-size:14px !important;
-    padding:9px 12px !important;
-    border-radius:10px !important;
-    transition:.2s !important;
-    white-space:nowrap !important;
-}
-
-.main-nav a:hover,
-.main-nav a.active{
-    background:var(--card) !important;
-}
-
-.icon-btn{
-    width:42px !important;
-    height:42px !important;
-    min-width:42px !important;
-    min-height:42px !important;
-    flex:0 0 42px !important;
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    border-radius:14px !important;
-    border:1px solid var(--border) !important;
-    background:var(--card) !important;
-    color:var(--text) !important;
-    cursor:pointer !important;
-    font-size:18px !important;
-    padding:0 !important;
-    margin:0 !important;
-}
-
-body.dark-mode header{
-    background:rgba(8,11,22,.72) !important;
-    border-bottom:1px solid rgba(255,255,255,.10) !important;
-}
-
-@media(max-width:900px){
-    .nav{
-        height:62px !important;
-        min-height:62px !important;
-        padding:8px 12px !important;
-    }
-
-    .logo{
-        font-size:19px !important;
-    }
-
-    .nav-right{
-        gap:8px !important;
-    }
+@media(max-width:420px){
 
     .main-nav{
-        max-width:68vw !important;
-        flex-wrap:nowrap !important;
-        overflow-x:auto !important;
-        scrollbar-width:none !important;
+
+        max-width:58vw;
     }
 
-    .main-nav::-webkit-scrollbar{
-        display:none !important;
-    }
 
     .main-nav a{
-        white-space:nowrap !important;
-    }
-}
 
-@media(max-width:700px){
-    .nav{
-        padding:8px 10px !important;
+        padding:
+            7px;
+
+        font-size:12px;
     }
 
-    .logo span{
-        display:none !important;
+
+    .icon-btn{
+
+        width:40px;
+
+        height:40px;
+
+        min-width:40px;
+
+        flex-basis:40px;
     }
 
-    .main-nav{
-        max-width:62vw !important;
-    }
-
-    .main-nav a{
-        padding:8px 8px !important;
-        font-size:13px !important;
-    }
 }
 
 </style>
+
 </head>
+
 
 <body>
 
-<!-- ================= HEADER ================= -->
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
 
 <header>
-    <div class="container nav">
 
-        <div class="logo">
-            ⌨️ <span>TypeMaster Pro</span>
-        </div>
+    <div class="nav">
+
+        <a
+            href="index.html"
+            class="logo"
+        >
+            ⌨️ TypeMaster Pro
+        </a>
+
 
         <div class="nav-right">
 
-            <div class="main-nav">
-                <a href="index.html">⌨️ Test</a>
-                <a href="learn.html">📚 Learn</a>
-                <a href="games.html">🎮 Games</a>
-                <a href="achievements.html">🏆 Achievements</a>
-                <a href="certificate.html">📜 Certificate</a>
-                <a href="typing-speed-test.html">⚡ Speed Test</a>
-            </div>
+            <nav class="main-nav">
+
+                <a href="index.html">
+                    ⌨️ Test
+                </a>
+
+                <a href="learn.html">
+                    📚 Learn
+                </a>
+
+                <a href="games.html">
+                    🎮 Games
+                </a>
+
+                <a href="achievements.html">
+                    🏆 Achievements
+                </a>
+
+                <a href="certificate.html">
+                    📜 Certificate
+                </a>
+
+                <a href="typing-speed-test.html">
+                    ⚡ Speed Test
+                </a>
+
+            </nav>
+
 
             <button
                 class="icon-btn"
+                id="tmThemeBtn"
                 onclick="toggleTMTheme()"
-                id="tmThemeBtn">
+                aria-label="Switch to Dark Mode"
+                title="Switch to Dark Mode"
+            >
                 🌙
             </button>
 
         </div>
 
     </div>
+
 </header>
 
-<!-- ================= MAIN ================= -->
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
 
 <main class="container">
 
-<a href="learn.html" class="back-lessons">
-    ← Back to Lessons
-</a>
-    
-<div class="lesson-header">
 
-<div class="badge">
-LESSON 1 · BEGINNER
-</div>
+    <a
+        href="learn.html"
+        class="back-lessons"
+    >
+        ← Back to Lessons
+    </a>
 
-<h1>
-Home Row Basics
-</h1>
 
-<p>
-Learn the correct finger position and practice the home row.
-</p>
+    <!-- =====================================================
+         LESSON HEADER
+    ====================================================== -->
 
-</div>
+    <div class="lesson-header">
 
+        <div
+            class="badge"
+            id="lessonBadge"
+        >
+            LESSON 1 · BEGINNER
+        </div>
 
-<!-- PROGRESS -->
 
-<div class="progress-box">
+        <h1 id="lessonTitle">
+            Home Row Basics
+        </h1>
 
-<div class="progress-info">
 
-<span>Lesson Progress</span>
+        <p id="lessonDescription">
+            Learn the correct finger position and practice the home row.
+        </p>
 
-<span id="progressText">
-0%
-</span>
+    </div>
 
-</div>
 
-<div class="progress-bar">
+    <!-- =====================================================
+         PROGRESS
+    ====================================================== -->
 
-<div
-class="progress-fill"
-id="progressFill">
-</div>
+    <div class="progress-box">
 
-</div>
+        <div class="progress-info">
 
-</div>
+            <span>
+                Lesson Progress
+            </span>
 
+            <span id="progressText">
+                0%
+            </span>
 
-<!-- STATS -->
+        </div>
 
-<div class="stats">
 
-<div class="stat">
+        <div class="progress-bar">
 
-<div class="stat-label">
-TIME
-</div>
+            <div
+                class="progress-fill"
+                id="progressFill"
+            ></div>
 
-<div class="stat-value" id="time">
-0:00
-</div>
+        </div>
 
-</div>
+    </div>
 
 
-<div class="stat">
+    <!-- =====================================================
+         STATS
+    ====================================================== -->
 
-<div class="stat-label">
-WPM
-</div>
+    <div class="stats">
 
-<div class="stat-value" id="wpm">
-0
-</div>
 
-</div>
+        <div class="stat">
 
+            <div class="stat-label">
+                TIME
+            </div>
 
-<div class="stat">
+            <div
+                class="stat-value"
+                id="time"
+            >
+                0:00
+            </div>
 
-<div class="stat-label">
-ACCURACY
-</div>
+        </div>
 
-<div class="stat-value" id="accuracy">
-100%
-</div>
 
-</div>
+        <div class="stat">
 
+            <div class="stat-label">
+                WPM
+            </div>
 
-<div class="stat">
+            <div
+                class="stat-value"
+                id="wpm"
+            >
+                0
+            </div>
 
-<div class="stat-label">
-ERRORS
-</div>
+        </div>
 
-<div class="stat-value" id="errors">
-0
-</div>
 
-</div>
+        <div class="stat">
 
-</div>
+            <div class="stat-label">
+                ACCURACY
+            </div>
 
+            <div
+                class="stat-value"
+                id="accuracy"
+            >
+                100%
+            </div>
 
-<!-- TYPING CARD -->
+        </div>
 
-<div class="typing-card">
 
-<div class="instruction">
-Press <strong>Start Lesson</strong> and type the text below.
-</div>
+        <div class="stat">
 
+            <div class="stat-label">
+                ERRORS
+            </div>
 
-<div
-class="text-display"
-id="textDisplay">
-</div>
+            <div
+                class="stat-value"
+                id="errors"
+            >
+                0
+            </div>
 
+        </div>
 
-<textarea
-id="typingInput"
-placeholder="Click Start Lesson and begin typing..."
-disabled
-spellcheck="false"
-autocomplete="off"
-autocorrect="off"
-autocapitalize="off"></textarea>
 
+    </div>
 
-<div class="controls">
 
-<button
-class="start-btn"
-id="startBtn"
-onclick="startLesson()">
-Start Lesson
-</button>
+    <!-- =====================================================
+         TYPING CARD
+    ====================================================== -->
 
-<button
-class="reset-btn"
-onclick="resetLesson()">
-Reset
-</button>
+    <div class="typing-card">
 
-</div>
 
+        <div class="instruction">
 
-<!-- KEYBOARD -->
+            Press
+            <strong>Start Lesson</strong>
+            and type the text below.
 
-<div class="keyboard-title">
-Keyboard Guide
-</div>
+        </div>
 
-<div class="keyboard">
 
-<div class="key-row">
+        <div
+            class="text-display"
+            id="textDisplay"
+        ></div>
 
-<div class="key">Q</div>
-<div class="key">W</div>
-<div class="key">E</div>
-<div class="key">R</div>
-<div class="key">T</div>
-<div class="key">Y</div>
-<div class="key">U</div>
-<div class="key">I</div>
-<div class="key">O</div>
-<div class="key">P</div>
 
-</div>
+        <textarea
+            id="typingInput"
+            placeholder="Click Start Lesson and begin typing..."
+            disabled
+            spellcheck="false"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+        ></textarea>
 
 
-<div class="key-row">
+        <div class="controls">
 
-<div class="key">A</div>
-<div class="key">S</div>
-<div class="key">D</div>
-<div class="key">F</div>
-<div class="key">G</div>
-<div class="key">H</div>
-<div class="key">J</div>
-<div class="key">K</div>
-<div class="key">L</div>
+            <button
+                class="start-btn"
+                id="startBtn"
+                onclick="startLesson()"
+            >
+                Start Lesson
+            </button>
 
-</div>
 
+            <button
+                class="reset-btn"
+                onclick="resetLesson()"
+            >
+                Reset
+            </button>
 
-<div class="key-row">
+        </div>
 
-<div class="key">Z</div>
-<div class="key">X</div>
-<div class="key">C</div>
-<div class="key">V</div>
-<div class="key">B</div>
-<div class="key">N</div>
-<div class="key">M</div>
 
-</div>
+        <!-- =================================================
+             KEYBOARD
+        ================================================== -->
 
+        <div class="keyboard-title">
+            Keyboard Guide
+        </div>
 
-<div class="key-row">
 
-<div class="key space">
-SPACE
-</div>
+        <div class="keyboard">
 
-</div>
 
-</div>
+            <div class="key-row">
 
+                <div class="key">Q</div>
+                <div class="key">W</div>
+                <div class="key">E</div>
+                <div class="key">R</div>
+                <div class="key">T</div>
+                <div class="key">Y</div>
+                <div class="key">U</div>
+                <div class="key">I</div>
+                <div class="key">O</div>
+                <div class="key">P</div>
 
-<div class="finger-info">
+            </div>
 
-Home row:
-<strong>A S D F</strong>
-&nbsp;&nbsp; | &nbsp;&nbsp;
-<strong>J K L</strong>
 
-<br><br>
+            <div class="key-row">
 
-Keep your fingers relaxed and return them to the home position after each keystroke.
+                <div class="key">A</div>
+                <div class="key">S</div>
+                <div class="key">D</div>
+                <div class="key">F</div>
+                <div class="key">G</div>
+                <div class="key">H</div>
+                <div class="key">J</div>
+                <div class="key">K</div>
+                <div class="key">L</div>
+                <div class="key">;</div>
 
-</div>
+            </div>
 
-</div>
 
+            <div class="key-row">
 
-<!-- RESULT -->
+                <div class="key">Z</div>
+                <div class="key">X</div>
+                <div class="key">C</div>
+                <div class="key">V</div>
+                <div class="key">B</div>
+                <div class="key">N</div>
+                <div class="key">M</div>
 
-<div
-class="result"
-id="result">
+            </div>
 
-<h2>
-🎉 Lesson Complete!
-</h2>
 
-<div class="result-grid">
+            <div class="key-row">
 
-<div class="result-item">
+                <div class="key space">
+                    SPACE
+                </div>
 
-<span>
-WPM
-</span>
+            </div>
 
-<strong id="resultWpm">
-0
-</strong>
 
-</div>
+        </div>
 
 
-<div class="result-item">
+        <!-- =================================================
+             FINGER INFO
+        ================================================== -->
 
-<span>
-Accuracy
-</span>
+        <div class="finger-info">
 
-<strong id="resultAccuracy">
-0%
-</strong>
+            Home row:
 
-</div>
+            <strong>
+                A S D F
+            </strong>
 
+            &nbsp;&nbsp; | &nbsp;&nbsp;
 
-<div class="result-item">
+            <strong>
+                J K L ;
+            </strong>
 
-<span>
-Errors
-</span>
+            <br><br>
 
-<strong id="resultErrors">
-0
-</strong>
+            Keep your fingers relaxed and return them to the
+            home position after each keystroke.
 
-</div>
+        </div>
 
-</div>
 
-<button
-class="start-btn"
-onclick="resetLesson()">
-Practice Again
-</button>
+    </div>
 
-</div>
+
+    <!-- =====================================================
+         RESULT
+    ====================================================== -->
+
+    <div
+        class="result"
+        id="result"
+    >
+
+        <h2>
+            🎉 Lesson Complete!
+        </h2>
+
+
+        <div class="result-grid">
+
+
+            <div class="result-item">
+
+                <span>
+                    WPM
+                </span>
+
+                <strong id="resultWpm">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="result-item">
+
+                <span>
+                    Accuracy
+                </span>
+
+                <strong id="resultAccuracy">
+                    0%
+                </strong>
+
+            </div>
+
+
+            <div class="result-item">
+
+                <span>
+                    Errors
+                </span>
+
+                <strong id="resultErrors">
+                    0
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+        <button
+            class="start-btn"
+            onclick="resetLesson()"
+        >
+            Practice Again
+        </button>
+
+    </div>
 
 
 </main>
 
 
+<!-- =========================================================
+     LESSON ENGINE
+========================================================= -->
+
 <script>
 
-/* ==========================================
-   TYPEMASTER PRO
-   MULTI LESSON ENGINE
-========================================== */
 
-
-/* ================= LESSON DATA ================= */
+/* =========================================================
+   LESSON DATA
+========================================================= */
 
 const lessons = {
 
     "home-row-1": {
-        number: 1,
-        title: "Home Row Basics",
-        level: "BEGINNER",
-        description: "Learn the correct finger position and practice the home row.",
-        text: "asdf jkl; asdf jkl; sad lad fall ask flask dad all;"
+
+        number:1,
+
+        title:"Home Row Basics",
+
+        level:"BEGINNER",
+
+        description:
+            "Learn the correct finger position and practice the home row.",
+
+        text:
+            "asdf jkl; asdf jkl; sad lad fall ask flask dad all;"
+
     },
+
 
     "left-hand-1": {
-        number: 2,
-        title: "Left Hand Practice",
-        level: "BEGINNER",
-        description: "Practice the A, S, D and F keys using the correct fingers.",
-        text: "asdf sad dad fad ask flask salad fall all dad"
+
+        number:2,
+
+        title:"Left Hand Practice",
+
+        level:"BEGINNER",
+
+        description:
+            "Practice the A, S, D and F keys using the correct fingers.",
+
+        text:
+            "asdf sad dad fad ask flask salad fall all dad"
+
     },
+
 
     "right-hand-1": {
-        number: 3,
-        title: "Right Hand Practice",
-        level: "BEGINNER",
-        description: "Practice the J, K, L and semicolon keys with proper finger placement.",
-        text: "jkl; jak kill jail like lake all; ask lad"
+
+        number:3,
+
+        title:"Right Hand Practice",
+
+        level:"BEGINNER",
+
+        description:
+            "Practice the J, K, L and semicolon keys with proper finger placement.",
+
+        text:
+            "jkl; jak kill jail like lake all; ask lad"
+
     },
+
 
     "home-row-words": {
-        number: 4,
-        title: "Home Row Words",
-        level: "BEGINNER",
-        description: "Combine home row letters to type simple words.",
-        text: "sad dad lad all fall ask flask salad lass"
+
+        number:4,
+
+        title:"Home Row Words",
+
+        level:"BEGINNER",
+
+        description:
+            "Combine home row letters to type simple words.",
+
+        text:
+            "sad dad lad all fall ask flask salad lass"
+
     },
+
 
     "top-row-1": {
-        number: 5,
-        title: "Top Row",
-        level: "BEGINNER",
-        description: "Practice the top row of the keyboard.",
-        text: "qwerty ytrewq we were write type quite power"
+
+        number:5,
+
+        title:"Top Row",
+
+        level:"BEGINNER",
+
+        description:
+            "Practice the top row of the keyboard.",
+
+        text:
+            "qwerty ytrewq we were write type quite power"
+
     },
+
 
     "bottom-row-1": {
-        number: 6,
-        title: "Bottom Row",
-        level: "BEGINNER",
-        description: "Practice the bottom row of the keyboard.",
-        text: "zxcv bnm zxcv bnm move zone zoom box van"
+
+        number:6,
+
+        title:"Bottom Row",
+
+        level:"BEGINNER",
+
+        description:
+            "Practice the bottom row of the keyboard.",
+
+        text:
+            "zxcv bnm zxcv bnm move zone zoom box van"
+
     },
+
 
     "capital-letters": {
-        number: 7,
-        title: "Capital Letters",
-        level: "BEGINNER",
-        description: "Learn how to use Shift correctly while typing capital letters.",
-        text: "Hello World This Is TypeMaster Pro Learn Typing"
+
+        number:7,
+
+        title:"Capital Letters",
+
+        level:"BEGINNER",
+
+        description:
+            "Learn how to use Shift correctly while typing capital letters.",
+
+        text:
+            "Hello World This Is TypeMaster Pro Learn Typing"
+
     },
+
 
     "numbers-1": {
-        number: 8,
-        title: "Numbers",
-        level: "INTERMEDIATE",
-        description: "Practice numbers and number combinations.",
-        text: "12345 67890 12345 67890 2026 123 456 789"
+
+        number:8,
+
+        title:"Numbers",
+
+        level:"INTERMEDIATE",
+
+        description:
+            "Practice numbers and number combinations.",
+
+        text:
+            "12345 67890 12345 67890 2026 123 456 789"
+
     },
 
+
     "punctuation-1": {
-        number: 9,
-        title: "Punctuation",
-        level: "INTERMEDIATE",
-        description: "Practice common punctuation keys.",
-        text: "Hello, world. How are you? I am learning typing!"
+
+        number:9,
+
+        title:"Punctuation",
+
+        level:"INTERMEDIATE",
+
+        description:
+            "Practice common punctuation keys.",
+
+        text:
+            "Hello, world. How are you? I am learning typing!"
+
     }
 
 };
 
 
-/* ================= GET LESSON ID ================= */
+/* =========================================================
+   GET LESSON
+========================================================= */
 
 const params =
-new URLSearchParams(window.location.search);
+    new URLSearchParams(
+        window.location.search
+    );
+
 
 const lessonId =
-params.get("id") || "home-row-1";
+    params.get("id") ||
+    "home-row-1";
 
-
-/* ================= SELECT LESSON ================= */
 
 const currentLesson =
-lessons[lessonId] || lessons["home-row-1"];
+    lessons[lessonId] ||
+    lessons["home-row-1"];
 
 
-/* ================= VARIABLES ================= */
+/* =========================================================
+   VARIABLES
+========================================================= */
 
 let started = false;
 
@@ -1382,58 +2107,109 @@ let timerInterval = null;
 let totalErrors = 0;
 
 
-/* ================= UPDATE HEADER ================= */
+/* =========================================================
+   ELEMENTS
+========================================================= */
 
-document.querySelector(".badge").textContent =
-"LESSON " +
-currentLesson.number +
-" · " +
-currentLesson.level;
-
-
-document.querySelector(".lesson-header h1").textContent =
-currentLesson.title;
+const lessonBadge =
+    document.getElementById(
+        "lessonBadge"
+    );
 
 
-document.querySelector(".lesson-header p").textContent =
-currentLesson.description;
+const lessonTitle =
+    document.getElementById(
+        "lessonTitle"
+    );
 
 
-/* ================= ELEMENTS ================= */
+const lessonDescription =
+    document.getElementById(
+        "lessonDescription"
+    );
+
 
 const textDisplay =
-document.getElementById("textDisplay");
+    document.getElementById(
+        "textDisplay"
+    );
+
 
 const typingInput =
-document.getElementById("typingInput");
+    document.getElementById(
+        "typingInput"
+    );
+
 
 const timeDisplay =
-document.getElementById("time");
+    document.getElementById(
+        "time"
+    );
+
 
 const wpmDisplay =
-document.getElementById("wpm");
+    document.getElementById(
+        "wpm"
+    );
+
 
 const accuracyDisplay =
-document.getElementById("accuracy");
+    document.getElementById(
+        "accuracy"
+    );
+
 
 const errorsDisplay =
-document.getElementById("errors");
+    document.getElementById(
+        "errors"
+    );
+
 
 const progressFill =
-document.getElementById("progressFill");
+    document.getElementById(
+        "progressFill"
+    );
+
 
 const progressText =
-document.getElementById("progressText");
+    document.getElementById(
+        "progressText"
+    );
+
 
 const result =
-document.getElementById("result");
+    document.getElementById(
+        "result"
+    );
 
 
-/* ================= SHOW TEXT ================= */
+/* =========================================================
+   UPDATE LESSON HEADER
+========================================================= */
+
+lessonBadge.textContent =
+    "LESSON " +
+    currentLesson.number +
+    " · " +
+    currentLesson.level;
+
+
+lessonTitle.textContent =
+    currentLesson.title;
+
+
+lessonDescription.textContent =
+    currentLesson.description;
+
+
+/* =========================================================
+   RENDER TEXT
+========================================================= */
 
 function renderText(){
 
     textDisplay.innerHTML = "";
+
 
     for(
         let i = 0;
@@ -1442,23 +2218,34 @@ function renderText(){
     ){
 
         const span =
-        document.createElement("span");
+            document.createElement(
+                "span"
+            );
 
-        span.className = "char";
+
+        span.className =
+            "char";
+
 
         span.textContent =
-        currentLesson.text[i];
+            currentLesson.text[i];
 
-        textDisplay.appendChild(span);
+
+        textDisplay.appendChild(
+            span
+        );
 
     }
+
 
     updateCurrentCharacter();
 
 }
 
 
-/* ================= START ================= */
+/* =========================================================
+   START LESSON
+========================================================= */
 
 function startLesson(){
 
@@ -1470,11 +2257,15 @@ function startLesson(){
 
     }
 
+
     started = true;
 
     finished = false;
 
     startTime = Date.now();
+
+    totalErrors = 0;
+
 
     typingInput.disabled = false;
 
@@ -1482,25 +2273,34 @@ function startLesson(){
 
     typingInput.focus();
 
-    document.getElementById("startBtn").textContent =
-    "Typing...";
+
+    document.getElementById(
+        "startBtn"
+    ).textContent =
+        "Typing...";
+
 
     timerInterval =
-    setInterval(
-        updateStats,
-        250
-    );
+        setInterval(
+            updateStats,
+            250
+        );
 
 }
 
 
-/* ================= INPUT ================= */
+/* =========================================================
+   INPUT
+========================================================= */
 
 typingInput.addEventListener(
     "input",
     function(){
 
-        if(!started || finished){
+        if(
+            !started ||
+            finished
+        ){
 
             return;
 
@@ -1508,7 +2308,7 @@ typingInput.addEventListener(
 
 
         const typed =
-        typingInput.value;
+            typingInput.value;
 
 
         totalErrors = 0;
@@ -1540,23 +2340,23 @@ typingInput.addEventListener(
 
 
         const progress =
-        Math.min(
-            100,
-            Math.round(
-                (
-                    typed.length /
-                    currentLesson.text.length
-                ) * 100
-            )
-        );
+            Math.min(
+                100,
+                Math.round(
+                    (
+                        typed.length /
+                        currentLesson.text.length
+                    ) * 100
+                )
+            );
 
 
         progressFill.style.width =
-        progress + "%";
+            progress + "%";
 
 
         progressText.textContent =
-        progress + "%";
+            progress + "%";
 
 
         if(
@@ -1572,15 +2372,20 @@ typingInput.addEventListener(
 );
 
 
-/* ================= CHARACTER COLORS ================= */
+/* =========================================================
+   CHARACTER COLORS
+========================================================= */
 
 function updateCharacterColors(){
 
     const typed =
-    typingInput.value;
+        typingInput.value;
+
 
     const chars =
-    textDisplay.querySelectorAll(".char");
+        textDisplay.querySelectorAll(
+            ".char"
+        );
 
 
     chars.forEach(
@@ -1605,7 +2410,8 @@ function updateCharacterColors(){
                         "correct"
                     );
 
-                }else{
+                }
+                else{
 
                     char.classList.add(
                         "wrong"
@@ -1621,16 +2427,20 @@ function updateCharacterColors(){
 }
 
 
-/* ================= CURRENT CHARACTER ================= */
+/* =========================================================
+   CURRENT CHARACTER
+========================================================= */
 
 function updateCurrentCharacter(){
 
     const typedLength =
-    typingInput.value.length;
+        typingInput.value.length;
 
 
     const chars =
-    textDisplay.querySelectorAll(".char");
+        textDisplay.querySelectorAll(
+            ".char"
+        );
 
 
     chars.forEach(
@@ -1649,8 +2459,9 @@ function updateCurrentCharacter(){
         chars.length
     ){
 
-        chars[typedLength]
-        .classList.add(
+        chars[
+            typedLength
+        ].classList.add(
             "current"
         );
 
@@ -1659,7 +2470,9 @@ function updateCurrentCharacter(){
 }
 
 
-/* ================= STATS ================= */
+/* =========================================================
+   STATS
+========================================================= */
 
 function updateStats(){
 
@@ -1671,62 +2484,67 @@ function updateStats(){
 
 
     const elapsedSeconds =
-    Math.max(
-        1,
-        (Date.now() - startTime) / 1000
-    );
+        Math.max(
+            1,
+            (
+                Date.now() -
+                startTime
+            ) / 1000
+        );
 
 
     const minutes =
-    elapsedSeconds / 60;
+        elapsedSeconds / 60;
 
 
     const typed =
-    typingInput.value;
+        typingInput.value;
 
 
     /* TIME */
 
     const minutesPart =
-    Math.floor(
-        elapsedSeconds / 60
-    );
+        Math.floor(
+            elapsedSeconds / 60
+        );
 
 
     const secondsPart =
-    Math.floor(
-        elapsedSeconds % 60
-    );
+        Math.floor(
+            elapsedSeconds % 60
+        );
 
 
     timeDisplay.textContent =
-    minutesPart +
-    ":" +
-    String(secondsPart).padStart(
-        2,
-        "0"
-    );
+        minutesPart +
+        ":" +
+        String(
+            secondsPart
+        ).padStart(
+            2,
+            "0"
+        );
 
 
     /* WPM */
 
     const correctCharacters =
-    calculateCorrectCharacters();
+        calculateCorrectCharacters();
 
 
     const wpm =
-    Math.round(
-        (
-            correctCharacters / 5
-        ) / minutes
-    );
+        Math.round(
+            (
+                correctCharacters / 5
+            ) / minutes
+        );
 
 
     wpmDisplay.textContent =
-    Math.max(
-        0,
-        wpm
-    );
+        Math.max(
+            0,
+            wpm
+        );
 
 
     /* ACCURACY */
@@ -1739,45 +2557,48 @@ function updateStats(){
     ){
 
         accuracy =
-        Math.round(
-            (
+            Math.round(
                 (
-                    typed.length -
-                    totalErrors
-                ) /
-                typed.length
-            ) * 100
-        );
+                    (
+                        typed.length -
+                        totalErrors
+                    ) /
+                    typed.length
+                ) * 100
+            );
 
     }
 
 
     accuracy =
-    Math.max(
-        0,
-        Math.min(
-            100,
-            accuracy
-        )
-    );
+        Math.max(
+            0,
+            Math.min(
+                100,
+                accuracy
+            )
+        );
 
 
     accuracyDisplay.textContent =
-    accuracy + "%";
+        accuracy + "%";
 
 
     errorsDisplay.textContent =
-    totalErrors;
+        totalErrors;
 
 }
 
 
-/* ================= CORRECT CHARACTERS ================= */
+/* =========================================================
+   CORRECT CHARACTERS
+========================================================= */
 
 function calculateCorrectCharacters(){
 
     const typed =
-    typingInput.value;
+        typingInput.value;
+
 
     let correct = 0;
 
@@ -1807,7 +2628,9 @@ function calculateCorrectCharacters(){
 }
 
 
-/* ================= FINISH ================= */
+/* =========================================================
+   FINISH LESSON
+========================================================= */
 
 function finishLesson(){
 
@@ -1832,46 +2655,46 @@ function finishLesson(){
     document.getElementById(
         "startBtn"
     ).textContent =
-    "Completed";
+        "Completed";
 
 
     updateStats();
 
 
     const finalWpm =
-    parseInt(
-        wpmDisplay.textContent
-    ) || 0;
+        parseInt(
+            wpmDisplay.textContent
+        ) || 0;
 
 
     const finalAccuracy =
-    accuracyDisplay.textContent;
+        accuracyDisplay.textContent;
 
 
     const finalErrors =
-    totalErrors;
+        totalErrors;
 
 
     document.getElementById(
         "resultWpm"
     ).textContent =
-    finalWpm;
+        finalWpm;
 
 
     document.getElementById(
         "resultAccuracy"
     ).textContent =
-    finalAccuracy;
+        finalAccuracy;
 
 
     document.getElementById(
         "resultErrors"
     ).textContent =
-    finalErrors;
+        finalErrors;
 
 
     result.style.display =
-    "block";
+        "block";
 
 
     saveProgress(
@@ -1882,7 +2705,9 @@ function finishLesson(){
 }
 
 
-/* ================= SAVE PROGRESS ================= */
+/* =========================================================
+   SAVE PROGRESS
+========================================================= */
 
 function saveProgress(
     lessonNumber,
@@ -1905,7 +2730,7 @@ function saveProgress(
     );
 
 
-    /* Completed lessons */
+    /* COMPLETED LESSONS */
 
     let completed = 0;
 
@@ -1937,17 +2762,19 @@ function saveProgress(
     );
 
 
-    /* Best WPM */
+    /* BEST WPM */
 
     let best =
-    Number(
-        localStorage.getItem(
-            "tm_best_wpm"
-        )
-    ) || 0;
+        Number(
+            localStorage.getItem(
+                "tm_best_wpm"
+            )
+        ) || 0;
 
 
-    if(wpm > best){
+    if(
+        wpm > best
+    ){
 
         localStorage.setItem(
             "tm_best_wpm",
@@ -1959,7 +2786,9 @@ function saveProgress(
 }
 
 
-/* ================= RESET ================= */
+/* =========================================================
+   RESET
+========================================================= */
 
 function resetLesson(){
 
@@ -1983,37 +2812,37 @@ function resetLesson(){
 
 
     timeDisplay.textContent =
-    "0:00";
+        "0:00";
 
 
     wpmDisplay.textContent =
-    "0";
+        "0";
 
 
     accuracyDisplay.textContent =
-    "100%";
+        "100%";
 
 
     errorsDisplay.textContent =
-    "0";
+        "0";
 
 
     progressFill.style.width =
-    "0%";
+        "0%";
 
 
     progressText.textContent =
-    "0%";
+        "0%";
 
 
     document.getElementById(
         "startBtn"
     ).textContent =
-    "Start Lesson";
+        "Start Lesson";
 
 
     result.style.display =
-    "none";
+        "none";
 
 
     renderText();
@@ -2021,7 +2850,9 @@ function resetLesson(){
 }
 
 
-/* ================= KEYBOARD HIGHLIGHT ================= */
+/* =========================================================
+   KEYBOARD HIGHLIGHT
+========================================================= */
 
 document.addEventListener(
     "keydown",
@@ -2038,11 +2869,11 @@ document.addEventListener(
 
 
         let key =
-        event.key.toUpperCase();
+            event.key.toUpperCase();
 
 
         if(
-            key === " "
+            event.key === " "
         ){
 
             key = "SPACE";
@@ -2051,23 +2882,25 @@ document.addEventListener(
 
 
         document
-        .querySelectorAll(".key")
-        .forEach(
-            function(k){
+            .querySelectorAll(
+                ".key"
+            )
+            .forEach(
+                function(k){
 
-                if(
-                    k.textContent.trim() ===
-                    key
-                ){
+                    if(
+                        k.textContent.trim() ===
+                        key
+                    ){
 
-                    k.classList.add(
-                        "active"
-                    );
+                        k.classList.add(
+                            "active"
+                        );
+
+                    }
 
                 }
-
-            }
-        );
+            );
 
     }
 );
@@ -2078,26 +2911,32 @@ document.addEventListener(
     function(){
 
         document
-        .querySelectorAll(".key")
-        .forEach(
-            function(k){
+            .querySelectorAll(
+                ".key"
+            )
+            .forEach(
+                function(k){
 
-                k.classList.remove(
-                    "active"
-                );
+                    k.classList.remove(
+                        "active"
+                    );
 
-            }
-        );
+                }
+            );
 
     }
 );
 
 
-/* ================= INITIALIZE ================= */
+/* =========================================================
+   INITIALIZE
+========================================================= */
 
 renderText();
 
 </script>
 
+
 </body>
+
 </html>
