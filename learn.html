@@ -703,6 +703,77 @@ body.dark-mode .cta {
 body.dark-mode .footer {
     color: #94a3b8 !important;
 }
+
+/* ==========================================
+   LESSON PROGRESS SYSTEM
+========================================== */
+
+.lesson.completed{
+    border-color:rgba(34,197,94,.35) !important;
+}
+
+.lesson.completed .lesson-number{
+    background:rgba(34,197,94,.14) !important;
+    color:#16a34a !important;
+}
+
+.lesson.completed .lesson-btn{
+    background:linear-gradient(
+        135deg,
+        #16a34a,
+        #22c55e
+    ) !important;
+
+    cursor:default !important;
+}
+
+.lesson.locked{
+    opacity:.60;
+    cursor:not-allowed;
+}
+
+.lesson.locked:hover{
+    transform:none !important;
+    border-color:var(--tm-border) !important;
+}
+
+.lesson.locked .lesson-number{
+    background:rgba(100,116,139,.12) !important;
+    color:#64748b !important;
+}
+
+.lesson.locked .lesson-btn{
+    background:rgba(100,116,139,.18) !important;
+    color:#64748b !important;
+    cursor:not-allowed !important;
+}
+
+.lesson-status{
+    margin-top:8px;
+    font-size:11px;
+    font-weight:800;
+}
+
+.lesson.completed .lesson-status{
+    color:#16a34a;
+}
+
+.lesson.locked .lesson-status{
+    color:#64748b;
+}
+
+body.dark-mode .lesson.completed{
+    border-color:rgba(34,197,94,.30) !important;
+}
+
+body.dark-mode .lesson.locked .lesson-number{
+    background:rgba(255,255,255,.06) !important;
+    color:#94a3b8 !important;
+}
+
+body.dark-mode .lesson.locked .lesson-status{
+    color:#94a3b8;
+}
     
 </style>
 </head>
@@ -954,7 +1025,7 @@ body.dark-mode .footer {
             <a
                 href="lesson.html?id=home-row-1"
                 class="lesson-btn"
-                onclick="startLesson(1)">
+                onclick="return startLesson(1, event)">
                 Start Lesson
             </a>
 
@@ -994,11 +1065,11 @@ body.dark-mode .footer {
             </div>
 
             <a
-                href="lesson.html?id=left-hand-1"
-                class="lesson-btn"
-                onclick="startLesson(2)">
-                Start Lesson
-            </a>
+    href="lesson.html?id=left-hand-1"
+    class="lesson-btn"
+    onclick="return startLesson(2, event)">
+    Start Lesson
+</a>
 
         </div>
 
@@ -1036,11 +1107,11 @@ body.dark-mode .footer {
             </div>
 
             <a
-                href="lesson.html?id=right-hand-1"
-                class="lesson-btn"
-                onclick="startLesson(3)">
-                Start Lesson
-            </a>
+    href="lesson.html?id=right-hand-1"
+    class="lesson-btn"
+    onclick="return startLesson(3, event)">
+    Start Lesson
+</a>
 
         </div>
 
@@ -1078,11 +1149,11 @@ body.dark-mode .footer {
             </div>
 
             <a
-                href="lesson.html?id=home-row-words"
-                class="lesson-btn"
-                onclick="startLesson(4)">
-                Start Lesson
-            </a>
+    href="lesson.html?id=home-row-words"
+    class="lesson-btn"
+    onclick="return startLesson(4, event)">
+    Start Lesson
+</a>
 
         </div>
 
@@ -1120,11 +1191,11 @@ body.dark-mode .footer {
             </div>
 
             <a
-                href="lesson.html?id=top-row-1"
-                class="lesson-btn"
-                onclick="startLesson(5)">
-                Start Lesson
-            </a>
+    href="lesson.html?id=top-row-1"
+    class="lesson-btn"
+    onclick="return startLesson(5, event)">
+    Start Lesson
+</a>
 
         </div>
 
@@ -1162,11 +1233,11 @@ body.dark-mode .footer {
             </div>
 
             <a
-                href="lesson.html?id=bottom-row-1"
-                class="lesson-btn"
-                onclick="startLesson(6)">
-                Start Lesson
-            </a>
+    href="lesson.html?id=bottom-row-1"
+    class="lesson-btn"
+    onclick="return startLesson(6, event)">
+    Start Lesson
+</a>
 
         </div>
 
@@ -1204,11 +1275,11 @@ body.dark-mode .footer {
             </div>
 
             <a
-                href="lesson.html?id=capital-letters"
-                class="lesson-btn"
-                onclick="startLesson(7)">
-                Start Lesson
-            </a>
+    href="lesson.html?id=capital-letters"
+    class="lesson-btn"
+    onclick="return startLesson(7, event)">
+    Start Lesson
+</a>
 
         </div>
 
@@ -1246,11 +1317,11 @@ body.dark-mode .footer {
             </div>
 
             <a
-                href="lesson.html?id=numbers-1"
-                class="lesson-btn"
-                onclick="startLesson(8)">
-                Start Lesson
-            </a>
+    href="lesson.html?id=numbers-1"
+    class="lesson-btn"
+    onclick="return startLesson(8, event)">
+    Start Lesson
+</a>
 
         </div>
 
@@ -1288,11 +1359,11 @@ body.dark-mode .footer {
             </div>
 
             <a
-                href="lesson.html?id=punctuation-1"
-                class="lesson-btn"
-                onclick="startLesson(9)">
-                Start Lesson
-            </a>
+    href="lesson.html?id=punctuation-1"
+    class="lesson-btn"
+    onclick="return startLesson(9, event)">
+    Start Lesson
+</a>
 
         </div>
 
@@ -1399,82 +1470,419 @@ body.dark-mode .footer {
 
 /* ==========================================
    TYPEMASTER PRO - LEARNING DASHBOARD
-   STEP 1
+   SEQUENTIAL LESSON SYSTEM
 ========================================== */
-
-
-/* ---------- Default Progress ---------- */
-
-let completedLessons =
-    Number(localStorage.getItem("tm_completed_lessons")) || 0;
-
-let bestWpm =
-    Number(localStorage.getItem("tm_best_wpm")) || 0;
-
-let accuracy =
-    Number(localStorage.getItem("tm_accuracy")) || 0;
-
-let practiceMinutes =
-    Number(localStorage.getItem("tm_practice_minutes")) || 0;
-
-
-/* ---------- Total Lessons ---------- */
 
 const totalLessons = 9;
 
 
-/* ---------- Display Progress ---------- */
+/* ==========================================
+   LESSON COMPLETION
+========================================== */
 
-function updateDashboard() {
+function isLessonCompleted(number){
 
-    const completed =
-        Math.min(completedLessons, totalLessons);
-
-    const percentage =
-        Math.round((completed / totalLessons) * 100);
-
-
-    document.getElementById("completedLessons").textContent =
-        completed;
-
-
-    document.getElementById("bestWpm").textContent =
-        bestWpm;
-
-
-    document.getElementById("accuracy").textContent =
-        accuracy > 0 ? accuracy + "%" : "0%";
-
-
-    document.getElementById("practiceTime").textContent =
-        practiceMinutes + "m";
-
-
-    document.getElementById("progressPercent").textContent =
-        percentage + "%";
-
-
-    document.getElementById("progressFill").style.width =
-        percentage + "%";
+    return localStorage.getItem(
+        "tm_lesson_" + number + "_completed"
+    ) === "true";
 
 }
 
 
-/* ---------- Start Lesson ---------- */
+/* ==========================================
+   COUNT COMPLETED LESSONS
+========================================== */
 
-function startLesson(number) {
+function getCompletedLessons(){
+
+    let completed = 0;
+
+    for(let i = 1; i <= totalLessons; i++){
+
+        if(isLessonCompleted(i)){
+            completed++;
+        }
+
+    }
+
+    return completed;
+
+}
+
+
+/* ==========================================
+   LESSON UNLOCK SYSTEM
+========================================== */
+
+function isLessonUnlocked(number){
+
+    /* Lesson 1 is always unlocked */
+
+    if(number === 1){
+        return true;
+    }
+
+
+    /* Every next lesson requires
+       previous lesson completion */
+
+    return isLessonCompleted(number - 1);
+
+}
+
+
+/* ==========================================
+   DASHBOARD
+========================================== */
+
+function updateDashboard(){
+
+    const completed =
+        getCompletedLessons();
+
+
+    const bestWpm =
+        Number(
+            localStorage.getItem("tm_best_wpm")
+        ) || 0;
+
+
+    const accuracy =
+        Number(
+            localStorage.getItem("tm_accuracy")
+        ) || 0;
+
+
+    const practiceMinutes =
+        Number(
+            localStorage.getItem("tm_practice_minutes")
+        ) || 0;
+
+
+    const percentage =
+        Math.round(
+            (completed / totalLessons) * 100
+        );
+
+
+    document.getElementById(
+        "completedLessons"
+    ).textContent = completed;
+
+
+    document.getElementById(
+        "bestWpm"
+    ).textContent = bestWpm;
+
+
+    document.getElementById(
+        "accuracy"
+    ).textContent =
+        accuracy > 0
+            ? accuracy + "%"
+            : "0%";
+
+
+    document.getElementById(
+        "practiceTime"
+    ).textContent =
+        practiceMinutes + "m";
+
+
+    document.getElementById(
+        "progressPercent"
+    ).textContent =
+        percentage + "%";
+
+
+    document.getElementById(
+        "progressFill"
+    ).style.width =
+        percentage + "%";
+
+
+    updateLessonCards();
+
+}
+
+
+/* ==========================================
+   UPDATE ALL LESSON CARDS
+========================================== */
+
+function updateLessonCards(){
+
+    const lessons =
+        document.querySelectorAll(
+            ".lesson"
+        );
+
+
+    lessons.forEach(
+        function(card, index){
+
+            const number =
+                index + 1;
+
+
+            const button =
+                card.querySelector(
+                    ".lesson-btn"
+                );
+
+
+            if(!button){
+                return;
+            }
+
+
+            const completed =
+                isLessonCompleted(number);
+
+
+            const unlocked =
+                isLessonUnlocked(number);
+
+
+            /* Remove old states */
+
+            card.classList.remove(
+                "completed",
+                "locked"
+            );
+
+
+            /* Remove old status */
+
+            const oldStatus =
+                card.querySelector(
+                    ".lesson-status"
+                );
+
+
+            if(oldStatus){
+                oldStatus.remove();
+            }
+
+
+            /* ==================================
+               COMPLETED
+            ================================== */
+
+            if(completed){
+
+                card.classList.add(
+                    "completed"
+                );
+
+
+                button.textContent =
+                    "✓ Complete";
+
+
+                button.removeAttribute(
+                    "aria-disabled"
+                );
+
+
+                const status =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                status.className =
+                    "lesson-status";
+
+
+                status.textContent =
+                    "Completed";
+
+
+                card.appendChild(
+                    status
+                );
+
+
+                return;
+
+            }
+
+
+            /* ==================================
+               LOCKED
+            ================================== */
+
+            if(!unlocked){
+
+                card.classList.add(
+                    "locked"
+                );
+
+
+                button.textContent =
+                    "🔒 Locked";
+
+
+                button.setAttribute(
+                    "aria-disabled",
+                    "true"
+                );
+
+
+                const status =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                status.className =
+                    "lesson-status";
+
+
+                status.textContent =
+                    "Complete Lesson " +
+                    (number - 1) +
+                    " to unlock";
+
+
+                card.appendChild(
+                    status
+                );
+
+
+                return;
+
+            }
+
+
+            /* ==================================
+               AVAILABLE
+            ================================== */
+
+            button.textContent =
+                "Start Lesson";
+
+
+            button.removeAttribute(
+                "aria-disabled"
+            );
+
+        }
+    );
+
+}
+
+
+/* ==========================================
+   START LESSON
+========================================== */
+
+function startLesson(number, event){
+
+    if(!isLessonUnlocked(number)){
+
+        if(event){
+            event.preventDefault();
+        }
+
+
+        return false;
+
+    }
+
 
     localStorage.setItem(
         "tm_last_lesson",
         number
     );
 
+
+    return true;
+
 }
 
 
-/* ---------- Load Dashboard ---------- */
+/* ==========================================
+   BLOCK LOCKED LESSON CLICKS
+========================================== */
+
+document.addEventListener(
+    "click",
+    function(event){
+
+        const button =
+            event.target.closest(
+                ".lesson-btn"
+            );
+
+
+        if(!button){
+            return;
+        }
+
+
+        const card =
+            button.closest(
+                ".lesson"
+            );
+
+
+        if(!card){
+            return;
+        }
+
+
+        if(
+            card.classList.contains(
+                "locked"
+            )
+        ){
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+        }
+
+    },
+    true
+);
+
+
+/* ==========================================
+   INITIAL LOAD
+========================================== */
 
 updateDashboard();
+
+
+/* ==========================================
+   REFRESH WHEN COMING BACK FROM LESSON
+========================================== */
+
+window.addEventListener(
+    "pageshow",
+    function(){
+
+        updateDashboard();
+
+    }
+);
+
+
+/* ==========================================
+   REFRESH IF ANOTHER PAGE CHANGES STORAGE
+========================================== */
+
+window.addEventListener(
+    "storage",
+    function(){
+
+        updateDashboard();
+
+    }
+);
 
 </script>
 
