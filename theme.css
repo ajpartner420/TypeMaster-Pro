@@ -17,16 +17,25 @@
 
 body.dark,
 body.dark-mode{
-    --bg:#080b16;
-    --bg2:#080b16;
+    --bg:#11172a;
+    --bg2:#181f38;
+
     --text:#f8fafc;
-    --muted:#94a3b8;
-    --card:rgba(15,23,42,.62);
-    --card-solid:#0f172a;
-    --border:rgba(255,255,255,.10);
-    --input:rgba(15,23,42,.55);
-    --shadow:0 20px 60px rgba(0,0,0,.35);
-    --header:rgba(15,23,42,.15);
+    --muted:#b8c2d8;
+
+    --card:rgba(30,38,65,.88);
+    --card-solid:#1e2641;
+
+    --border:rgba(148,163,184,.22);
+
+    --input:rgba(25,32,55,.90);
+
+    --accent:#818cf8;
+    --accent2:#a78bfa;
+
+    --shadow:0 20px 60px rgba(0,0,0,.22);
+
+    --header:rgba(17,23,42,.88);
 }
 
 *{box-sizing:border-box}
@@ -34,14 +43,33 @@ html{scroll-behavior:smooth}
 
 body{
     margin:0;
+
     background:
-        radial-gradient(circle at 10% 10%,rgba(99,102,241,.22),transparent 30%),
-        radial-gradient(circle at 90% 20%,rgba(139,92,246,.18),transparent 30%),
-        var(--bg);
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(99,102,241,.18),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 90% 20%,
+            rgba(139,92,246,.14),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            var(--bg),
+            var(--bg2)
+        );
+
     color:var(--text);
+
     font-family:Inter,Segoe UI,Arial,sans-serif;
+
     min-height:100vh;
-    transition:background .3s,color .3s;
+
+    transition:
+        background .3s,
+        color .3s;
 }
 
 a{color:inherit}
