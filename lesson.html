@@ -784,6 +784,157 @@ body.dark-mode .back-lessons {
     flex: 0 0 42px !important;
 }
     
+
+/* ==========================================
+   FINAL HEADER FIX - MATCH INDEX EXACTLY
+   ========================================== */
+
+header{
+    position:sticky !important;
+    top:0 !important;
+    z-index:50 !important;
+    backdrop-filter:blur(18px) !important;
+    -webkit-backdrop-filter:blur(18px) !important;
+    background:rgba(255,255,255,.15) !important;
+    border-bottom:1px solid var(--border) !important;
+}
+
+.nav{
+    width:100% !important;
+    max-width:1200px !important;
+    height:72px !important;
+    min-height:72px !important;
+    margin:0 auto !important;
+    padding:0 20px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    gap:20px !important;
+}
+
+.logo{
+    display:flex !important;
+    align-items:center !important;
+    gap:8px !important;
+    color:#6366f1 !important;
+    font-size:24px !important;
+    font-weight:800 !important;
+    white-space:nowrap !important;
+    text-decoration:none !important;
+}
+
+.logo span{
+    color:#6366f1 !important;
+}
+
+.nav-right{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:flex-end !important;
+    gap:10px !important;
+    min-width:0 !important;
+    flex:1 !important;
+}
+
+.main-nav{
+    display:flex !important;
+    align-items:center !important;
+    gap:8px !important;
+    flex-wrap:wrap !important;
+    justify-content:flex-end !important;
+}
+
+.main-nav a{
+    display:block !important;
+    text-decoration:none !important;
+    color:var(--text) !important;
+    font-weight:700 !important;
+    font-size:14px !important;
+    padding:9px 12px !important;
+    border-radius:10px !important;
+    transition:.2s !important;
+    white-space:nowrap !important;
+}
+
+.main-nav a:hover,
+.main-nav a.active{
+    background:var(--card) !important;
+}
+
+.icon-btn{
+    width:42px !important;
+    height:42px !important;
+    min-width:42px !important;
+    min-height:42px !important;
+    flex:0 0 42px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    border-radius:14px !important;
+    border:1px solid var(--border) !important;
+    background:var(--card) !important;
+    color:var(--text) !important;
+    cursor:pointer !important;
+    font-size:18px !important;
+    padding:0 !important;
+    margin:0 !important;
+}
+
+body.dark-mode header{
+    background:rgba(8,11,22,.72) !important;
+    border-bottom:1px solid rgba(255,255,255,.10) !important;
+}
+
+@media(max-width:900px){
+    .nav{
+        height:62px !important;
+        min-height:62px !important;
+        padding:8px 12px !important;
+    }
+
+    .logo{
+        font-size:19px !important;
+    }
+
+    .nav-right{
+        gap:8px !important;
+    }
+
+    .main-nav{
+        max-width:68vw !important;
+        flex-wrap:nowrap !important;
+        overflow-x:auto !important;
+        scrollbar-width:none !important;
+    }
+
+    .main-nav::-webkit-scrollbar{
+        display:none !important;
+    }
+
+    .main-nav a{
+        white-space:nowrap !important;
+    }
+}
+
+@media(max-width:700px){
+    .nav{
+        padding:8px 10px !important;
+    }
+
+    .logo span{
+        display:none !important;
+    }
+
+    .main-nav{
+        max-width:62vw !important;
+    }
+
+    .main-nav a{
+        padding:8px 8px !important;
+        font-size:13px !important;
+    }
+}
+
 </style>
 </head>
 
@@ -1948,7 +2099,5 @@ renderText();
 
 </script>
 
-<script src="theme.js"></script>
-    
 </body>
 </html>
