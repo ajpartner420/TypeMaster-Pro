@@ -10,28 +10,28 @@
 <title>Home Row Typing Lesson | TypeMaster Pro</title>
 
 <meta
-name="description"
-content="Learn home row typing with a free interactive typing lesson from TypeMaster Pro. Practice ASDF JKL and improve typing accuracy and speed."
+    name="description"
+    content="Learn home row typing with a free interactive typing lesson from TypeMaster Pro. Practice ASDF JKL and improve typing accuracy and speed."
 >
 
 <meta
-name="robots"
-content="index, follow"
+    name="robots"
+    content="index, follow"
 >
 
 <link
-rel="canonical"
-href="https://ajpartner420.github.io/TypeMaster-Pro/lesson.html"
+    rel="canonical"
+    href="https://ajpartner420.github.io/TypeMaster-Pro/lesson.html"
 >
 
 <link
-rel="stylesheet"
-href="theme.css"
+    rel="stylesheet"
+    href="theme.css"
 >
 
 <script
-src="theme.js"
-defer
+    src="theme.js"
+    defer
 ></script>
 
 
@@ -47,12 +47,18 @@ defer
     padding:0;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 
 /* =========================================================
    BODY
 ========================================================= */
 
 body{
+
+    min-height:100vh;
 
     font-family:
         Inter,
@@ -62,35 +68,6 @@ body{
         "Segoe UI",
         sans-serif;
 
-    min-height:100vh;
-
-    background:
-        radial-gradient(
-            circle at 15% 10%,
-            rgba(99,102,241,.10),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 85% 20%,
-            rgba(124,58,237,.08),
-            transparent 30%
-        ),
-        #eef2ff;
-
-    color:#111827;
-
-    transition:
-        background .25s ease,
-        color .25s ease;
-}
-
-
-/* =========================================================
-   DARK MODE
-========================================================= */
-
-body.dark-mode{
-
     background:
         radial-gradient(
             circle at 15% 10%,
@@ -99,18 +76,26 @@ body.dark-mode{
         ),
         radial-gradient(
             circle at 85% 20%,
-            rgba(124,58,237,.10),
+            rgba(139,92,246,.10),
             transparent 30%
         ),
-        #080b16;
+        linear-gradient(
+            135deg,
+            var(--bg),
+            var(--bg2)
+        );
 
-    color:#f8fafc;
+    color:var(--text);
+
+    transition:
+        background .3s ease,
+        color .3s ease;
 }
 
 
 /* =========================================================
    HEADER
-   SAME STRUCTURE AS INDEX PAGE
+   SAME STYLE AS INDEX
 ========================================================= */
 
 header{
@@ -119,21 +104,19 @@ header{
 
     top:0;
 
-    z-index:50;
+    z-index:1000;
 
     backdrop-filter:blur(18px);
 
     -webkit-backdrop-filter:blur(18px);
 
-    background:rgba(255,255,255,.15);
+    background:var(--header);
 
     border-bottom:
         1px solid
-        rgba(255,255,255,.70);
+        var(--border);
 }
 
-
-/* Main header container */
 
 header .nav{
 
@@ -159,7 +142,9 @@ header .nav{
 }
 
 
-/* Logo */
+/* =========================================================
+   LOGO
+========================================================= */
 
 .logo{
 
@@ -169,7 +154,7 @@ header .nav{
 
     gap:8px;
 
-    color:#6366f1;
+    color:var(--accent);
 
     font-size:24px;
 
@@ -181,7 +166,9 @@ header .nav{
 }
 
 
-/* Right side */
+/* =========================================================
+   NAV RIGHT
+========================================================= */
 
 .nav-right{
 
@@ -199,7 +186,9 @@ header .nav{
 }
 
 
-/* Navigation */
+/* =========================================================
+   MAIN NAV
+========================================================= */
 
 .main-nav{
 
@@ -221,7 +210,7 @@ header .nav{
 
     text-decoration:none;
 
-    color:#111827;
+    color:var(--text);
 
     font-weight:700;
 
@@ -231,29 +220,27 @@ header .nav{
 
     border-radius:10px;
 
-    transition:.2s;
-
     white-space:nowrap;
+
+    transition:
+        background .2s ease,
+        color .2s ease;
 }
 
 
-.main-nav a:hover{
-
-    color:#6366f1;
-
-    background:rgba(99,102,241,.12);
-}
-
-
+.main-nav a:hover,
 .main-nav a.active{
 
-    color:#6366f1;
+    color:var(--accent);
 
-    background:rgba(99,102,241,.12);
+    background:
+        rgba(99,102,241,.12);
 }
 
 
-/* Theme button */
+/* =========================================================
+   THEME BUTTON
+========================================================= */
 
 .icon-btn{
 
@@ -277,12 +264,13 @@ header .nav{
 
     border:
         1px solid
-        rgba(99,102,241,.18);
+        var(--border);
 
-    background:
-        rgba(255,255,255,.62);
+    background:var(--card);
 
-    color:#111827;
+    color:var(--text);
+
+    box-shadow:var(--shadow);
 
     cursor:pointer;
 
@@ -292,76 +280,35 @@ header .nav{
 
     margin:0;
 
-    transition:.2s;
+    transition:
+        transform .2s ease,
+        background .2s ease;
 }
 
 
 .icon-btn:hover{
 
     transform:translateY(-1px);
-
-    background:
-        rgba(255,255,255,.80);
 }
 
 
 /* =========================================================
-   DARK HEADER
-========================================================= */
-
-body.dark-mode header{
-
-    background:
-        rgba(8,11,22,.72);
-
-    border-bottom:
-        1px solid
-        rgba(255,255,255,.10);
-}
-
-
-body.dark-mode .main-nav a{
-
-    color:#f8fafc;
-}
-
-
-body.dark-mode .main-nav a:hover,
-body.dark-mode .main-nav a.active{
-
-    color:#a5b4fc;
-
-    background:
-        rgba(99,102,241,.15);
-}
-
-
-body.dark-mode .icon-btn{
-
-    background:
-        rgba(15,23,42,.62);
-
-    border:
-        1px solid
-        rgba(255,255,255,.10);
-
-    color:#f8fafc;
-}
-
-
-/* =========================================================
-   MAIN CONTAINER
+   MAIN
 ========================================================= */
 
 main.container{
 
-    max-width:1100px;
+    width:
+        min(
+            1100px,
+            calc(100% - 32px)
+        );
 
     margin:0 auto;
 
     padding:
         30px
-        20px
+        0
         60px;
 }
 
@@ -376,7 +323,7 @@ main.container{
 
     margin-bottom:16px;
 
-    color:#6366f1;
+    color:var(--accent);
 
     text-decoration:none;
 
@@ -384,19 +331,14 @@ main.container{
 
     font-weight:700;
 
-    transition:.2s;
+    transition:
+        color .2s ease;
 }
 
 
 .back-lessons:hover{
 
-    color:#8b5cf6;
-}
-
-
-body.dark-mode .back-lessons{
-
-    color:#a5b4fc;
+    color:var(--accent2);
 }
 
 
@@ -429,7 +371,7 @@ body.dark-mode .back-lessons{
         1px solid
         rgba(99,102,241,.20);
 
-    color:#6366f1;
+    color:var(--accent);
 
     font-size:12px;
 
@@ -452,29 +394,17 @@ body.dark-mode .back-lessons{
 
     margin-bottom:9px;
 
-    color:#111827;
+    color:var(--text);
 }
 
 
 .lesson-header p{
 
-    color:#64748b;
+    color:var(--muted);
 
     font-size:15px;
 
     line-height:1.6;
-}
-
-
-body.dark-mode .lesson-header h1{
-
-    color:#f8fafc;
-}
-
-
-body.dark-mode .lesson-header p{
-
-    color:#94a3b8;
 }
 
 
@@ -492,9 +422,11 @@ body.dark-mode .lesson-header p{
 
     display:flex;
 
+    align-items:center;
+
     justify-content:space-between;
 
-    color:#64748b;
+    color:var(--muted);
 
     font-size:13px;
 
@@ -526,27 +458,14 @@ body.dark-mode .lesson-header p{
     background:
         linear-gradient(
             90deg,
-            #6366f1,
-            #8b5cf6
+            var(--accent),
+            var(--accent2)
         );
 
     border-radius:inherit;
 
     transition:
         width .25s ease;
-}
-
-
-body.dark-mode .progress-info{
-
-    color:#94a3b8;
-}
-
-
-body.dark-mode .progress-bar{
-
-    background:
-        rgba(255,255,255,.08);
 }
 
 
@@ -569,12 +488,11 @@ body.dark-mode .progress-bar{
 
 .stat{
 
-    background:
-        rgba(255,255,255,.62);
+    background:var(--card);
 
     border:
         1px solid
-        rgba(255,255,255,.70);
+        var(--border);
 
     border-radius:15px;
 
@@ -582,19 +500,17 @@ body.dark-mode .progress-bar{
 
     text-align:center;
 
-    box-shadow:
-        0 20px 60px
-        rgba(15,23,42,.12);
+    box-shadow:var(--shadow);
 
-    backdrop-filter:blur(14px);
+    backdrop-filter:blur(18px);
 
-    -webkit-backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(18px);
 }
 
 
 .stat-label{
 
-    color:#64748b;
+    color:var(--muted);
 
     font-size:12px;
 
@@ -606,38 +522,11 @@ body.dark-mode .progress-bar{
 
 .stat-value{
 
-    color:#111827;
+    color:var(--text);
 
     font-size:25px;
 
     font-weight:800;
-}
-
-
-body.dark-mode .stat{
-
-    background:
-        rgba(15,23,42,.62);
-
-    border:
-        1px solid
-        rgba(255,255,255,.10);
-
-    box-shadow:
-        0 20px 60px
-        rgba(0,0,0,.35);
-}
-
-
-body.dark-mode .stat-label{
-
-    color:#94a3b8;
-}
-
-
-body.dark-mode .stat-value{
-
-    color:#f8fafc;
 }
 
 
@@ -647,39 +536,21 @@ body.dark-mode .stat-value{
 
 .typing-card{
 
-    background:
-        rgba(255,255,255,.62);
+    background:var(--card);
 
     border:
         1px solid
-        rgba(255,255,255,.70);
+        var(--border);
 
     border-radius:18px;
 
     padding:25px;
 
-    box-shadow:
-        0 20px 60px
-        rgba(15,23,42,.12);
+    box-shadow:var(--shadow);
 
-    backdrop-filter:blur(14px);
+    backdrop-filter:blur(20px);
 
-    -webkit-backdrop-filter:blur(14px);
-}
-
-
-body.dark-mode .typing-card{
-
-    background:
-        rgba(15,23,42,.62);
-
-    border:
-        1px solid
-        rgba(255,255,255,.10);
-
-    box-shadow:
-        0 20px 60px
-        rgba(0,0,0,.35);
+    -webkit-backdrop-filter:blur(20px);
 }
 
 
@@ -691,7 +562,7 @@ body.dark-mode .typing-card{
 
     text-align:center;
 
-    color:#64748b;
+    color:var(--muted);
 
     font-size:14px;
 
@@ -699,9 +570,9 @@ body.dark-mode .typing-card{
 }
 
 
-body.dark-mode .instruction{
+.instruction strong{
 
-    color:#94a3b8;
+    color:var(--text);
 }
 
 
@@ -717,12 +588,11 @@ body.dark-mode .instruction{
 
     border-radius:12px;
 
-    background:
-        rgba(255,255,255,.55);
+    background:var(--input);
 
     border:
         1px solid
-        rgba(99,102,241,.12);
+        var(--border);
 
     font-size:24px;
 
@@ -735,18 +605,20 @@ body.dark-mode .instruction{
     word-wrap:break-word;
 
     overflow-wrap:break-word;
+
+    color:var(--text);
 }
 
 
 .char{
 
-    color:#94a3b8;
+    color:var(--muted);
 }
 
 
 .char.current{
 
-    color:#111827;
+    color:var(--text);
 
     background:
         rgba(99,102,241,.18);
@@ -757,44 +629,18 @@ body.dark-mode .instruction{
 
 .char.correct{
 
-    color:#16a34a;
+    color:var(--success);
 }
 
 
 .char.wrong{
 
-    color:#ef4444;
+    color:var(--danger);
 
     background:
         rgba(239,68,68,.10);
 
     border-radius:2px;
-}
-
-
-body.dark-mode .text-display{
-
-    background:
-        rgba(8,11,22,.65);
-
-    border:
-        1px solid
-        rgba(255,255,255,.10);
-}
-
-
-body.dark-mode .char{
-
-    color:#94a3b8;
-}
-
-
-body.dark-mode .char.current{
-
-    color:#f8fafc;
-
-    background:
-        rgba(99,102,241,.25);
 }
 
 
@@ -816,12 +662,11 @@ body.dark-mode .char.current{
 
     border:
         1px solid
-        rgba(99,102,241,.15);
+        var(--border);
 
-    background:
-        rgba(255,255,255,.55);
+    background:var(--input);
 
-    color:#111827;
+    color:var(--text);
 
     font-size:18px;
 
@@ -831,17 +676,25 @@ body.dark-mode .char.current{
 
     font-family:inherit;
 
-    transition:.2s;
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease;
+}
+
+
+#typingInput::placeholder{
+
+    color:var(--muted);
 }
 
 
 #typingInput:focus{
 
-    border-color:#6366f1;
+    border-color:var(--accent);
 
     box-shadow:
         0 0 0 3px
-        rgba(99,102,241,.10);
+        rgba(99,102,241,.12);
 }
 
 
@@ -850,19 +703,6 @@ body.dark-mode .char.current{
     opacity:.60;
 
     cursor:not-allowed;
-}
-
-
-body.dark-mode #typingInput{
-
-    background:
-        rgba(8,11,22,.65);
-
-    color:#f8fafc;
-
-    border:
-        1px solid
-        rgba(255,255,255,.10);
 }
 
 
@@ -904,22 +744,28 @@ button{
 }
 
 
+/* =========================================================
+   START BUTTON
+========================================================= */
+
 .start-btn{
 
     background:
         linear-gradient(
             135deg,
-            #6366f1,
-            #8b5cf6
+            var(--accent),
+            var(--accent2)
         );
 
     color:#fff;
 
     box-shadow:
         0 8px 20px
-        rgba(99,102,241,.18);
+        rgba(99,102,241,.20);
 
-    transition:.2s;
+    transition:
+        transform .2s ease,
+        opacity .2s ease;
 }
 
 
@@ -931,18 +777,23 @@ button{
 }
 
 
+/* =========================================================
+   RESET BUTTON
+========================================================= */
+
 .reset-btn{
 
-    background:
-        rgba(255,255,255,.70);
+    background:var(--card);
 
-    color:#475569;
+    color:var(--text);
 
     border:
         1px solid
-        rgba(99,102,241,.15);
+        var(--border);
 
-    transition:.2s;
+    transition:
+        background .2s ease,
+        transform .2s ease;
 }
 
 
@@ -950,19 +801,8 @@ button{
 
     background:
         rgba(99,102,241,.10);
-}
 
-
-body.dark-mode .reset-btn{
-
-    background:
-        rgba(255,255,255,.06);
-
-    color:#cbd5e1;
-
-    border:
-        1px solid
-        rgba(255,255,255,.10);
+    transform:translateY(-1px);
 }
 
 
@@ -974,7 +814,7 @@ body.dark-mode .reset-btn{
 
     text-align:center;
 
-    color:#64748b;
+    color:var(--muted);
 
     margin:
         28px
@@ -989,12 +829,11 @@ body.dark-mode .reset-btn{
 
 .keyboard{
 
-    background:
-        rgba(255,255,255,.45);
+    background:var(--card);
 
     border:
         1px solid
-        rgba(255,255,255,.70);
+        var(--border);
 
     border-radius:14px;
 
@@ -1002,7 +841,9 @@ body.dark-mode .reset-btn{
 
     overflow-x:auto;
 
-    backdrop-filter:blur(10px);
+    backdrop-filter:blur(14px);
+
+    -webkit-backdrop-filter:blur(14px);
 }
 
 
@@ -1028,12 +869,11 @@ body.dark-mode .reset-btn{
 
     border-radius:8px;
 
-    background:
-        rgba(255,255,255,.70);
+    background:var(--card-solid);
 
     border:
         1px solid
-        rgba(99,102,241,.12);
+        var(--border);
 
     display:flex;
 
@@ -1041,14 +881,15 @@ body.dark-mode .reset-btn{
 
     align-items:center;
 
-    color:#334155;
+    color:var(--text);
 
     font-weight:700;
 
     font-size:13px;
 
     transition:
-        .1s;
+        transform .1s ease,
+        background .1s ease;
 }
 
 
@@ -1057,8 +898,8 @@ body.dark-mode .reset-btn{
     background:
         linear-gradient(
             135deg,
-            #6366f1,
-            #8b5cf6
+            var(--accent),
+            var(--accent2)
         );
 
     color:#fff;
@@ -1074,36 +915,6 @@ body.dark-mode .reset-btn{
 }
 
 
-body.dark-mode .keyboard-title{
-
-    color:#94a3b8;
-}
-
-
-body.dark-mode .keyboard{
-
-    background:
-        rgba(15,23,42,.50);
-
-    border:
-        1px solid
-        rgba(255,255,255,.10);
-}
-
-
-body.dark-mode .key{
-
-    background:
-        rgba(255,255,255,.06);
-
-    border:
-        1px solid
-        rgba(255,255,255,.08);
-
-    color:#cbd5e1;
-}
-
-
 /* =========================================================
    FINGER INFO
 ========================================================= */
@@ -1115,17 +926,17 @@ body.dark-mode .key{
     padding:16px;
 
     background:
-        rgba(99,102,241,.06);
+        rgba(99,102,241,.07);
 
     border:
         1px solid
-        rgba(99,102,241,.15);
+        rgba(99,102,241,.16);
 
     border-radius:10px;
 
     text-align:center;
 
-    color:#64748b;
+    color:var(--muted);
 
     font-size:13px;
 
@@ -1135,19 +946,7 @@ body.dark-mode .key{
 
 .finger-info strong{
 
-    color:#111827;
-}
-
-
-body.dark-mode .finger-info{
-
-    color:#94a3b8;
-}
-
-
-body.dark-mode .finger-info strong{
-
-    color:#f8fafc;
+    color:var(--text);
 }
 
 
@@ -1165,20 +964,19 @@ body.dark-mode .finger-info strong{
 
     border-radius:16px;
 
-    background:
-        rgba(255,255,255,.62);
+    background:var(--card);
 
     border:
         1px solid
-        rgba(255,255,255,.70);
+        var(--border);
 
-    box-shadow:
-        0 20px 60px
-        rgba(15,23,42,.12);
+    box-shadow:var(--shadow);
 
     text-align:center;
 
-    backdrop-filter:blur(14px);
+    backdrop-filter:blur(18px);
+
+    -webkit-backdrop-filter:blur(18px);
 }
 
 
@@ -1186,7 +984,7 @@ body.dark-mode .finger-info strong{
 
     margin-bottom:20px;
 
-    color:#111827;
+    color:var(--text);
 }
 
 
@@ -1205,12 +1003,15 @@ body.dark-mode .finger-info strong{
 
 .result-item{
 
-    background:
-        rgba(255,255,255,.55);
+    background:var(--input);
 
     padding:15px;
 
     border-radius:10px;
+
+    border:
+        1px solid
+        var(--border);
 }
 
 
@@ -1218,7 +1019,7 @@ body.dark-mode .finger-info strong{
 
     display:block;
 
-    color:#64748b;
+    color:var(--muted);
 
     font-size:12px;
 
@@ -1228,49 +1029,9 @@ body.dark-mode .finger-info strong{
 
 .result-item strong{
 
-    color:#111827;
+    color:var(--text);
 
     font-size:22px;
-}
-
-
-body.dark-mode .result{
-
-    background:
-        rgba(15,23,42,.62);
-
-    border:
-        1px solid
-        rgba(255,255,255,.10);
-
-    box-shadow:
-        0 20px 60px
-        rgba(0,0,0,.35);
-}
-
-
-body.dark-mode .result h2{
-
-    color:#f8fafc;
-}
-
-
-body.dark-mode .result-item{
-
-    background:
-        rgba(8,11,22,.65);
-}
-
-
-body.dark-mode .result-item span{
-
-    color:#94a3b8;
-}
-
-
-body.dark-mode .result-item strong{
-
-    color:#f8fafc;
 }
 
 
@@ -1334,31 +1095,19 @@ body.dark-mode .result-item strong{
 
     main.container{
 
+        width:
+            calc(100% - 24px);
+
         padding:
             25px
-            12px
+            0
             45px;
     }
 
 
-    .logo span{
+    .logo{
 
-        display:none;
-    }
-
-
-    .main-nav{
-
-        max-width:62vw;
-    }
-
-
-    .main-nav a{
-
-        padding:
-            8px;
-
-        font-size:13px;
+        font-size:19px;
     }
 
 
@@ -1432,7 +1181,13 @@ body.dark-mode .result-item strong{
 }
 
 
-@media(max-width:420px){
+@media(max-width:600px){
+
+    .logo{
+
+        font-size:17px;
+    }
+
 
     .main-nav{
 
@@ -1443,9 +1198,9 @@ body.dark-mode .result-item strong{
     .main-nav a{
 
         padding:
-            7px;
+            8px 9px;
 
-        font-size:12px;
+        font-size:13px;
     }
 
 
@@ -1458,6 +1213,32 @@ body.dark-mode .result-item strong{
         min-width:40px;
 
         flex-basis:40px;
+    }
+
+}
+
+
+@media(max-width:420px){
+
+    main.container{
+
+        width:
+            calc(100% - 20px);
+    }
+
+
+    .main-nav{
+
+        max-width:56vw;
+    }
+
+
+    .main-nav a{
+
+        padding:
+            7px;
+
+        font-size:12px;
     }
 
 }
@@ -1549,9 +1330,7 @@ body.dark-mode .result-item strong{
     </a>
 
 
-    <!-- =====================================================
-         LESSON HEADER
-    ====================================================== -->
+    <!-- LESSON HEADER -->
 
     <div class="lesson-header">
 
@@ -1575,9 +1354,7 @@ body.dark-mode .result-item strong{
     </div>
 
 
-    <!-- =====================================================
-         PROGRESS
-    ====================================================== -->
+    <!-- PROGRESS -->
 
     <div class="progress-box">
 
@@ -1606,12 +1383,9 @@ body.dark-mode .result-item strong{
     </div>
 
 
-    <!-- =====================================================
-         STATS
-    ====================================================== -->
+    <!-- STATS -->
 
     <div class="stats">
-
 
         <div class="stat">
 
@@ -1676,16 +1450,12 @@ body.dark-mode .result-item strong{
 
         </div>
 
-
     </div>
 
 
-    <!-- =====================================================
-         TYPING CARD
-    ====================================================== -->
+    <!-- TYPING CARD -->
 
     <div class="typing-card">
-
 
         <div class="instruction">
 
@@ -1734,9 +1504,7 @@ body.dark-mode .result-item strong{
         </div>
 
 
-        <!-- =================================================
-             KEYBOARD
-        ================================================== -->
+        <!-- KEYBOARD -->
 
         <div class="keyboard-title">
             Keyboard Guide
@@ -1744,7 +1512,6 @@ body.dark-mode .result-item strong{
 
 
         <div class="keyboard">
-
 
             <div class="key-row">
 
@@ -1799,13 +1566,10 @@ body.dark-mode .result-item strong{
 
             </div>
 
-
         </div>
 
 
-        <!-- =================================================
-             FINGER INFO
-        ================================================== -->
+        <!-- FINGER INFO -->
 
         <div class="finger-info">
 
@@ -1828,13 +1592,10 @@ body.dark-mode .result-item strong{
 
         </div>
 
-
     </div>
 
 
-    <!-- =====================================================
-         RESULT
-    ====================================================== -->
+    <!-- RESULT -->
 
     <div
         class="result"
@@ -1847,7 +1608,6 @@ body.dark-mode .result-item strong{
 
 
         <div class="result-grid">
-
 
             <div class="result-item">
 
@@ -1887,7 +1647,6 @@ body.dark-mode .result-item strong{
 
             </div>
 
-
         </div>
 
 
@@ -1900,7 +1659,6 @@ body.dark-mode .result-item strong{
 
     </div>
 
-
 </main>
 
 
@@ -1909,7 +1667,6 @@ body.dark-mode .result-item strong{
 ========================================================= -->
 
 <script>
-
 
 /* =========================================================
    LESSON DATA
@@ -2073,7 +1830,7 @@ const lessons = {
 
 
 /* =========================================================
-   GET LESSON
+   GET CURRENT LESSON
 ========================================================= */
 
 const params =
@@ -2183,6 +1940,12 @@ const result =
     );
 
 
+const startButton =
+    document.getElementById(
+        "startBtn"
+    );
+
+
 /* =========================================================
    UPDATE LESSON HEADER
 ========================================================= */
@@ -2274,9 +2037,7 @@ function startLesson(){
     typingInput.focus();
 
 
-    document.getElementById(
-        "startBtn"
-    ).textContent =
+    startButton.textContent =
         "Typing...";
 
 
@@ -2652,9 +2413,7 @@ function finishLesson(){
     typingInput.disabled = true;
 
 
-    document.getElementById(
-        "startBtn"
-    ).textContent =
+    startButton.textContent =
         "Completed";
 
 
@@ -2697,6 +2456,8 @@ function finishLesson(){
         "block";
 
 
+    /* SAVE COMPLETION */
+
     saveProgress(
         currentLesson.number,
         finalWpm
@@ -2714,6 +2475,10 @@ function saveProgress(
     wpm
 ){
 
+    /* -----------------------------------------
+       SAVE THIS LESSON AS COMPLETED
+    ----------------------------------------- */
+
     localStorage.setItem(
         "tm_lesson_" +
         lessonNumber +
@@ -2722,15 +2487,21 @@ function saveProgress(
     );
 
 
+    /* -----------------------------------------
+       SAVE WPM FOR THIS LESSON
+    ----------------------------------------- */
+
     localStorage.setItem(
         "tm_lesson_" +
         lessonNumber +
         "_wpm",
-        wpm
+        String(wpm)
     );
 
 
-    /* COMPLETED LESSONS */
+    /* -----------------------------------------
+       COUNT COMPLETED LESSONS
+    ----------------------------------------- */
 
     let completed = 0;
 
@@ -2758,11 +2529,13 @@ function saveProgress(
 
     localStorage.setItem(
         "tm_completed_lessons",
-        completed
+        String(completed)
     );
 
 
-    /* BEST WPM */
+    /* -----------------------------------------
+       SAVE BEST WPM
+    ----------------------------------------- */
 
     let best =
         Number(
@@ -2778,7 +2551,7 @@ function saveProgress(
 
         localStorage.setItem(
             "tm_best_wpm",
-            wpm
+            String(wpm)
         );
 
     }
@@ -2802,6 +2575,8 @@ function resetLesson(){
     finished = false;
 
     startTime = null;
+
+    timerInterval = null;
 
     totalErrors = 0;
 
@@ -2835,14 +2610,25 @@ function resetLesson(){
         "0%";
 
 
-    document.getElementById(
-        "startBtn"
-    ).textContent =
+    startButton.textContent =
         "Start Lesson";
 
 
     result.style.display =
         "none";
+
+
+    document
+        .querySelectorAll(".key")
+        .forEach(
+            function(key){
+
+                key.classList.remove(
+                    "active"
+                );
+
+            }
+        );
 
 
     renderText();
@@ -2882,9 +2668,7 @@ document.addEventListener(
 
 
         document
-            .querySelectorAll(
-                ".key"
-            )
+            .querySelectorAll(".key")
             .forEach(
                 function(k){
 
@@ -2911,9 +2695,7 @@ document.addEventListener(
     function(){
 
         document
-            .querySelectorAll(
-                ".key"
-            )
+            .querySelectorAll(".key")
             .forEach(
                 function(k){
 
@@ -2926,6 +2708,51 @@ document.addEventListener(
 
     }
 );
+
+
+/* =========================================================
+   ACTIVE NAVIGATION
+========================================================= */
+
+(function(){
+
+    const currentPage =
+        location.pathname
+            .split("/")
+            .pop() ||
+        "index.html";
+
+
+    document
+        .querySelectorAll(".main-nav a")
+        .forEach(
+            function(link){
+
+                const href =
+                    link.getAttribute("href") || "";
+
+
+                const page =
+                    href
+                        .split("/")
+                        .pop()
+                        .split("?")[0];
+
+
+                if(
+                    page === currentPage
+                ){
+
+                    link.classList.add(
+                        "active"
+                    );
+
+                }
+
+            }
+        );
+
+})();
 
 
 /* =========================================================
